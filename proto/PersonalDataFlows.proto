@@ -1,0 +1,32 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package pd;
+
+// GET
+message GetPersonalDataRequest {
+    string ClientId = 1;
+}
+
+message GetPersonalDataResponse{
+    pd.PersonalDataModel PersonalDataModel = 1;
+}
+
+message PersonalDataModel {
+    string Email = 1;
+    string FirstName = 2;
+    string LastName = 3;
+    string City = 4;
+    int64 DateOfBirth = 5;
+    string CountryOfResidence = 6;
+    string CountryOfCitizenship = 7;
+    string ZipCode = 8;
+    string Phone = 9;
+    string Address = 10;
+}
+
+
+service PersonalDataService {
+    rpc Get(stream pd.GetPersonalDataRequest) returns (stream pd.GetPersonalDataResponse);
+    rpc Set(stream pd.PersonalDataModel) returns (google.protobuf.Empty);        
+ }
