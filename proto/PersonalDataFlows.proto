@@ -18,16 +18,16 @@ message SetPersonalDataRequest{
 }
 
 message PersonalDataModel {
-    string Email = 1;
-    string FirstName = 2;
-    string LastName = 3;
-    string City = 4;
-    int64 DateOfBirth = 5;
-    string CountryOfResidence = 6;
-    string CountryOfCitizenship = 7;
-    string ZipCode = 8;
-    string Phone = 9;
-    string Address = 10;
+    optional string Email = 1;
+    optional string FirstName = 2;
+    optional string LastName = 3;
+    optional string City = 4;
+    optional int64 DateOfBirth = 5;
+    optional string CountryOfResidence = 6;
+    optional string CountryOfCitizenship = 7;
+    optional string ZipCode = 8;
+    optional string Phone = 9;
+    optional string Address = 10;
 }
 
 
