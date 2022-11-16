@@ -18,7 +18,7 @@ message GetDocumentsRequest {
 
 message DocumentModel{
     string DocId = 1;
-    int64 Uploaded = 2;
+    int64 UploadedAt = 2;
     docs.DocType DocType = 3;
     string ContentType = 4;
     bytes Content = 5;
