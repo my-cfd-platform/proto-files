@@ -5,11 +5,16 @@ package pd;
 
 // GET
 message GetPersonalDataRequest {
-    string ClientId = 1;
+    string Id = 1;
 }
 
 message GetPersonalDataResponse{
     pd.PersonalDataModel PersonalDataModel = 1;
+}
+
+message SetPersonalDataRequest{
+    string Id = 1;
+    pd.PersonalDataModel PersonalDataModel = 2;
 }
 
 message PersonalDataModel {
@@ -28,5 +33,5 @@ message PersonalDataModel {
 
 service PersonalDataService {
     rpc Get(stream pd.GetPersonalDataRequest) returns (stream pd.GetPersonalDataResponse);
-    rpc Set(stream pd.PersonalDataModel) returns (google.protobuf.Empty);        
+    rpc Set(stream pd.SetPersonalDataRequest) returns (google.protobuf.Empty);        
  }
