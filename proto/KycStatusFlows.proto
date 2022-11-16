@@ -5,7 +5,7 @@ package kyc;
 
 
 enum KycStatus{
-    NeedToUploadDocs = 0;
+    DocsNotUploaded = 0;
     OnVerification = 1;
     VerifiedOk = 2;
     ForbiddenCountry = 3;
