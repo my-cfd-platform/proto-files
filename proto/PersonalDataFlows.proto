@@ -32,6 +32,6 @@ message PersonalDataModel {
 
 
 service PersonalDataService {
-    rpc Get(stream pd.GetPersonalDataRequest) returns (stream pd.GetPersonalDataResponse);
-    rpc Set(stream pd.SetPersonalDataRequest) returns (google.protobuf.Empty);        
+    rpc Get(pd.GetPersonalDataRequest) returns (pd.GetPersonalDataResponse);
+    rpc Set(pd.SetPersonalDataRequest) returns (google.protobuf.Empty);        
  }
