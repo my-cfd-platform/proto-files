@@ -25,9 +25,10 @@ message DocumentModel{
 }
 
 message UploadDocumentRequest{
-    docs.DocType DocType = 1;
-    string ContentType = 2;
-    bytes Content = 3;
+    string ClientId = 1;
+    docs.DocType DocType = 2;
+    string ContentType = 3;
+    bytes Content = 4;
 }
 
 
