@@ -17,6 +17,12 @@ message SetPersonalDataRequest{
     pd.PersonalDataModel PersonalDataModel = 2;
 }
 
+enum Sex{
+    NotSet=0;
+    Mail =1;
+    Femail=2;
+}
+
 message PersonalDataModel {
     optional string Email = 1;
     optional string FirstName = 2;
@@ -28,6 +34,7 @@ message PersonalDataModel {
     optional string ZipCode = 8;
     optional string Phone = 9;
     optional string Address = 10;
+    pd.Sex Sex = 11;
 }
 
 
