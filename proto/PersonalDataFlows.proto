@@ -19,8 +19,8 @@ message SetPersonalDataRequest{
 
 enum Sex{
     NotSet=0;
-    Mail =1;
-    Femail=2;
+    Male =1;
+    Female=2;
 }
 
 message PersonalDataModel {
