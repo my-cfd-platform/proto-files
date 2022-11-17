@@ -10,6 +10,7 @@ message ChangeLog {
     int64 Timestamp = 2;
     string Message = 3;
     optional string DocumentId = 4;
+    string Who = 5;
 }
 
 service KycChangeLogsService {
