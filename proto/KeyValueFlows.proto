@@ -20,7 +20,7 @@ message GetKeyValueGrpcResponseModel {
 message SetKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
-    optional string Value = 3;
+    string Value = 3;
 }
 
 //DELETE
