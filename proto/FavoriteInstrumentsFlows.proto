@@ -22,6 +22,6 @@ message SetFavoriteInstrumentsRequestModel {
 
 
 service FavoriteInstrumentsGrpcService {
-    rpc Get(stream favorite_instruments_flows.GetFavoriteInstrumentsResponeModel) returns (stream favorite_instruments_flows.GetFavoriteInstrumentsResponeModel);
+    rpc Get(stream favorite_instruments_flows.GetFavoriteInstrumentsRequestModel) returns (favorite_instruments_flows.GetFavoriteInstrumentsResponeModel);
     rpc Set(stream favorite_instruments_flows.SetFavoriteInstrumentsRequestModel) returns (google.protobuf.Empty);
  }
