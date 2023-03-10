@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package favorite_instruments_flows;
+
+// GET
+message GetFavoriteInstrumentsRequestModel {
+    string ClientId = 1;
+}
+
+message GetFavoriteInstrumentsResponeModel {
+    repeated string Instruments = 1;
+}
+
+//SET
+
+message SetFavoriteInstrumentsRequestModel {
+    string ClientId = 1;
+    repeated string Instruments = 2;
+}
+
+
+
+service FavoriteInstrumentGrpcService {
+    rpc Get(stream favorite_instruments_flows.GetFavoriteInstrumentsResponeModel) returns (stream favorite_instruments_flows.GetFavoriteInstrumentsResponeModel);
+    rpc Set(stream favorite_instruments_flows.SetFavoriteInstrumentsRequestModel) returns (google.protobuf.Empty);
+ }
