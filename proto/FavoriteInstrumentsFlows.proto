@@ -8,7 +8,7 @@ message GetFavoriteInstrumentsRequestModel {
     string ClientId = 1;
 }
 
-message GetFavoriteInstrumentsResponeModel {
+message GetFavoriteInstrumentsResponseModel {
     repeated string Instruments = 1;
 }
 
