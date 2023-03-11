@@ -5,7 +5,8 @@ package favorite_instruments_flows;
 
 // GET
 message GetFavoriteInstrumentsRequestModel {
-    string ClientId = 1;
+    string TraderId = 1;
+    string AccountId = 2;
 }
 
 message GetFavoriteInstrumentsResponseModel {
@@ -15,13 +16,14 @@ message GetFavoriteInstrumentsResponseModel {
 //SET
 
 message SetFavoriteInstrumentsRequestModel {
-    string ClientId = 1;
-    repeated string Instruments = 2;
+    string TraderId = 1;
+    string AccountId = 2;
+    repeated string Instruments = 3;
 }
 
 
 
 service FavoriteInstrumentsGrpcService {
-    rpc Get(stream favorite_instruments_flows.GetFavoriteInstrumentsRequestModel) returns (favorite_instruments_flows.GetFavoriteInstrumentsResponeModel);
+    rpc Get(stream favorite_instruments_flows.GetFavoriteInstrumentsRequestModel) returns (favorite_instruments_flows.GetFavoriteInstrumentsResponseModel);
     rpc Set(stream favorite_instruments_flows.SetFavoriteInstrumentsRequestModel) returns (google.protobuf.Empty);
  }
