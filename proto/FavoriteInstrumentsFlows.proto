@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package favorite_instruments_flows;
 
-enum PlatformType {
+enum WebOrMobileGrpcModel {
     Web = 0;
     Mobile = 1;
 }
@@ -12,7 +12,7 @@ enum PlatformType {
 message GetFavoriteInstrumentsRequestModel {
     string TraderId = 1;
     string AccountId = 2;
-    string PlatformType = 3;
+    favorite_instruments_flows.WebOrMobileGrpcModel WebOrMobile = 3;
 }
 
 message GetFavoriteInstrumentsResponseModel {
@@ -24,7 +24,7 @@ message GetFavoriteInstrumentsResponseModel {
 message SetFavoriteInstrumentsRequestModel {
     string TraderId = 1;
     string AccountId = 2;
-    string PlatformType = 3;
+    favorite_instruments_flows.WebOrMobileGrpcModel WebOrMobile = 3;
     repeated string Instruments = 4;
 }
 
