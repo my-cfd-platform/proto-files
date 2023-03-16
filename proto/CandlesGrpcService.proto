@@ -1,0 +1,67 @@
+
+syntax = "proto3";
+package candles_grpc;
+
+enum CandleGrpcType{
+    Minute = 0;
+    Hour = 1;
+    Day = 2;
+    Month = 3;
+}
+
+message CandleGrpcModel{
+    uint64 DateTime = 1;
+    double Open = 2;
+    double Close = 3;
+    double High = 4;
+    double Low = 5;
+    double Volume = 6;
+}
+
+message GetCandlesHistoryGrpcRequest {
+    string InstrumentId = 1;
+    uint64 From = 2;
+    uint64 To = 3;
+    CandleGrpcType CandleType = 4;
+    bool IsBid = 5;
+    optional string Source = 6;
+}
+
+message CandlesList{
+    repeated CandleGrpcModel Candles = 1;
+}
+
+message GetLastCandlesGrpcRequest{
+    string InstrumentId = 1;
+    int32 Amount = 2;
+    CandleGrpcType CandleType = 3;
+    bool IsBid = 4;
+}
+
+message GetAllCandlesGrpcRequest{
+    bool IsBid = 1;
+    string Source = 2;
+}
+
+message CandleCacheModel{
+    string InstrumentId = 1;
+    CandleGrpcType CandleType = 2;
+    uint64 DateTime = 3;
+    double Open = 4;
+    double Close = 5;
+    double High = 6;
+    double Low = 7;
+    double Volume = 8;
+    bool IsBid = 9;
+}
+
+message CandleCacheList{
+    repeated CandleCacheModel Candles = 1;
+}
+
+service CandlesGrpcService {
+    rpc GetCandlesHistory(GetCandlesHistoryGrpcRequest) returns (CandlesList);
+    rpc GetCandlesHistoryStream(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);
+    rpc GetLastCandles(GetLastCandlesGrpcRequest) returns (CandlesList);
+    rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
+}
