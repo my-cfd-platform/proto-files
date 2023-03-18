@@ -10,7 +10,7 @@ enum CandleGrpcType{
 }
 
 message CandleGrpcModel{
-    uint64 DateTime = 1;
+    uint64 DateKey = 1;
     double Open = 2;
     double Close = 3;
     double High = 4;
@@ -20,8 +20,8 @@ message CandleGrpcModel{
 
 message GetCandlesHistoryGrpcRequest {
     string InstrumentId = 1;
-    uint64 From = 2;
-    uint64 To = 3;
+    uint64 FromDateKey = 2;
+    uint64 ToDateKey = 3;
     CandleGrpcType CandleType = 4;
     bool IsBid = 5;
     optional string Source = 6;
@@ -46,7 +46,7 @@ message GetAllCandlesGrpcRequest{
 message CandleCacheModel{
     string InstrumentId = 1;
     CandleGrpcType CandleType = 2;
-    uint64 DateTime = 3;
+    uint64 DateKey = 3;
     double Open = 4;
     double Close = 5;
     double High = 6;
