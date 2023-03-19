@@ -43,20 +43,11 @@ message GetAllCandlesGrpcRequest{
     string Source = 2;
 }
 
-message CandleCacheModel{
-    string InstrumentId = 1;
-    CandleGrpcType CandleType = 2;
-    uint64 DateKey = 3;
-    double Open = 4;
-    double Close = 5;
-    double High = 6;
-    double Low = 7;
-    double Volume = 8;
-    bool IsBid = 9;
-}
 
 message CandleCacheList{
-    repeated CandleCacheModel Candles = 1;
+    string InstrumentId = 1;
+    CandleGrpcType CandleType = 2;
+    repeated CandleGrpcModel Candles = 3;
 }
 
 service CandlesGrpcService {
