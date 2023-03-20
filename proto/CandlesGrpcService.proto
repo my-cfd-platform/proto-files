@@ -1,5 +1,6 @@
 
 syntax = "proto3";
+import "google/protobuf/empty.proto";
 package candles_grpc;
 
 enum CandleGrpcType{
@@ -50,9 +51,17 @@ message CandleCacheList{
     repeated CandleGrpcModel Candles = 3;
 }
 
+message UploadCandleRequest{
+    CandleGrpcType CandleType = 1;
+    string InstrumentId = 2;
+    bool IsBid = 3;
+    repeated CandleGrpcModel Candles = 4;
+}
+
 service CandlesGrpcService {
     rpc GetCandlesHistory(GetCandlesHistoryGrpcRequest) returns (CandlesList);
     rpc GetCandlesHistoryStream(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);
     rpc GetLastCandles(GetLastCandlesGrpcRequest) returns (CandlesList);
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
+    rpc UploadCandles(UploadCandleRequest) returns (google.protobuf.Empty);
 }
