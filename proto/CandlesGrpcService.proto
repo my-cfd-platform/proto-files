@@ -63,5 +63,5 @@ service CandlesGrpcService {
     rpc GetCandlesHistoryStream(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);
     rpc GetLastCandles(GetLastCandlesGrpcRequest) returns (CandlesList);
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
-    rpc UploadCandles(UploadCandleRequest) returns (google.protobuf.Empty);
+    rpc UploadCandles(stream UploadCandleRequest) returns (google.protobuf.Empty);
 }
