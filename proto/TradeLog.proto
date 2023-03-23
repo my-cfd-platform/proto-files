@@ -4,12 +4,12 @@ import "google/protobuf/empty.proto";
 package trade_log;
 
 message WriteTradeLogItem {
-    int64 DateTime = 1;
+    int64 DateTimeMicros = 1;
     string ClientId = 2;
     string Message = 3;
     string Data = 4;
 }
 
-service KeyValueFlowsGrpcService {
+service TradeLogGrpcService {
     rpc Write(stream WriteTradeLogItem) returns (google.protobuf.Empty);    
  }
