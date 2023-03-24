@@ -25,7 +25,6 @@ message GetCandlesHistoryGrpcRequest {
     uint64 ToDateTime = 3;
     CandleGrpcType CandleType = 4;
     bool IsBid = 5;
-    optional string Source = 6;
 }
 
 message CandlesList{
@@ -35,7 +34,6 @@ message CandlesList{
 
 message GetAllCandlesGrpcRequest{
     bool IsBid = 1;
-    string Source = 2;
 }
 
 
@@ -67,8 +65,7 @@ message GetCandlesHistoryFromCacheGrpcRequest {
 }
 
 service CandlesGrpcService {
-    rpc GetCandlesHistory(GetCandlesHistoryGrpcRequest) returns (CandlesList);
-    rpc GetCandlesHistoryStream(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);    
+    rpc GetCandlesByInstrumentFromDb(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);    
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
     rpc GetAllByInstrumentFromCache(GetAllByInstrumentGrpcRequest) returns (stream CandleCacheList);
     rpc GetByInstrumentFromCache(GetCandlesHistoryFromCacheGrpcRequest) returns (stream CandleCacheList);
