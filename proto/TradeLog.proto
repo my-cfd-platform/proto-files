@@ -23,8 +23,8 @@ message TradeLogItem {
 message ReadTradeLogRequest {
     string TraderId = 1;
     string AccountId = 2;
-    string DateFromMicros = 3;
-    string DateToMicros = 4;
+    int64 DateFromMicros = 3;
+    int64 DateToMicros = 4;
 }
 
 service TradeLogGrpcService {
