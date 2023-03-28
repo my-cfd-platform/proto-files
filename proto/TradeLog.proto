@@ -10,6 +10,15 @@ message WriteTradeLogItem {
     string Data = 4;
 }
 
+message ReadTradeLogRequest {
+
+    string TraderId = 1;
+    string AccountId = 2;
+    string DateFromMicros = 3;
+    string DateToMicros = 4;
+}
+
 service TradeLogGrpcService {
-    rpc Write(stream WriteTradeLogItem) returns (google.protobuf.Empty);    
+    rpc Write(stream WriteTradeLogItem) returns (google.protobuf.Empty);   
+    rpc Read(ReadTradeLogRequest) returns (stream WriteTradeLogItem);
  }
