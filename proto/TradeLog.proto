@@ -9,8 +9,9 @@ message WriterTradeLogItem{
     string AccountId = 3;
     string ProcessId = 4;
     int64 MessageId = 5;
-    string Message = 6;
-    string Data = 7;
+    string OperationId = 6;
+    string Message = 7;
+    string Data = 8;
 }
 
 message TradeLogItem {
@@ -23,8 +24,9 @@ message TradeLogItem {
 message ReadTradeLogRequest {
     string TraderId = 1;
     string AccountId = 2;
-    int64 DateFromMicros = 3;
-    int64 DateToMicros = 4;
+    optional string OperationId = 3;
+    int64 DateFromMicros = 4;
+    int64 DateToMicros = 5;
 }
 
 service TradeLogGrpcService {
