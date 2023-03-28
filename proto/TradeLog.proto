@@ -6,11 +6,11 @@ package trade_log;
 message WriterTradeLogItem{
     int64 DateTimeMicros = 1;
     string TraderId =2;
-    string ClientId = 3;
+    string AccountId = 3;
     string ProcessId = 4;
-    string Message = 5;
-    string Data = 6;
-    int64 MessageId = 7;
+    int64 MessageId = 5;
+    string Message = 6;
+    string Data = 7;
 }
 
 message TradeLogItem {
