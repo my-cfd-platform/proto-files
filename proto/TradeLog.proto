@@ -3,7 +3,7 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package trade_log;
 
-message WriteTradeLogItem {
+message TradeLogItem {
     int64 DateTimeMicros = 1;
     string ClientId = 2;
     string Message = 3;
@@ -19,6 +19,6 @@ message ReadTradeLogRequest {
 }
 
 service TradeLogGrpcService {
-    rpc Write(stream WriteTradeLogItem) returns (google.protobuf.Empty);   
-    rpc Read(ReadTradeLogRequest) returns (stream WriteTradeLogItem);
+    rpc Write(stream TradeLogItem) returns (google.protobuf.Empty);   
+    rpc Read(ReadTradeLogRequest) returns (stream TradeLogItem);
  }
