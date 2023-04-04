@@ -33,4 +33,5 @@ message SetFavoriteInstrumentsRequestModel {
 service FavoriteInstrumentsGrpcService {
     rpc Get(favorite_instruments_flows.GetFavoriteInstrumentsRequestModel) returns (favorite_instruments_flows.GetFavoriteInstrumentsResponseModel);
     rpc Set(favorite_instruments_flows.SetFavoriteInstrumentsRequestModel) returns (google.protobuf.Empty);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
