@@ -32,4 +32,5 @@ message ReadTradeLogRequest {
 service TradeLogGrpcService {
     rpc Write(stream WriterTradeLogItem) returns (google.protobuf.Empty);   
     rpc Read(ReadTradeLogRequest) returns (stream TradeLogItem);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
