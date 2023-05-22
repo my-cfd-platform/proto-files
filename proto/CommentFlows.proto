@@ -1,0 +1,25 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package CommentFlows;
+
+message RequestByCategory {
+    string Category = 1;
+}
+
+message CommentGrpcModel {
+    string Id = 1;
+    uint64 UnixEpochTime = 2;
+    string Category = 3;
+    string Author = 4;
+    string Comment = 5;
+}
+
+message GetCommentsResponse {
+    repeated CommentGrpcModel Data = 1;
+}
+
+service CommentService {
+    rpc GetComments(CommentFlows.RequestByCategory) returns (CommentFlows.GetCommentsResponse);
+    rpc SetComment(CommentFlows.CommentGrpcModel) returns (google.protobuf.Empty);
+ }
