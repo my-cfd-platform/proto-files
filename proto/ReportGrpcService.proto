@@ -11,8 +11,8 @@ enum ReportsFlowsClosePositionReason{
 }
 
 enum ReportFlowsTransactionType{
-    Deposit = 0;
-    Withdrawal = 1;
+    Withdrawal = 0;
+    Deposit = 1;
     BalanceCorrection = 2;
     Trading = 3;
 }
