@@ -15,9 +15,16 @@ message TraderAccessModel {
     string ManagerType = 3;
 }
 
+message Search {
+    repeated string TraderIds = 1;
+    repeated string ManagerIds = 2;
+    optional string ManagerType = 3;
+}
+
 service ManagerAccessService {
     rpc CanAccess(ManagerAccessFlows.AccessRequest) returns (google.protobuf.BoolValue);
     rpc SetAccess(ManagerAccessFlows.TraderAccessModel) returns (google.protobuf.Empty);
     rpc GetManagerAccess(ManagerAccessFlows.AccessRequest) returns (stream TraderAccessModel);
     rpc GetTraderManagers(ManagerAccessFlows.AccessRequest) returns (stream TraderAccessModel);
+    rpc Search(ManagerAccessFlows.Search) returns (stream TraderAccessModel);
  }
