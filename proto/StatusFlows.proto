@@ -7,6 +7,13 @@ message RequestById {
     string Id = 1;
 }
 
+message Search {
+    string Name = 1;
+    string Value = 2;
+    optional string Label = 3;
+    repeated string TraderIds = 4;
+}
+
 message StatusGrpcModel {
     string Id = 1;
     string Name = 2;
@@ -27,4 +34,5 @@ service StatusService {
     rpc GetStatuses(StatusFlows.RequestById) returns (StatusFlows.GetStatusesResponse);
     rpc GetStatus(StatusFlows.StatusGrpcModel) returns (StatusFlows.GetStatusResponse);
     rpc SetStatus(StatusFlows.StatusGrpcModel) returns (google.protobuf.Empty);
+    rpc Search(StatusFlows.Search) returns (stream StatusFlows.StatusGrpcModel);
  }
