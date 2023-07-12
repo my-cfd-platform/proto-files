@@ -158,12 +158,12 @@ message SearchHistory{
     repeated string TraderIds = 1;
     repeated string AccountIds = 2;
     optional ReportFlowsTransactionType TransactionType = 3;
-    optional FromToInt64Model DateRange = 4;
+    optional FromToUint64Model DateRange = 4;
 }
 
-message FromToInt64Model{
-    optional int64 From = 1;
-    optional int64 To = 2;
+message FromToUint64Model{
+    optional uint64 From = 1;
+    optional uint64 To = 2;
 }
 
 service ReportGrpcService {
