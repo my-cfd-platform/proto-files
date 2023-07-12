@@ -11,8 +11,8 @@ enum ReportsFlowsClosePositionReason{
 }
 
 enum ReportFlowsTransactionType{
-    Withdrawal = 0;
-    Deposit = 1;
+    Deposit = 0;
+    Withdrawal = 1;
     BalanceCorrection = 2;
     Trading = 3;
 }
@@ -154,10 +154,23 @@ message GetHistoryPositionsPaginatedRequest{
     int32 Size = 3;
 }
 
+message SearchHistory{
+    repeated string TraderIds = 1;
+    repeated string AccountIds = 2;
+    optional ReportFlowsTransactionType TransactionType = 3;
+    optional FromToInt64Model DateRange = 4;
+}
+
+message FromToInt64Model{
+    optional int64 From = 1;
+    optional int64 To = 2;
+}
+
 service ReportGrpcService {
     rpc GetHistoryPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetHistoryPositionsPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
     rpc GetOperationsHistoryInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportOperationHistoryItem);
     rpc GetActivePositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsActivePositionGrpcModel);
     rpc GetHistoryPositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsClosedPositionGrpcModel);
+    rpc SearchHistoryPositions(SearchHistory) returns (stream ReportOperationHistoryItem);
 }
