@@ -8,8 +8,8 @@ message RequestById {
 }
 
 message Search {
-    string Name = 1;
-    string Value = 2;
+    optional string Name = 1;
+    optional string Value = 2;
     optional string Label = 3;
     repeated string TraderIds = 4;
 }
