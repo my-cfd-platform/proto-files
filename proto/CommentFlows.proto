@@ -7,6 +7,18 @@ message RequestByCategory {
     string Category = 1;
 }
 
+message SearchComments {
+    repeated string Categories = 1;
+    repeated string Authors = 2;
+    optional string Comment = 3;
+    optional FromToUint64Model DateRange = 4;
+}
+
+message FromToUint64Model{
+    optional uint64 From = 1;
+    optional uint64 To = 2;
+}
+
 message CommentGrpcModel {
     string Id = 1;
     uint64 UnixEpochTime = 2;
@@ -20,6 +32,7 @@ message GetCommentsResponse {
 }
 
 service CommentService {
-    rpc GetComments(CommentFlows.RequestByCategory) returns (CommentFlows.GetCommentsResponse);
-    rpc SetComment(CommentFlows.CommentGrpcModel) returns (google.protobuf.Empty);
+    rpc GetComments(RequestByCategory) returns (GetCommentsResponse);
+    rpc SetComment(CommentGrpcModel) returns (google.protobuf.Empty);
+    rpc Search(SearchComments) returns (stream CommentGrpcModel);
  }
