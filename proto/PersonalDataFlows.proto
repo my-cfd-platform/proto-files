@@ -3,18 +3,17 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package pd;
 
-// GET
 message GetPersonalDataRequest {
     string Id = 1;
 }
 
 message GetPersonalDataResponse{
-    pd.PersonalDataModel PersonalDataModel = 1;
+    PersonalDataModel PersonalDataModel = 1;
 }
 
 message SetPersonalDataRequest{
     string Id = 1;
-    pd.PersonalDataModel PersonalDataModel = 2;
+    PersonalDataModel PersonalDataModel = 2;
 }
 
 enum Sex{
@@ -34,11 +33,21 @@ message PersonalDataModel {
     optional string ZipCode = 8;
     optional string Phone = 9;
     optional string Address = 10;
-    pd.Sex Sex = 11;
+    Sex Sex = 11;
 }
 
+message SearchPersonal {
+    repeated string Ids = 1;
+    optional string Name = 2;
+    optional string Surname = 3;
+    optional string Email = 4;
+    optional string Residence = 5;
+    optional string Citizenship = 6;
+    optional Sex Sex = 7;
+}
 
 service PersonalDataService {
-    rpc Get(pd.GetPersonalDataRequest) returns (pd.GetPersonalDataResponse);
-    rpc Set(pd.SetPersonalDataRequest) returns (google.protobuf.Empty);        
+    rpc Get(GetPersonalDataRequest) returns (GetPersonalDataResponse);
+    rpc Set(SetPersonalDataRequest) returns (google.protobuf.Empty);
+    rpc Search(SearchPersonal) returns (stream PersonalDataModel);
  }
