@@ -23,17 +23,18 @@ enum Sex{
 }
 
 message PersonalDataModel {
-    optional string Email = 1;
-    optional string FirstName = 2;
-    optional string LastName = 3;
-    optional string City = 4;
-    optional int64 DateOfBirth = 5;
-    optional string CountryOfResidence = 6;
-    optional string CountryOfCitizenship = 7;
-    optional string ZipCode = 8;
-    optional string Phone = 9;
-    optional string Address = 10;
-    Sex Sex = 11;
+    string Id = 1;
+    optional string Email = 2;
+    optional string FirstName = 3;
+    optional string LastName = 4;
+    optional string City = 5;
+    optional int64 DateOfBirth = 6;
+    optional string CountryOfResidence = 7;
+    optional string CountryOfCitizenship = 8;
+    optional string ZipCode = 9;
+    optional string Phone = 10;
+    optional string Address = 11;
+    Sex Sex = 12;
 }
 
 message SearchPersonal {
