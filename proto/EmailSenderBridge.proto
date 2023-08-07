@@ -1,5 +1,5 @@
 syntax = "proto3";
-package reset_password_codes;
+package email_bridge;
 import "google/protobuf/empty.proto";
 
 
