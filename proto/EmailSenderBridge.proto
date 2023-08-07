@@ -1,0 +1,14 @@
+syntax = "proto3";
+package reset_password_codes;
+import "google/protobuf/empty.proto";
+
+
+message SendResetPasswordEmailRequest{
+    string Email = 1;
+    string RecoveryCode = 2;
+}
+
+service EmailSenderBridge {
+    rpc SendResetPasswordEmail(SendResetPasswordEmailRequest) returns (google.protobuf.Empty);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
