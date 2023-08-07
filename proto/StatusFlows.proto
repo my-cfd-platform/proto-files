@@ -7,7 +7,7 @@ message RequestById {
     string Id = 1;
 }
 
-message Search {
+message SearchStatus {
     optional string Name = 1;
     optional string Value = 2;
     optional string Label = 3;
@@ -34,5 +34,5 @@ service StatusService {
     rpc GetStatuses(StatusFlows.RequestById) returns (StatusFlows.GetStatusesResponse);
     rpc GetStatus(StatusFlows.StatusGrpcModel) returns (StatusFlows.GetStatusResponse);
     rpc SetStatus(StatusFlows.StatusGrpcModel) returns (google.protobuf.Empty);
-    rpc Search(StatusFlows.Search) returns (stream StatusFlows.StatusGrpcModel);
+    rpc Search(StatusFlows.SearchStatus) returns (stream StatusFlows.StatusGrpcModel);
  }
