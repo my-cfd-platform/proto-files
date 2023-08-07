@@ -4,8 +4,9 @@ import "google/protobuf/empty.proto";
 
 
 message SendResetPasswordEmailRequest{
-    string Email = 1;
-    string RecoveryCode = 2;
+    string LanguageId = 1;
+    string Email = 2;    
+    string RecoveryCode = 3;
 }
 
 service EmailSenderBridge {
