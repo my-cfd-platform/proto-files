@@ -12,8 +12,7 @@ message GetPersonalDataResponse{
 }
 
 message SetPersonalDataRequest{
-    string Id = 1;
-    PersonalDataModel PersonalDataModel = 2;
+    PersonalDataModel PersonalDataModel = 1;
 }
 
 enum Sex{
