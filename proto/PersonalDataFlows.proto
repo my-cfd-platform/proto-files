@@ -21,9 +21,8 @@ message SetPersonalDataResponse{
 }
 
 enum Sex{
-    NotSet=0;
-    Male =1;
-    Female=2;
+    Male =0;
+    Female=1;
 }
 
 message PersonalDataModel {
@@ -38,7 +37,7 @@ message PersonalDataModel {
     optional string ZipCode = 9;
     optional string Phone = 10;
     optional string Address = 11;
-    Sex Sex = 12;
+    optional Sex Sex = 12;
 }
 
 message SearchPersonal {
