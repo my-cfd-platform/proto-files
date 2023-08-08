@@ -51,4 +51,5 @@ service PersonalDataService {
     rpc Get(GetPersonalDataRequest) returns (GetPersonalDataResponse);
     rpc Set(SetPersonalDataRequest) returns (google.protobuf.Empty);
     rpc Search(SearchPersonal) returns (stream PersonalDataModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
