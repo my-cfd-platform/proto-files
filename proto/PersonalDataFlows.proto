@@ -38,7 +38,7 @@ message PersonalDataModel {
     optional string ZipCode = 9;
     optional string Phone = 10;
     optional string Address = 11;
-    optional Sex Sex = 12;
+    Sex Sex = 12;
 }
 
 message SearchPersonal {
