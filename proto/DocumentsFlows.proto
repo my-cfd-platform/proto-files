@@ -31,9 +31,25 @@ message UploadDocumentRequest{
     bytes Content = 4;
 }
 
+message DocumentItemModel{
+    string DocId = 1;
+    int64 UploadedAt = 2;
+    docs.DocType DocType = 3;
+    string ContentType = 4;
+    optional int64 DeletedAt = 5;
+}
+
+
+message DeleteDocumentRequest{
+    string DocId = 1;
+}
+
 
 
 service DocumentsService {
-    rpc Get(docs.GetDocumentsRequest) returns (stream docs.DocumentModel);
+    rpc Get(docs.GetDocumentsRequest) returns (stream DocumentModel);
+    rpc GetDocumentsList(docs.GetDocumentsRequest) returns (stream DocumentItemModel);
     rpc Upload(docs.UploadDocumentRequest) returns (google.protobuf.Empty);
+    rpc Delete(DeleteDocumentRequest) returns (google.protobuf.Empty);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
