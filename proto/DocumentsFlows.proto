@@ -53,7 +53,7 @@ message GetDocumentsListRequest {
 service DocumentsService {
     rpc Get(docs.GetDocumentsRequest) returns (stream DocumentModel);
     rpc GetDocumentsList(GetDocumentsListRequest) returns (stream DocumentItemModel);
-    rpc Upload(docs.UploadDocumentRequest) returns (google.protobuf.Empty);
+    rpc Upload(docs.UploadDocumentRequest) returns (DocumentItemModel);
     rpc Delete(DeleteDocumentRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
