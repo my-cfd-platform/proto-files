@@ -44,11 +44,14 @@ message DeleteDocumentRequest{
     string DocId = 1;
 }
 
-
+message GetDocumentsListRequest {
+    string ClientId = 1;
+    bool WithDeleted = 2;
+}
 
 service DocumentsService {
     rpc Get(docs.GetDocumentsRequest) returns (stream DocumentModel);
-    rpc GetDocumentsList(docs.GetDocumentsRequest) returns (stream DocumentItemModel);
+    rpc GetDocumentsList(GetDocumentsListRequest) returns (stream DocumentItemModel);
     rpc Upload(docs.UploadDocumentRequest) returns (google.protobuf.Empty);
     rpc Delete(DeleteDocumentRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
