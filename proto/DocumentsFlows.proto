@@ -13,7 +13,6 @@ enum DocType{
 message GetDocumentsRequest {
     string ClientId = 1;
     repeated string DocIds = 2;
-    repeated DocType DocTypes = 3;
 }
 
 message DocumentModel{
