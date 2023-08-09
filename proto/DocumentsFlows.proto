@@ -41,7 +41,8 @@ message DocumentItemModel{
 
 
 message DeleteDocumentRequest{
-    string DocId = 1;
+    string ClientId = 1;
+    string DocId = 2;
 }
 
 message GetDocumentsListRequest {
