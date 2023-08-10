@@ -13,6 +13,7 @@ message GetPersonalDataResponse{
 
 message SetPersonalDataRequest{
     PersonalDataModel PersonalDataModel = 1;
+    string Who=2;
 }
 
 
