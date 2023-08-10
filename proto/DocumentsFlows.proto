@@ -7,6 +7,16 @@ package docs;
 enum DocType{
     Id = 0;
     ProofOfAddress = 1;
+    DrivingLicense = 2;
+    UtilityBill = 3;
+    BankStatement = 4;
+    RentalAgreement = 5;
+    HealthInsurance = 6;
+    TaxBill = 7;
+    Affidavit = 8;
+    FamilyCard = 9;
+    IbDeclaration=10;
+    Other = 999;
 }
 
 // GET
