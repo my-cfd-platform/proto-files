@@ -13,8 +13,13 @@ message ChangeLog {
     string Who = 5;
 }
 
+message GetChangeLogRequest{
+    string ClientId = 1;
+}
+
 service KycChangeLogsService {
     rpc Upload(stream ChangeLog) returns (google.protobuf.Empty);
+    rpc Get(GetChangeLogRequest) returns (stream ChangeLog);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 
  }
