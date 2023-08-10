@@ -24,6 +24,7 @@ message GetStatusResponse {
 message UpdateStatusRequest {
     string ClientId = 1;
     kyc.KycStatus Status = 2;
+    string Who =3;
 }
 
 service KycStatusService {
