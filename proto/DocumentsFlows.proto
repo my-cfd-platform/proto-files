@@ -28,6 +28,7 @@ message UploadDocumentRequest{
     docs.DocType DocType = 2;
     string ContentType = 3;
     bytes Content = 4;
+    string Who = 5;
 }
 
 message DocumentItemModel{
