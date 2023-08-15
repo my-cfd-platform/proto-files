@@ -5,17 +5,21 @@ package docs;
 
 
 enum DocType{
-    Id = 0;
-    ProofOfAddress = 1;
-    DrivingLicense = 2;
-    UtilityBill = 3;
-    BankStatement = 4;
-    RentalAgreement = 5;
-    HealthInsurance = 6;
-    TaxBill = 7;
-    Affidavit = 8;
-    FamilyCard = 9;
-    IbDeclaration=10;
+    PoIAsIdPassport = 0;
+    PoIAsIdCard = 1;
+    PoIAsDrivingLicense = 2;
+    PoIAsOther = 3;
+    PoAAsIdCard = 4;
+    PoAAsDrivingLicense = 5;
+    PoAAsUtilityBill = 6;
+    PoAAsBankStatement = 7;
+    PoAAsRentalAgreement = 8;
+    PoAAsInsurance = 9;
+    PoAAsTaxBill=10;
+    PoAAsAffidavit=11;
+    PoAAsFamilyCard=12;
+    PoAAsIBDeclaration=13;
+    PoAAsOther=14;
     Other = 999;
 }
 
