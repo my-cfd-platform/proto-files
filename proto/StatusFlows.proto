@@ -35,4 +35,5 @@ service StatusService {
     rpc GetStatus(StatusFlows.StatusGrpcModel) returns (StatusFlows.GetStatusResponse);
     rpc SetStatus(StatusFlows.StatusGrpcModel) returns (google.protobuf.Empty);
     rpc Search(StatusFlows.SearchStatus) returns (stream StatusFlows.StatusGrpcModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }

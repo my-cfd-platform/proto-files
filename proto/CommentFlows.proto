@@ -35,4 +35,5 @@ service CommentService {
     rpc GetComments(RequestByCategory) returns (GetCommentsResponse);
     rpc SetComment(CommentGrpcModel) returns (google.protobuf.Empty);
     rpc Search(SearchComments) returns (stream CommentGrpcModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }

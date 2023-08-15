@@ -27,4 +27,5 @@ service ManagerAccessService {
     rpc GetManagerAccess(ManagerAccessFlows.AccessRequest) returns (stream TraderAccessModel);
     rpc GetTraderManagers(ManagerAccessFlows.AccessRequest) returns (stream TraderAccessModel);
     rpc Search(ManagerAccessFlows.SearchManager) returns (stream TraderAccessModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
