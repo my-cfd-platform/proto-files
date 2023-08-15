@@ -43,6 +43,8 @@ message UploadDocumentRequest{
     string ContentType = 3;
     bytes Content = 4;
     string Who = 5;
+    int64 Expires = 6;
+    string Comment = 7;
 }
 
 message DocumentItemModel{
@@ -51,8 +53,10 @@ message DocumentItemModel{
     docs.DocType DocType = 3;
     string ContentType = 4;
     optional int64 DeletedAt = 5;
+    int64 Expires = 6;
+    string Comment = 7;
+    string Who = 8;
 }
-
 
 message DeleteDocumentRequest{
     string ClientId = 1;
