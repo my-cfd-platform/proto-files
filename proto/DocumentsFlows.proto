@@ -55,7 +55,6 @@ message DocumentItemModel{
     optional int64 DeletedAt = 5;
     int64 Expires = 6;
     string Comment = 7;
-    string Who = 8;
 }
 
 message DeleteDocumentRequest{
