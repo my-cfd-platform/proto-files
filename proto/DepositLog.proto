@@ -1,7 +1,7 @@
 
 syntax = "proto3";
 import "google/protobuf/empty.proto";
-package deposit_logs;
+package deposit_log;
 
 
 message DepositLogGrpcItem {
@@ -16,7 +16,7 @@ message GetRequest {
 }
 
 service DepositLog {
-    rpc Register(DepositLogGrpcItem) returns (google.protobuf.Empty);
+    rpc Write(DepositLogGrpcItem) returns (google.protobuf.Empty);
     rpc Get(GetRequest) returns (stream DepositLogGrpcItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
