@@ -12,13 +12,13 @@ message RegisterRequest {
     string TraderId = 1;
     string AccountId = 2;
     string AccountCurrency = 3;
-    string AccountDepositAmount = 4;
+    float AccountDepositAmount = 4;
 
     PaymentSystemType PaymentSystemType = 5;
     string PaymentSystemId = 6;
     string PaymentSystemReferenceId = 7;
     string PaymentSystemCurrency = 8;
-    string PaymentSystemAmount = 9;
+    float PaymentSystemAmount = 9;
 }
 
 message RegisterResponse {
