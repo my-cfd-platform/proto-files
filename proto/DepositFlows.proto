@@ -33,13 +33,13 @@ message DepositGrpcModel{
 
     string AccountId = 4;
     string AccountCurrency = 5;
-    string AccountDepositAmount = 6;
+    double AccountDepositAmount = 6;
 
     PaymentSystemType PaymentSystemType = 7;
     string PaymentSystemId = 8;
     string PaymentSystemReferenceId = 9;
     string PaymentSystemCurrency = 10;
-    string PaymentSystemAmount = 11;
+    double PaymentSystemAmount = 11;
 
     int64 AcceptedAt = 12;
     int64 RejectedAt = 13;
