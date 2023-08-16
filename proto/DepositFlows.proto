@@ -14,15 +14,16 @@ enum PaymentSystemType{
 }
 
 message RegisterRequest {
-    string AccountId = 1;
-    string AccountCurrency = 2;
-    string AccountDepositAmount = 3;
+    string TraderId = 1;
+    string AccountId = 2;
+    string AccountCurrency = 3;
+    string AccountDepositAmount = 4;
 
-    PaymentSystemType PaymentSystemType = 4;
-    string PaymentSystemId = 5;
-    string PaymentSystemReferenceId = 6;
-    string PaymentSystemCurrency = 7;
-    string PaymentSystemAmount = 8;
+    PaymentSystemType PaymentSystemType = 5;
+    string PaymentSystemId = 6;
+    string PaymentSystemReferenceId = 7;
+    string PaymentSystemCurrency = 8;
+    string PaymentSystemAmount = 9;
 }
 
 message RegisterResponse {
@@ -31,17 +32,18 @@ message RegisterResponse {
 
 message DepositGrpcModel{
     string Id = 1;
-    DepositStatus Status = 2;
+    string TraderId = 2;
+    DepositStatus Status = 3;
 
-    string AccountId = 3;
-    string AccountCurrency = 4;
-    string AccountDepositAmount = 5;
+    string AccountId = 4;
+    string AccountCurrency = 5;
+    string AccountDepositAmount = 6;
 
-    PaymentSystemType PaymentSystemType = 6;
-    string PaymentSystemId = 7;
-    string PaymentSystemReferenceId = 8;
-    string PaymentSystemCurrency = 9;
-    string PaymentSystemAmount = 10;
+    PaymentSystemType PaymentSystemType = 7;
+    string PaymentSystemId = 8;
+    string PaymentSystemReferenceId = 9;
+    string PaymentSystemCurrency = 10;
+    string PaymentSystemAmount = 11;
 }
 
 
