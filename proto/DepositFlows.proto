@@ -1,0 +1,51 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package deposit_flows;
+
+enum DepositStatus{
+    Registered = 0;
+    Accepted = 1;
+    Rejected = 2;
+}
+
+enum PaymentSystemType{
+    BankCards =0;
+}
+
+message RegisterRequest {
+    string AccountId = 1;
+    string AccountCurrency = 2;
+    string AccountDepositAmount = 3;
+
+    PaymentSystemType PaymentSystemType = 4;
+    string PaymentSystemId = 5;
+    string PaymentSystemReferenceId = 6;
+    string PaymentSystemCurrency = 7;
+    string PaymentSystemAmount = 8;
+}
+
+message RegisterResponse {
+    DepositGrpcModel DepositModel = 1;
+}
+
+message DepositGrpcModel{
+    string Id = 1;
+    DepositStatus Status = 2;
+
+    string AccountId = 3;
+    string AccountCurrency = 4;
+    string AccountDepositAmount = 5;
+
+    PaymentSystemType PaymentSystemType = 6;
+    string PaymentSystemId = 7;
+    string PaymentSystemReferenceId = 8;
+    string PaymentSystemCurrency = 9;
+    string PaymentSystemAmount = 10;
+}
+
+
+service DepositFlowsService {
+    rpc Register(RegisterRequest) returns (RegisterResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+ }
