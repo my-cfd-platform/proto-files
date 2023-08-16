@@ -3,11 +3,6 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package deposit_flows;
 
-enum DepositStatus{
-    Registered = 0;
-    Accepted = 1;
-    Rejected = 2;
-}
 
 enum PaymentSystemType{
     BankCards =0;
@@ -33,7 +28,8 @@ message RegisterResponse {
 message DepositGrpcModel{
     string Id = 1;
     string TraderId = 2;
-    DepositStatus Status = 3;
+
+    int64 CreatedAt = 3;
 
     string AccountId = 4;
     string AccountCurrency = 5;
@@ -44,6 +40,9 @@ message DepositGrpcModel{
     string PaymentSystemReferenceId = 9;
     string PaymentSystemCurrency = 10;
     string PaymentSystemAmount = 11;
+
+    int64 AcceptedAt = 12;
+    int64 RejectedAt = 13;
 }
 
 
