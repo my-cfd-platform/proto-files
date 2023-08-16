@@ -80,7 +80,7 @@ message UpdateExpiresRequest{
 message UpdateCommentRequest{
     string ClientId = 1;
     string DocId = 2;
-    int64 Comment = 3;
+    string Comment = 3;
     string Who = 4;
 }
 
