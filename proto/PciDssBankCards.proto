@@ -7,8 +7,8 @@ package pci_dss_bank_cards;
 message DepositRequest {
    string CardNumber = 1;
    string FullName = 2;
-   string Month = 3;
-   string Year = 4;
+   int32 Month = 3;
+   int32 Year = 4;
    string CVC = 5;
 }
 
