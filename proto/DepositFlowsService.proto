@@ -45,8 +45,14 @@ message DepositGrpcModel{
     int64 RejectedAt = 13;
 }
 
+message UpdatePaymentSystemReferenceIdRequest {
+  string Id = 1;
+  string ReferenceId = 2;
+}
+
 
 service DepositFlowsService {
     rpc Register(RegisterRequest) returns (RegisterResponse);
+    rpc UpdatePaymentSystemReferenceId(UpdatePaymentSystemReferenceIdRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
