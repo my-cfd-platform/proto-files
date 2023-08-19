@@ -47,7 +47,8 @@ message DepositGrpcModel{
 
 message UpdatePaymentSystemReferenceIdRequest {
   string Id = 1;
-  string ReferenceId = 2;
+  string PaymentSystemId = 2;
+  string ReferenceId = 3;
 }
 
 

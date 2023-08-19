@@ -22,7 +22,8 @@ enum DepositStatus{
 message DepositResponse{
     DepositStatus status = 1;
     string GoTo3DsUrl = 2;
-    string ReferenceId = 3;
+    string PaymentSystemId = 3;
+    string ReferenceId = 4;
 }
 
 service PciDssBankCards {
