@@ -5,11 +5,12 @@ package pci_dss_bank_cards;
 
 
 message DepositRequest {
-   string CardNumber = 1;
-   string FullName = 2;
-   int32 Month = 3;
-   int32 Year = 4;
-   string CVC = 5;
+   string DepositId = 1;
+   string CardNumber = 2;
+   string FullName = 3;
+   int32 Month = 4;
+   int32 Year = 5;
+   string CVC = 6;
 }
 
 enum DepositStatus{
