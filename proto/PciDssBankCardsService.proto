@@ -18,8 +18,9 @@ message PciDssDepositGrpcRequest {
 message PciDssDepositGrpcResponse{
     string ErrorIfOccurs = 1;
     string GoTo3DsUrlIfOccurs = 2;
-    string PaymentSystemId = 3;
-    string ReferenceId = 4;
+    string IFrameTo3DsUrlIfOccurs = 3;
+    string PaymentSystemId = 4;
+    string ReferenceId = 5;
 }
 
 service PciDssBankCards {
