@@ -13,15 +13,11 @@ message PciDssDepositGrpcRequest {
    string CVC = 6;
 }
 
-enum PciDssDepositGrpcStatus{
-    Ok = 0;
-    Error = 1;
-    GoTo3Ds = 2;
-}
+
 
 message PciDssDepositGrpcResponse{
-    PciDssDepositGrpcStatus Status = 1;
-    string GoTo3DsUrl = 2;
+    string ErrorIfOccurs = 1;
+    string GoTo3DsUrlIfOccurs = 2;
     string PaymentSystemId = 3;
     string ReferenceId = 4;
 }
