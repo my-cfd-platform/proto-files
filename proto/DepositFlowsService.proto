@@ -51,9 +51,16 @@ message UpdatePaymentSystemReferenceIdRequest {
   string ReferenceId = 3;
 }
 
+message MarkAsFailRequest {
+    string Id = 1;
+    string TechInfo = 2;
+}
+  
+
 
 service DepositFlowsService {
     rpc Register(RegisterRequest) returns (RegisterResponse);
     rpc UpdatePaymentSystemReferenceId(UpdatePaymentSystemReferenceIdRequest) returns (google.protobuf.Empty);
+    rpc MarkAsFail(MarkAsFailRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
