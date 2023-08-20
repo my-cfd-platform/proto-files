@@ -4,29 +4,29 @@ import "google/protobuf/empty.proto";
 package pci_dss_bank_cards;
 
 
-message DepositRequest {
+message PciDssDepositGrpcRequest {
    string DepositId = 1;
    string CardNumber = 2;
-   string FullName = 3;
+   string CardHolder = 3;
    int32 Month = 4;
    int32 Year = 5;
    string CVC = 6;
 }
 
-enum DepositStatus{
+enum PciDssDepositGrpcStatus{
     Ok = 0;
     Error = 1;
     GoTo3Ds = 2;
 }
 
-message DepositResponse{
-    DepositStatus status = 1;
+message PciDssDepositGrpcResponse{
+    PciDssDepositGrpcStatus Status = 1;
     string GoTo3DsUrl = 2;
     string PaymentSystemId = 3;
     string ReferenceId = 4;
 }
 
 service PciDssBankCards {
-    rpc Deposit(DepositRequest) returns (DepositResponse);
+    rpc Deposit(PciDssDepositGrpcRequest) returns (PciDssDepositGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
