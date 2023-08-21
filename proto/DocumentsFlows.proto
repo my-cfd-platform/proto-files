@@ -114,6 +114,14 @@ message UpdateCommentRequest{
     string Who = 4;
 }
 
+message UpdateDocumentStatusRequest{
+    string ClientId = 1;
+    string DocId = 2;
+    DocumentStatus Status=3;
+    DocumentRejectReason RejectReason=4;
+    string Who = 5;
+}
+
 service DocumentsService {
     rpc Get(docs.GetDocumentsRequest) returns (stream DocumentModel);
     rpc GetDocumentsList(GetDocumentsListRequest) returns (stream DocumentItemModel);
@@ -121,5 +129,6 @@ service DocumentsService {
     rpc Delete(DeleteDocumentRequest) returns (google.protobuf.Empty);
     rpc UpdateExpires(UpdateExpiresRequest) returns (google.protobuf.Empty);
     rpc UpdateComment(UpdateCommentRequest) returns (google.protobuf.Empty);
+    rpc UpdateStatus(UpdateDocumentStatusRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
