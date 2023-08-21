@@ -23,6 +23,32 @@ enum DocType{
     Other = 999;
 }
 
+enum DocumentStatus{
+    New=0;
+    Approved=1;
+    Partial=2;
+    NotVerified=3;
+    Rejected=4;
+}
+
+enum DocumentRejectReason{
+    NotSet = 0;
+    CutOrCroppedDocument=1;
+    ExpiredDocument=2;
+    ColorCopyNeeded=3;
+    BlurryOrBadQuality=4;
+    NotAcceptableTypeOfDocument=5;
+    ThirdPartyName =6;
+    FrontSideOfTheDocumentNeeded=7;
+    BacksideOfTheDocumentNeeded=8;
+    Duplicate=9;
+    Underage=10;
+    NoIssueDate=11;
+    NoFullAddress=12;
+    AdditionalDocumentRequired=13;
+    OtherRejectReason=14;
+}
+
 // GET
 message GetDocumentsRequest {
     string ClientId = 1;
@@ -34,7 +60,9 @@ message DocumentModel{
     int64 UploadedAt = 2;
     docs.DocType DocType = 3;
     string ContentType = 4;
-    bytes Content = 5;
+    DocumentStatus Status = 5;
+    DocumentRejectReason RejectReason = 6;
+    bytes Content = 7;
 }
 
 message UploadDocumentRequest{
@@ -55,6 +83,8 @@ message DocumentItemModel{
     optional int64 DeletedAt = 5;
     int64 Expires = 6;
     string Comment = 7;
+    DocumentStatus Status = 8;
+    DocumentRejectReason RejectReason = 9;
 }
 
 message DeleteDocumentRequest{
