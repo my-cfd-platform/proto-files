@@ -6,6 +6,7 @@ package deposit_flows;
 
 enum PaymentSystemType{
     BankCards =0;
+    PayNetEasy = 1;
 }
 
 message RegisterRequest {
