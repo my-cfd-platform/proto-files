@@ -1,0 +1,21 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package pci_dss_bank_cards;
+
+
+message PspGrpcRequest {
+   string DepositId = 1;
+}
+
+message PspGrpcResponse{
+    string PaymentSystemId = 1;
+    optional string ReferenceId = 2;
+    optional string RedirectIfOk = 3;
+    optional string ErrorTechDataIfFail = 4;
+}
+
+service PspRedirectIntegration {
+    rpc Deposit(PspGrpcRequest) returns (PspGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+ }
