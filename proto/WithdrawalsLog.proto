@@ -11,12 +11,12 @@ message WithdrawalLogGrpcItem {
    string TechInfo = 4;
 }
 
-message GetRequest {
+message GetByWithdrawalRequest {
     string Id = 1;
 }
 
 service DepositLog {
     rpc Write(WithdrawalLogGrpcItem) returns (google.protobuf.Empty);
-    rpc Get(GetRequest) returns (stream WithdrawalLogGrpcItem);
+    rpc Get(GetByWithdrawalRequest) returns (stream WithdrawalLogGrpcItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
