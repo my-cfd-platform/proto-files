@@ -15,7 +15,7 @@ message GetByWithdrawalRequest {
     string Id = 1;
 }
 
-service DepositLog {
+service WithdrawalLog {
     rpc Write(WithdrawalLogGrpcItem) returns (google.protobuf.Empty);
     rpc Get(GetByWithdrawalRequest) returns (stream WithdrawalLogGrpcItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
