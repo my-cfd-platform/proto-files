@@ -17,7 +17,7 @@ message PspGrpcPersonalData{
 message PspGrpcDepositInfo{
     string Id = 1;
     string Description = 2;
-    string InitializeIpAddr = 3;
+    string InitializerIpAddr = 3;
 }
 
 
