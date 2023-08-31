@@ -4,18 +4,37 @@ import "google/protobuf/empty.proto";
 package psp_redirect_integration;
 
 
-message PspGrpcRequest {
-   string DepositId = 1;
+message PspGrpcPersonalData{
+    string ClientId = 1;
+    string Email = 2;
+    string City = 3;
+    string ZipCode = 4;
+    string Country = 5;
+    string Phone = 6;
+    string Addr = 7;
+}
+
+message PspGrpcDepositInfo{
+    string Id = 1;
+    string Description = 2;
+    string InitializeIpAddr = 3;
+}
+
+
+message PspGrpcCreateDepositRequest {
+    PspGrpcDepositInfo DepositInfo = 1;
+    PspGrpcPersonalData PersonalDataInfo = 2;
 }
 
 message PspGrpcResponse{
     string PaymentSystemId = 1;
-    optional string ReferenceId = 2;
-    optional string RedirectIfOk = 3;
-    optional string ErrorTechDataIfFail = 4;
+    string ExternalId = 2;
+    optional string ReferenceId = 3;
+    optional string RedirectIfOk = 4;
+    optional string ErrorTechDataIfFail = 5;
 }
 
 service PspRedirectIntegration {
-    rpc Deposit(PspGrpcRequest) returns (PspGrpcResponse);
+    rpc Deposit(PspGrpcCreateDepositRequest) returns (PspGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
