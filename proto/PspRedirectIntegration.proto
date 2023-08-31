@@ -18,6 +18,7 @@ message PspGrpcDepositInfo{
     string Id = 1;
     string Description = 2;
     string InitializerIpAddr = 3;
+    double Amount = 4;
 }
 
 
