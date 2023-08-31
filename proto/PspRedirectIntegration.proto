@@ -29,10 +29,9 @@ message PspGrpcCreateDepositRequest {
 
 message PspGrpcResponse{
     string PaymentSystemId = 1;
-    string ExternalId = 2;
-    optional string ReferenceId = 3;
-    optional string RedirectIfOk = 4;
-    optional string ErrorTechDataIfFail = 5;
+    optional string ReferenceId = 2;
+    optional string RedirectIfOk = 3;
+    optional string ErrorTechDataIfFail = 4;
 }
 
 service PspRedirectIntegration {
