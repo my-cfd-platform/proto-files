@@ -4,8 +4,27 @@ import "google/protobuf/empty.proto";
 package psp_redirect_integration;
 
 
-message PspGrpcRequest {
-   string DepositId = 1;
+message PspGrpcPersonalData{
+    string ClientId = 1;
+    string Email = 2;
+    string City = 3;
+    string ZipCode = 4;
+    string Country = 5;
+    string Phone = 6;
+    string Addr = 7;
+}
+
+message PspGrpcDepositInfo{
+    string Id = 1;
+    string Description = 2;
+    string InitializerIpAddr = 3;
+    double Amount = 4;
+}
+
+
+message PspGrpcCreateDepositRequest {
+    PspGrpcDepositInfo DepositInfo = 1;
+    PspGrpcPersonalData PersonalDataInfo = 2;
 }
 
 message PspGrpcResponse{
@@ -16,6 +35,6 @@ message PspGrpcResponse{
 }
 
 service PspRedirectIntegration {
-    rpc Deposit(PspGrpcRequest) returns (PspGrpcResponse);
+    rpc Deposit(PspGrpcCreateDepositRequest) returns (PspGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
