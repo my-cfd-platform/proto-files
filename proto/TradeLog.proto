@@ -19,6 +19,7 @@ message TradeLogItem {
     string ProcessId = 2;
     string Message = 3;
     string Data = 4;
+    string OperationId = 5;
 }
 
 message ReadTradeLogRequest {
