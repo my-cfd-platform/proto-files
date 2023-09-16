@@ -178,4 +178,5 @@ service ReportGrpcService {
     rpc GetHistoryPositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsClosedPositionGrpcModel);
     rpc SearchHistoryPositions(SearchHistory) returns (stream ReportOperationHistoryItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+
 }
