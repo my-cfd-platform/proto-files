@@ -49,5 +49,6 @@ message PositionManagerPersistenceActivePositionGrpcModel{
 
 service PositionManagerPersistenceGrpcService {
     rpc GetActivePositions(google.protobuf.Empty) returns (stream PositionManagerPersistenceActivePositionGrpcModel);
+    rpc GetPricesSnapshot(google.protobuf.Empty) returns (stream PositionManagerPersistenceBidAsk);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
