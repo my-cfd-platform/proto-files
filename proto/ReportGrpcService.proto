@@ -170,6 +170,14 @@ message FromToUint64Model{
     optional uint64 To = 2;
 }
 
+message GetOperationRequest{
+    string OperationId = 1;
+}
+
+message GetOperationResponse{
+    optional ReportOperationHistoryItem Item = 1;
+}
+
 service ReportGrpcService {
     rpc GetHistoryPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetHistoryPositionsPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
@@ -178,5 +186,5 @@ service ReportGrpcService {
     rpc GetHistoryPositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsClosedPositionGrpcModel);
     rpc SearchHistoryPositions(SearchHistory) returns (stream ReportOperationHistoryItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
-
+    rpc GetOperation(GetOperationRequest) returns (GetOperationResponse);
 }
