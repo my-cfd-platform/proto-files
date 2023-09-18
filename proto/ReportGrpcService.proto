@@ -34,14 +34,14 @@ message ReportsFlowsBidAsk{
 
 message ReportFlowsOperationsGetPaginatedGrpcRequest{
     string AccountId = 1;
-    int32 TraderId  = 2;
+    string TraderId  = 2;
     int32 Page = 3;
     int32 Size = 4;
 }
 
 message ReportFlowsOperationsGetInDateRangeGrpcRequest{
     optional string AccountId = 1;
-    int32 TraderId  = 2;
+    string TraderId  = 2;
     optional uint64 DateFrom = 3;
     optional uint64 DateTo = 4;
 }
