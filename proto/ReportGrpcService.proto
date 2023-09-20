@@ -149,6 +149,7 @@ message ReportOperationHistoryItem{
     uint64 Date = 7;
     optional string ReferenceTransactionId = 8;
     double BalanceAfterOperation = 9;
+    optional string Comment = 10;
 }
 
 message GetHistoryPositionsPaginatedRequest{
