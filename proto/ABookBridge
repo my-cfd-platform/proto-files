@@ -1,0 +1,49 @@
+
+syntax = "proto3";
+package a_book_bridge;
+import "google/protobuf/empty.proto";
+
+enum ABookBridgePositionSide{
+    Buy = 0;
+    Sell = 1;
+}
+
+message ABookBridgeOpenPositionGrpcRequest{
+    string InstrumentId = 1;
+    string PositionId = 2;
+    string AccountId = 3;
+    double Leverage = 4;
+    double InvestAmount = 5;
+    ABookBridgePositionSide Side = 6;
+}
+
+enum OpenPositionGrpcResponseStatusCode{
+    Success = 0;
+    LiquidityProviderNotFound = 1;
+    InstrumentNotFoundInLpMapping = 2;
+    TradingInstrumentNotFound = 3;
+    LpReject = 4;
+    Timeout = 5;
+    Disconnect = 6;
+}
+
+message ABookBridgeOpenPositionResponse{
+    OpenPositionGrpcResponseStatusCode StatusCode = 1;
+    ABookBridgeOpenPositionGrpcResponsePositionModel Position = 2;
+}
+
+message ABookBridgeOpenPositionGrpcResponsePositionModel{
+    string InternalId = 1;
+    string ExternalId = 2;
+    string AccountId = 3;
+    double Leverage = 4;
+    double InvestAmount = 5;
+    ABookBridgePositionSide Side = 6;
+    uint64 TradeDate = 7;
+    double Price = 8;
+}
+
+service ABookBridgeGrpcService {
+    rpc OpenPosition(ABookBridgeOpenPositionGrpcRequest) returns (ABookBridgeOpenPositionResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
