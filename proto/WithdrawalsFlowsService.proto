@@ -63,7 +63,7 @@ message CancelActiveWithdrawalResponse{
     WithdrawalGrpcModel Model = 2;
 }
 
-service DepositFlowsService {
+service WithdrawalFlowsService {
     rpc Register(RegisterWithdrawalRequest) returns (RegisterWithdrawalResponse);
     rpc GetActiveWithdrawals(GetActiveWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc CancelActiveWithdrawal(GetActiveWithdrawalsRequest) returns (CancelActiveWithdrawalResponse);
