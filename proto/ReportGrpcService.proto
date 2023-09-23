@@ -1,4 +1,4 @@
-﻿
+
 syntax = "proto3";
 package report_grpc;
 import "google/protobuf/empty.proto";
@@ -33,15 +33,15 @@ message ReportsFlowsBidAsk{
 ////////////////////////////////////////////////////////////
 
 message ReportFlowsOperationsGetPaginatedGrpcRequest{
-    string TraderId = 1;
-    string AccountId = 2;
+    string AccountId = 1;
+    string TraderId  = 2;
     int32 Page = 3;
     int32 Size = 4;
 }
 
 message ReportFlowsOperationsGetInDateRangeGrpcRequest{
-    string TraderId = 1;
-    string AccountId = 2;
+    optional string AccountId = 1;
+    optional string TraderId  = 2;
     optional uint64 DateFrom = 3;
     optional uint64 DateTo = 4;
 }
@@ -71,25 +71,33 @@ message ReportFlowsOperationHistoryUiItem{
 
 message ReportsFlowsActivePositionGrpcModel{
     string Id = 1;
-    string AccountId = 2;
     string TraderId = 3;
+    string AccountId = 2;
     string AssetPair = 4;
-    ReportsFlowsPositionSide Side = 5;
     double InvestAmount = 6;
+    ReportsFlowsPositionSide Side = 5;
     double Leverage = 7;
     double StopOutPercent = 8;
-    string CreateProcessId = 9;
     uint64 CreateDateUnixTimestampMilis = 10;
-    string LastUpdateProcessId = 11;
-    uint64 LastUpdateDate = 12;
     optional double TpInProfit = 13;
     optional double SlInProfit = 14;
     optional double TpInAssetPrice = 15;
     optional double SlInAssetPrice = 16;
+    string CreateProcessId = 9;
+    string LastUpdateProcessId = 11;
+    uint64 LastUpdateDate = 12;
     double OpenPrice = 17;
-    ReportsFlowsBidAsk OpenBidAsk = 18;
-    string OpenProcessId = 19;
     uint64 OpenDate = 20;
+    string OpenProcessId = 19;
+    ReportsFlowsBidAsk OpenBidAsk = 18;
+    map<string, string> Metadata = 21;
+    string Base = 22;
+    string Quote = 23;
+    string Collateral = 24;
+    double CollateralBaseOpenPrice = 25;
+    double CollateralQuoteClosePrice = 26;
+    ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 27;
+    ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 28;
 }
 
 
@@ -97,29 +105,38 @@ message ReportsFlowsClosedPositionGrpcModel{
     string Id = 1;
     string AccountId = 2;
     string TraderId = 3;
+
     string AssetPair = 4;
-    ReportsFlowsPositionSide Side = 5;
     double InvestAmount = 6;
+    ReportsFlowsPositionSide Side = 5;
     double Leverage = 7;
     double StopOutPercent = 8;
-    string CreateProcessId = 9;
     uint64 CreateDateUnixTimestampMilis = 10;
+    optional double TpInAssetPrice = 15;
+    optional double TpInProfit = 13;
+    optional double SlInAssetPrice = 16;
+    optional double SlInProfit = 14;
+    string CreateProcessId = 9;
     string LastUpdateProcessId = 11;
     uint64 LastUpdateDate = 12;
-    optional double TpInProfit = 13;
-    optional double SlInProfit = 14;
-    optional double TpInAssetPrice = 15;
-    optional double SlInAssetPrice = 16;
     double OpenPrice = 17;
-    ReportsFlowsBidAsk OpenBidAsk = 18;
-    string OpenProcessId = 19;
     uint64 OpenDate = 20;
-    double Profit = 21;
+    string OpenProcessId = 19;
+    ReportsFlowsBidAsk OpenBidAsk = 18;
+    map<string, string> Metadata = 27;
+    uint64 CloseDate = 26;
+    ReportsFlowsClosePositionReason CloseReason = 25;
     double ClosePrice = 22;
     ReportsFlowsBidAsk CloseBidAsk = 23;
     string CloseProcessId = 24;
-    ReportsFlowsClosePositionReason CloseReason = 25;
-    uint64 CloseDate = 26;
+    double Profit = 21;
+    optional string Base = 28;
+    optional string Quote = 29;
+    optional string Collateral = 30;
+    optional double CollateralBaseOpenPrice = 31;
+    optional double CollateralQuoteClosePrice = 32;
+    ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 33;
+    ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 34;
 }
 
 message ReportOperationHistoryItem{
@@ -132,12 +149,14 @@ message ReportOperationHistoryItem{
     uint64 Date = 7;
     optional string ReferenceTransactionId = 8;
     double BalanceAfterOperation = 9;
+    optional string Comment = 10;
 }
 
 message GetHistoryPositionsPaginatedRequest{
     string AccountId = 1;
-    int32 Page = 2;
-    int32 Size = 3;
+    string TraderId = 2;
+    int32 Page = 3;
+    int32 Size = 4;
 }
 
 message SearchHistory{
@@ -152,6 +171,14 @@ message FromToUint64Model{
     optional uint64 To = 2;
 }
 
+message GetOperationRequest{
+    string OperationId = 1;
+}
+
+message GetOperationResponse{
+    optional ReportOperationHistoryItem Item = 1;
+}
+
 service ReportGrpcService {
     rpc GetHistoryPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetHistoryPositionsPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
@@ -160,4 +187,5 @@ service ReportGrpcService {
     rpc GetHistoryPositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsClosedPositionGrpcModel);
     rpc SearchHistoryPositions(SearchHistory) returns (stream ReportOperationHistoryItem);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc GetOperation(GetOperationRequest) returns (GetOperationResponse);
 }
