@@ -40,7 +40,6 @@ message WithdrawalGrpcModel{
 
     int64 ProcessedAsOkAt = 7;
     int64 CanceledAt = 8;
-    string ProcessedComment = 9;
 }
 
 message GetActiveWithdrawalsRequest {
