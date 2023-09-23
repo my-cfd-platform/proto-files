@@ -3,9 +3,6 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package withdrawals_flows;
 
-enum WithdrawalPaymentSystemType{
-    WireTransfer = 0;
-}
 
 enum WithdrawalStatus{
     Pending = 0;
@@ -14,15 +11,21 @@ enum WithdrawalStatus{
 }
 
 message RegisterWithdrawalRequest {
-    string TraderId = 1;
-    string AccountId = 2;
-    WithdrawalPaymentSystemType PaymentSystemType = 3;
+    string ProcessId = 1;
+    string TraderId = 2;
+    string AccountId = 3;
     string PaymentSystemCredentials = 4;
     double WithdrawalAmount = 5;
 }
 
+enum RegisterWithdrawalStatus{
+    ReservedOk = 0;
+    NotEnoughFundsToReserveFunds = 1;
+}
+
 message RegisterWithdrawalResponse {
-    WithdrawalGrpcModel Model = 1;
+    RegisterWithdrawalStatus Status = 1;
+    optional WithdrawalGrpcModel Model = 2;
 }
 
 message WithdrawalGrpcModel{
@@ -32,17 +35,37 @@ message WithdrawalGrpcModel{
     int64 CreatedAt = 3;
 
     string AccountId = 4;
+    double Amount = 5;
+    string WithdrawalCredentials = 6;
 
-    WithdrawalPaymentSystemType PaymentSystemType = 5;
-    string PaymentSystemId = 6;
-    double PaymentSystemAmount = 7;
+    int64 ProcessedAsOkAt = 7;
+    int64 CanceledAt = 8;
+    string ProcessedComment = 9;
+}
 
-    int64 ProcessedAsOkAt = 8;
-    int64 CanceledAt = 9;
-    string ProcessedComment = 10;
+message GetActiveWithdrawalsRequest {
+    string TraderId = 1;
+}
+
+message CancelActiveWithdrawalRequest {
+    string ProcessId = 1;
+    string TraderId = 2;
+    string Id = 3;
+}
+
+enum CancelWithdrawalStatus{
+    CanceledOk = 0;
+    WithdrawalNotFound = 1;
+}
+
+message CancelActiveWithdrawalResponse{
+    CancelWithdrawalStatus Status = 1;
+    WithdrawalGrpcModel Model = 2;
 }
 
 service DepositFlowsService {
     rpc Register(RegisterWithdrawalRequest) returns (RegisterWithdrawalResponse);
+    rpc GetActiveWithdrawals(GetActiveWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
+    rpc CancelActiveWithdrawal(GetActiveWithdrawalsRequest) returns (CancelActiveWithdrawalResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
