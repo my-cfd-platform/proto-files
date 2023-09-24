@@ -16,6 +16,8 @@ message RegisterWithdrawalRequest {
     string AccountId = 3;
     string PaymentSystemCredentials = 4;
     double WithdrawalAmount = 5;
+    string Who = 6;
+
 }
 
 enum RegisterWithdrawalStatus{
@@ -50,21 +52,35 @@ message CancelActiveWithdrawalRequest {
     string ProcessId = 1;
     string TraderId = 2;
     string Id = 3;
+    string Who = 4;
 }
 
-enum CancelWithdrawalStatus{
+enum ProcessWithdrawalStatus{
     CanceledOk = 0;
     WithdrawalNotFound = 1;
 }
 
 message CancelActiveWithdrawalResponse{
-    CancelWithdrawalStatus Status = 1;
+    ProcessWithdrawalStatus Status = 1;
+    WithdrawalGrpcModel Model = 2;
+}
+
+message ProcessActiveWithdrawalRequest {
+    string ProcessId = 1;
+    string TraderId = 2;
+    string Id = 3;
+    string Who = 4;
+}
+
+message ProcessActiveWithdrawalResponse{
+    ProcessWithdrawalStatus Status = 1;
     WithdrawalGrpcModel Model = 2;
 }
 
 service WithdrawalFlowsService {
     rpc Register(RegisterWithdrawalRequest) returns (RegisterWithdrawalResponse);
     rpc GetActiveWithdrawals(GetActiveWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
-    rpc CancelActiveWithdrawal(GetActiveWithdrawalsRequest) returns (CancelActiveWithdrawalResponse);
+    rpc CancelActiveWithdrawal(CancelActiveWithdrawalRequest) returns (CancelActiveWithdrawalResponse);
+    rpc ProcessActiveWithdrawal(ProcessActiveWithdrawalRequest) returns (ProcessActiveWithdrawalResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
