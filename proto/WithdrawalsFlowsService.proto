@@ -56,13 +56,13 @@ message CancelActiveWithdrawalRequest {
     string Who = 5;
 }
 
-enum ProcessWithdrawalStatus{
+enum CancelWithdrawalStatus{
     CanceledOk = 0;
-    WithdrawalNotFound = 1;
+    WithdrawalNotFoundToCancel = 1;
 }
 
 message CancelActiveWithdrawalResponse{
-    ProcessWithdrawalStatus Status = 1;
+    CancelWithdrawalStatus Status = 1;
     WithdrawalGrpcModel Model = 2;
 }
 
@@ -74,8 +74,14 @@ message ProcessActiveWithdrawalRequest {
     string Who = 5;
 }
 
+
+enum ProcessedWithdrawalStatus{
+    ProcessedOk = 0;
+    WithdrawalNotFoundToProcess = 1;
+}
+
 message ProcessActiveWithdrawalResponse{
-    ProcessWithdrawalStatus Status = 1;
+    ProcessedWithdrawalStatus Status = 1;
     WithdrawalGrpcModel Model = 2;
 }
 
