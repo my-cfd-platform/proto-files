@@ -46,6 +46,7 @@ message WithdrawalGrpcModel{
 
 message GetActiveWithdrawalsRequest {
     string TraderId = 1;
+    string AccountId = 2;
 }
 
 message CancelActiveWithdrawalRequest {
