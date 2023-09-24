@@ -9,6 +9,7 @@ message WithdrawalLogGrpcItem {
    int64 Moment = 2;
    string Message = 3;
    string TechInfo = 4;
+   string Who = 5;
 }
 
 message GetByWithdrawalRequest {
