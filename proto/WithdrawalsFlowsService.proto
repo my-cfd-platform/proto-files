@@ -60,6 +60,8 @@ message CancelActiveWithdrawalRequest {
 enum CancelWithdrawalStatus{
     CanceledOk = 0;
     WithdrawalNotFoundToCancel = 1;
+    CanNotCancelWithdrawalIsAlreadyProcessed = 2;
+    CanNotCancelWithdrawalIsAlreadyCanceled = 3;
 }
 
 message CancelActiveWithdrawalResponse{
@@ -79,6 +81,8 @@ message ProcessActiveWithdrawalRequest {
 enum ProcessedWithdrawalStatus{
     ProcessedOk = 0;
     WithdrawalNotFoundToProcess = 1;
+    CanNotProcessWithdrawalIsAlreadyProcessed = 2;
+    CanNotProcessWithdrawalIsAlreadyCanceled = 3;
 }
 
 message ProcessActiveWithdrawalResponse{
