@@ -202,6 +202,11 @@ message TradingExecutorCancelPendingGrpcRequest{
     string PositionId = 3;
 }
 
+message TradingExecutorGetAccountPendingPositionGrpcRequest{
+    string AccountId = 1;
+    string TraderId = 2;
+}
+
 service TradingExecutorGrpcService {
     rpc OpenPosition(TradingExecutorOpenPositionGrpcRequest) returns (TradingExecutorOpenPositionGrpcResponse);
     rpc ClosePosition(TradingExecutorClosePositionGrpcRequest) returns (TradingExecutorClosePositionGrpcResponse);
@@ -209,5 +214,6 @@ service TradingExecutorGrpcService {
     rpc UpdateSlTp(TradingExecutorUpdateSlTpGrpcRequest) returns (TradingExecutorUpdateSlTpGrpcResponse);
     rpc SetPendingPosition(TradingExecutorOpenPendingGrpcRequest) returns (TradingExecutorOpenPendingPositionGrpcResponse);
     rpc CancelPendingPosition(TradingExecutorCancelPendingGrpcRequest) returns (TradingExecutorCancelPendingPositionGrpcResponse);
+    rpc GetAccountPendingPositions(TradingExecutorGetAccountPendingPositionGrpcRequest) returns (stream TradingExecutorPendingPositionGrpcModel);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
