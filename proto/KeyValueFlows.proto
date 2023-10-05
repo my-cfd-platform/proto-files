@@ -3,18 +3,18 @@ syntax = "proto3";
 import "google/protobuf/empty.proto";
 package keyvalue;
 
+//If Key starts with .MyKey - then key is private and can not be changed by client via API
+
 // GET
 message GetKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
-    bool KeyIsPublic = 3;
 }
 
 message GetKeyValueGrpcResponseModel {
     string ClientId = 1;
     string Key = 2;
     optional string Value = 3;
-    bool KeyIsPublic = 4;
 }
 
 //SET
@@ -23,7 +23,6 @@ message SetKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
     string Value = 3;
-    bool KeyIsPublic = 4;
 }
 
 //DELETE
@@ -31,7 +30,6 @@ message SetKeyValueGrpcRequestModel {
 message DeleteKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
-    bool KeyIsPublic = 3;
 
 }
 
@@ -41,9 +39,9 @@ message GetAllByUserGrpcRequestModel {
 }
 
 service KeyValueFlowsGrpcService {
-    rpc Get(stream keyvalue.GetKeyValueGrpcRequestModel) returns (stream keyvalue.GetKeyValueGrpcResponseModel);
-    rpc GetAllByUser(keyvalue.GetAllByUserGrpcRequestModel) returns (stream keyvalue.GetKeyValueGrpcResponseModel);
-    rpc Set(stream keyvalue.SetKeyValueGrpcRequestModel) returns (google.protobuf.Empty);    
-    rpc Delete(stream keyvalue.DeleteKeyValueGrpcRequestModel) returns (google.protobuf.Empty);    
+    rpc Get(stream GetKeyValueGrpcRequestModel) returns (stream GetKeyValueGrpcResponseModel);
+    rpc GetAllByUser(keyvalue.GetAllByUserGrpcRequestModel) returns (stream GetKeyValueGrpcResponseModel);
+    rpc Set(stream SetKeyValueGrpcRequestModel) returns (google.protobuf.Empty);    
+    rpc Delete(stream DeleteKeyValueGrpcRequestModel) returns (google.protobuf.Empty);    
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
