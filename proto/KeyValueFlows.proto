@@ -7,14 +7,14 @@ package keyvalue;
 message GetKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
-    bool KeyIsPrivate = 3;
+    bool KeyIsPublic = 3;
 }
 
 message GetKeyValueGrpcResponseModel {
     string ClientId = 1;
     string Key = 2;
     optional string Value = 3;
-    bool KeyIsPrivate = 4;
+    bool KeyIsPublic = 4;
 }
 
 //SET
@@ -23,7 +23,7 @@ message SetKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
     string Value = 3;
-    bool KeyIsPrivate = 4;
+    bool KeyIsPublic = 4;
 }
 
 //DELETE
@@ -31,7 +31,7 @@ message SetKeyValueGrpcRequestModel {
 message DeleteKeyValueGrpcRequestModel {
     string ClientId = 1;
     string Key = 2;
-    bool KeyIsPrivate = 3;
+    bool KeyIsPublic = 3;
 
 }
 
