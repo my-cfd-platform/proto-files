@@ -95,11 +95,14 @@ message ReportsFlowsActivePositionGrpcModel{
     string Quote = 23;
     string Collateral = 24;
     double CollateralBaseOpenPrice = 25;
-    optional double CollateralQuoteClosePrice = 26;
     ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 27;
-    ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 28;
+    repeated PositionSwapGrpcModel Swaps = 28;
 }
 
+message PositionSwapGrpcModel{
+    double Amount = 1;
+    uint64 Date = 2;
+}
 
 message ReportsFlowsClosedPositionGrpcModel{
     string Id = 1;
