@@ -95,7 +95,7 @@ message ReportsFlowsActivePositionGrpcModel{
     string Quote = 23;
     string Collateral = 24;
     double CollateralBaseOpenPrice = 25;
-    double CollateralQuoteClosePrice = 26;
+    optional double CollateralQuoteClosePrice = 26;
     ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 27;
     ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 28;
 }
