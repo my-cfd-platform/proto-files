@@ -12,6 +12,8 @@ message PspGrpcPersonalData{
     string Country = 5;
     string Phone = 6;
     string Addr = 7;
+    string FirstName = 8;
+    string LastName = 9;
 }
 
 message PspGrpcDepositInfo{
