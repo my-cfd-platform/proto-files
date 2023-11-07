@@ -10,7 +10,15 @@ message SendWelcomeEmailRequest {
     string ConfirmationLink = 4;
 }
 
+message SendResetPasswordEmailRequest {
+    string Email = 1;
+    string LangId = 2;
+    string FullName = 3;
+    string ConfirmationLink = 4;
+}
+
 service SendGridBridgeGrpcService {
     rpc SendWelcomeEmail(sendgridbridge.SendWelcomeEmailRequest) returns (google.protobuf.Empty);
+    rpc SendResetPasswordEmail(sendgridbridge.SendResetPasswordEmailRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
