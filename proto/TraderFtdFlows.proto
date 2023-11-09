@@ -1,0 +1,33 @@
+syntax = "proto3";
+package TraderFtd;
+import "google/protobuf/empty.proto";
+
+message GetTradersRequest{
+  string AffiliateId = 1;
+  uint64 FromDate = 2;
+  uint64 ToDate = 3;
+  uint32 Page = 4;
+  uint32 Limit = 5;
+}
+
+message TraderFtdModel{
+  string TraderId = 1;
+  uint64 OperationDate = 2;
+}
+
+message GetRequest{
+  string TraderId = 1;
+}
+
+message GetTraderFtdModel{
+  string TraderId = 1;
+  string AccountId = 2;
+  string OperationId = 3;
+  uint64 OperationDate = 4;
+}
+
+service TraderFtdGrpcService {
+  rpc Get(stream GetRequest) returns (stream GetTraderFtdModel);
+  rpc GetTraders(GetTradersRequest) returns (stream TraderFtdModel);
+  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
