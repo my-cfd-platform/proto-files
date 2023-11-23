@@ -140,6 +140,7 @@ message ReportsFlowsClosedPositionGrpcModel{
     optional double CollateralQuoteClosePrice = 32;
     ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 33;
     ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 34;
+    repeated PositionSwapGrpcModel Swaps = 35;
 }
 
 message ReportOperationHistoryItem{
