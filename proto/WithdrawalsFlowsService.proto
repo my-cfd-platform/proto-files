@@ -44,7 +44,7 @@ message WithdrawalGrpcModel{
     int64 CanceledAt = 8;
 }
 
-message GetActiveWithdrawalsRequest {
+message GetWithdrawalsRequest {
     optional string TraderId = 1;
     optional string AccountId = 2;
 }
@@ -92,7 +92,9 @@ message ProcessActiveWithdrawalResponse{
 
 service WithdrawalFlowsService {
     rpc Register(RegisterWithdrawalRequest) returns (RegisterWithdrawalResponse);
-    rpc GetActiveWithdrawals(GetActiveWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
+    rpc GetActiveWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
+    rpc GetProcessedWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
+    rpc GetCanceledWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc CancelActiveWithdrawal(CancelActiveWithdrawalRequest) returns (CancelActiveWithdrawalResponse);
     rpc ProcessActiveWithdrawal(ProcessActiveWithdrawalRequest) returns (ProcessActiveWithdrawalResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
