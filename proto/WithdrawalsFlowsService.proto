@@ -49,6 +49,11 @@ message GetWithdrawalsRequest {
     optional string AccountId = 2;
 }
 
+message SearchWithdrawalsRequest {
+    repeated string TraderIds = 1;
+    WithdrawalStatus Status = 2;
+}
+
 message CancelActiveWithdrawalRequest {
     string ProcessId = 1;
     string TraderId = 2;
@@ -92,6 +97,7 @@ message ProcessActiveWithdrawalResponse{
 
 service WithdrawalFlowsService {
     rpc Register(RegisterWithdrawalRequest) returns (RegisterWithdrawalResponse);
+    rpc SearchWithdrawals(SearchWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc GetActiveWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc GetProcessedWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc GetCanceledWithdrawals(GetWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
