@@ -58,6 +58,10 @@ message GetProcessedWithdrawalsRequest {
     optional string AccountId = 2;
 }
 
+message GetHistoryWithdrawalsRequest {
+    string TraderId = 1;
+}
+
 message SearchWithdrawalsRequest {
     repeated string TraderIds = 1;
     WithdrawalStatus Status = 2;
@@ -110,6 +114,7 @@ service WithdrawalFlowsService {
     rpc GetActiveWithdrawals(GetActiveWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc GetProcessedWithdrawals(GetProcessedWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc GetCanceledWithdrawals(GetCanceledWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
+    rpc GetHistoryWithdrawals(GetHistoryWithdrawalsRequest) returns (stream WithdrawalGrpcModel);
     rpc CancelActiveWithdrawal(CancelActiveWithdrawalRequest) returns (CancelActiveWithdrawalResponse);
     rpc ProcessActiveWithdrawal(ProcessActiveWithdrawalRequest) returns (ProcessActiveWithdrawalResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
