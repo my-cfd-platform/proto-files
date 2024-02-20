@@ -1,0 +1,39 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package internal_reports_flows;
+
+message FromToUint64Model{
+  uint64 From = 1;
+  uint64 To = 2;
+}
+
+enum TransactionType{
+  Deposit = 0;
+  Withdrawal = 1;
+  BalanceCorrection = 2;
+  Trading = 3;
+}
+
+message TransactionModel{
+  string Id = 1;
+  string TraderId = 2;
+  string AccountId = 3;
+  TransactionType TransactionType = 4;
+  optional string ProcessId = 5;
+  double Delta = 6;
+  uint64 Date = 7;
+  optional string ReferenceTransactionId = 8;
+  double BalanceAfterOperation = 9;
+  optional string Comment = 10;
+}
+
+message NetDepositReportModel{
+  double Amount = 1;
+  repeated TransactionModel Transactions = 2;
+}
+
+service InternalReportsGrpcService {
+  rpc GetNetDepositReport(FromToUint64Model) returns (NetDepositReportModel);
+  rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
