@@ -29,8 +29,10 @@ message TransactionModel{
 }
 
 message NetDepositReportModel{
-  double Amount = 1;
-  repeated TransactionModel Transactions = 2;
+  double Deposits = 1;
+  double Withdrawals = 2;
+  double Delta = 3;
+  repeated TransactionModel Transactions = 4;
 }
 
 service InternalReportsGrpcService {
