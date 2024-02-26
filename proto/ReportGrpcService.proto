@@ -39,6 +39,15 @@ message ReportFlowsOperationsGetPaginatedGrpcRequest{
     int32 Size = 4;
 }
 
+message GetPaginatedInDateRangeRequest{
+    string AccountId = 1;
+    string TraderId  = 2;
+    uint64 DateFrom = 3;
+    uint64 DateTo = 4;
+    int32 Page = 5;
+    int32 Size = 6;
+}
+
 message ReportFlowsOperationsGetInDateRangeGrpcRequest{
     optional string AccountId = 1;
     optional string TraderId  = 2;
@@ -58,7 +67,7 @@ message ReportFlowsOperationsGetHistoryPaginatedGrpcResponse{
 message ReportFlowsGetHistoryPositionsPaginatedGrpcResponse{
     int32 Page = 1;
     int32 Size = 2;
-    uint64 TotalItems = 3;
+    uint64 Count = 3;
     repeated ReportsFlowsClosedPositionGrpcModel History = 4;
 }
 
@@ -185,7 +194,9 @@ message GetOperationResponse{
 
 service ReportGrpcService {
     rpc GetHistoryPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
+    rpc GetOperationsHistoryPaginatedInDateRange(GetPaginatedInDateRangeRequest) returns (ReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetHistoryPositionsPaginated(ReportFlowsOperationsGetPaginatedGrpcRequest) returns (ReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
+    rpc GetHistoryPositionsPaginatedInDateRange(GetPaginatedInDateRangeRequest) returns (ReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
     rpc GetOperationsHistoryInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportOperationHistoryItem);
     rpc GetActivePositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsActivePositionGrpcModel);
     rpc GetHistoryPositionsInDateRange(ReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream ReportsFlowsClosedPositionGrpcModel);
