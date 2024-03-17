@@ -54,7 +54,7 @@ message PositionManagerPersistenceActivePositionGrpcModel{
     repeated PositionManagerPositionSwapGrpcModel Swaps = 26;
 
     optional double ToppingUpPercent = 27;
-    optional map<string, string> Metadata = 28;
+    map<string, string> Metadata = 28;
 }
 
 message PositionManagerPersistencePendingPositionGrpcModel{
