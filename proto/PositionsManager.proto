@@ -78,6 +78,7 @@ message PositionManagerOpenPendingGrpcRequest{
     double DesirePrice = 19;
     optional double OpenProcessId = 20;
     map<string, string> Metadata = 21;
+    optional double ToppingUpPercent = 22;
 }
 
 message PositionManagerOpenPendingGrpcResponse{
