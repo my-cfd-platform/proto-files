@@ -54,6 +54,7 @@ message PositionManagerOpenPositionGrpcRequest{
     optional string Id = 18;
     optional double OpenProcessId = 19;
     map<string, string> Metadata = 20;
+    optional double ToppingUpPercent = 21;
 }
 
 message PositionManagerOpenPendingGrpcRequest{
