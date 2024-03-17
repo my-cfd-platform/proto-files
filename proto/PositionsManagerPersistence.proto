@@ -52,6 +52,9 @@ message PositionManagerPersistenceActivePositionGrpcModel{
     uint64 OpenDateUnixTimestampMilis = 25;
 
     repeated PositionManagerPositionSwapGrpcModel Swaps = 26;
+
+    optional double ToppingUpPercent = 27;
+    optional map<string, string> Metadata = 28;
 }
 
 message PositionManagerPersistencePendingPositionGrpcModel{
@@ -75,6 +78,9 @@ message PositionManagerPersistencePendingPositionGrpcModel{
     string Base = 18;
     string Quote = 19;
     double DesirePrice = 20;
+
+    optional double ToppingUpPercent = 21;
+    optional map<string, string> Metadata = 22;
 }
 
 
