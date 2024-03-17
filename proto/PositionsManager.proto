@@ -53,7 +53,7 @@ message PositionManagerOpenPositionGrpcRequest{
     string CollateralCurrency = 17;
     optional string Id = 18;
     optional double OpenProcessId = 19;
-    optional map Metadata = 20;
+    map<string, string> Metadata = 20;
 }
 
 message PositionManagerOpenPendingGrpcRequest{
@@ -77,7 +77,7 @@ message PositionManagerOpenPendingGrpcRequest{
     optional string Id = 18;
     double DesirePrice = 19;
     optional double OpenProcessId = 20;
-    optional map<string, string> Metadata = 21;
+    map<string, string> Metadata = 21;
 }
 
 message PositionManagerOpenPendingGrpcResponse{
@@ -124,7 +124,7 @@ message PositionManagerActivePositionGrpcModel{
     double BaseCollateralOpenPrice = 25;
     repeated PositionManagerSwapGrpcModel Swaps = 26;
     optional double ToppingUpPercent = 27;
-    optional map<string, string> Metadata = 28;
+    map<string, string> Metadata = 28;
 }
 
 message PositionManagerPendingPositionGrpcModel{
@@ -146,7 +146,7 @@ message PositionManagerPendingPositionGrpcModel{
     optional double SlInAssetPrice = 16;
     double DesirePrice = 17;
     optional double ToppingUpPercent = 18;
-    optional map<string, string> Metadata = 19;
+    map<string, string> Metadata = 19;
 }
 
 message PositionManagerOpenPositionGrpcResponse{
@@ -187,7 +187,7 @@ message PositionManagerClosedPositionGrpcModel{
     PositionManagerClosePositionReason CloseReason = 24;
     repeated PositionManagerSwapGrpcModel Swaps = 25;
     optional double ToppingUpPercent = 26;
-    optional map<string, string> Metadata = 27;
+    map<string, string> Metadata = 27;
 }
 
 message PositionManagerClosePositionGrpcResponse{

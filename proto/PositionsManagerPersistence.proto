@@ -80,7 +80,7 @@ message PositionManagerPersistencePendingPositionGrpcModel{
     double DesirePrice = 20;
 
     optional double ToppingUpPercent = 21;
-    optional map<string, string> Metadata = 22;
+    map<string, string> Metadata = 22;
 }
 
 
