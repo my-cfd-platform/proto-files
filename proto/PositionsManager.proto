@@ -55,6 +55,7 @@ message PositionManagerOpenPositionGrpcRequest{
     optional double OpenProcessId = 19;
     map<string, string> Metadata = 20;
     optional double ToppingUpPercent = 21;
+    optional double MarginCallPercent = 22;
 }
 
 message PositionManagerOpenPendingGrpcRequest{
@@ -80,6 +81,7 @@ message PositionManagerOpenPendingGrpcRequest{
     optional double OpenProcessId = 20;
     map<string, string> Metadata = 21;
     optional double ToppingUpPercent = 22;
+    optional double MarginCallPercent = 23;
 }
 
 message PositionManagerOpenPendingGrpcResponse{
@@ -127,6 +129,8 @@ message PositionManagerActivePositionGrpcModel{
     repeated PositionManagerSwapGrpcModel Swaps = 26;
     optional double ToppingUpPercent = 27;
     map<string, string> Metadata = 28;
+    optional double MarginCallPercent = 29;
+    optional double ReservedFundForToppingUp = 30;
 }
 
 message PositionManagerPendingPositionGrpcModel{
@@ -149,6 +153,7 @@ message PositionManagerPendingPositionGrpcModel{
     double DesirePrice = 17;
     optional double ToppingUpPercent = 18;
     map<string, string> Metadata = 19;
+    optional double MarginCallPercent = 20;
 }
 
 message PositionManagerOpenPositionGrpcResponse{
@@ -190,6 +195,8 @@ message PositionManagerClosedPositionGrpcModel{
     repeated PositionManagerSwapGrpcModel Swaps = 25;
     optional double ToppingUpPercent = 26;
     map<string, string> Metadata = 27;
+    optional double MarginCallPercent = 28;
+    optional double ReservedFundForToppingUp = 29;
 }
 
 message PositionManagerClosePositionGrpcResponse{
@@ -254,12 +261,10 @@ message PositionManagerChargeSwapGrpcRequest
     double SwapAmount = 5;
 }
 
-
 message PositionManagerChargeSwapGrpcResponse{
     PositionManagerOperationsCodes Status = 1;
     optional PositionManagerActivePositionGrpcModel Position = 2;
 }
-
 
 service PositionManagerGrpcService {
     rpc OpenPosition(position_manager.PositionManagerOpenPositionGrpcRequest) returns (position_manager.PositionManagerOpenPositionGrpcResponse);
