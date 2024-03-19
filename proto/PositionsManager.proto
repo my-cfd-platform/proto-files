@@ -288,7 +288,7 @@ message PositionManagerUpdateToppingUpGrpcRequest
     string TraderId = 3;
     string ProcessId = 4;
     bool IsToppingUp = 5;
-    optional f64 ToppingUpPercent = 6;
+    optional double ToppingUpPercent = 6;
 }
 
 message PositionManagerUpdateToppingUpGrpcResponse
