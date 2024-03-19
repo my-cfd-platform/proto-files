@@ -6,6 +6,8 @@ enum PositionManagerOperationsCodes{
     Ok = 0;
     NoLiquidity = 1;
     PositionNotFound = 2;
+    ToppingUpDisabledForPosition = 3;
+    MarginCallSettingsNotFound = 4;
 }
 
 enum PositionManagerClosePositionReason{
@@ -266,6 +268,35 @@ message PositionManagerChargeSwapGrpcResponse{
     optional PositionManagerActivePositionGrpcModel Position = 2;
 }
 
+message PositionManagerTopUpPositionGrpcRequest
+{
+    string PositionId = 1;
+    string AccountId = 2;
+    string TraderId = 3;
+    string ProcessId = 4;
+    double ToppingUpAmount = 5;
+}
+message PositionManagerTopUpPositionGrpcResponse{
+    PositionManagerOperationsCodes Status = 1;
+    optional PositionManagerActivePositionGrpcModel Position = 2;
+}
+
+message PositionManagerUpdateToppingUpGrpcRequest
+{
+    string PositionId = 1;
+    string AccountId = 2;
+    string TraderId = 3;
+    string ProcessId = 4;
+    bool IsToppingUp = 5;
+    optional f64 ToppingUpPercent = 6;
+}
+
+message PositionManagerUpdateToppingUpGrpcResponse
+{
+    PositionManagerOperationsCodes Status = 1;
+    optional PositionManagerActivePositionGrpcModel Position = 2;
+}
+
 service PositionManagerGrpcService {
     rpc OpenPosition(position_manager.PositionManagerOpenPositionGrpcRequest) returns (position_manager.PositionManagerOpenPositionGrpcResponse);
     rpc ClosePosition(position_manager.PositionManagerClosePositionGrpcRequest) returns (position_manager.PositionManagerClosePositionGrpcResponse);
@@ -277,5 +308,7 @@ service PositionManagerGrpcService {
     rpc CancelPending(position_manager.PositionManagerCancelPendingGrpcRequest) returns (position_manager.PositionManagerCancelPendingGrpcResponse);
     rpc GetPendingPosition(position_manager.PositionManagerGetPendingPositionGrpcRequest) returns (PositionManagerGetPendingPositionGrpcResponse);
     rpc GetAccountPendingPositions(position_manager.PositionManagerGetPendingPositionsGrpcRequest) returns (stream PositionManagerPendingPositionGrpcModel);
+    rpc TopUpPosition(position_manager.PositionManagerTopUpPositionGrpcRequest) returns (position_manager.PositionManagerTopUpPositionGrpcResponse);
+    rpc UpdateToppingUpSettings(position_manager.PositionManagerUpdateToppingUpGrpcRequest) returns (position_manager.PositionManagerUpdateToppingUpGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
