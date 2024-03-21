@@ -64,7 +64,13 @@ message GetHistoryWithdrawalsRequest {
 
 message SearchWithdrawalsRequest {
     repeated string TraderIds = 1;
-    WithdrawalStatus Status = 2;
+    optional WithdrawalStatus Status = 2;
+    optional FromToUint64Model Range = 3;
+}
+
+message FromToUint64Model{
+    uint64 From = 1;
+    uint64 To = 2;
 }
 
 message CancelActiveWithdrawalRequest {
