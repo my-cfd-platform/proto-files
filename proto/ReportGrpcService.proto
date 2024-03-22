@@ -16,6 +16,7 @@ enum ReportFlowsTransactionType{
     Withdrawal = 1;
     BalanceCorrection = 2;
     Trading = 3;
+    WithdrawalCancel = 4;
 }
 
 enum ReportsFlowsPositionSide{
@@ -175,7 +176,7 @@ message GetHistoryPositionsPaginatedRequest{
 message SearchHistory{
     repeated string TraderIds = 1;
     repeated string AccountIds = 2;
-    optional ReportFlowsTransactionType TransactionType = 3;
+    repeated ReportFlowsTransactionType TransactionTypes = 3;
     optional FromToUint64Model DateRange = 4;
 }
 
