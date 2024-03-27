@@ -1,4 +1,3 @@
-
 syntax = "proto3";
 import "google/protobuf/empty.proto";
 package deposit_flows;
@@ -56,12 +55,21 @@ message MarkAsFailRequest {
     string Id = 1;
     string TechInfo = 2;
 }
-  
 
+message SearchDepositsRequest {
+    repeated string TraderIds = 1;
+    optional FromToUint64Model Range = 2;
+}
+
+message FromToUint64Model{
+    uint64 From = 1;
+    uint64 To = 2;
+}
 
 service DepositFlowsService {
     rpc Register(RegisterRequest) returns (RegisterResponse);
     rpc UpdatePaymentSystemReferenceId(UpdatePaymentSystemReferenceIdRequest) returns (google.protobuf.Empty);
     rpc MarkAsFail(MarkAsFailRequest) returns (google.protobuf.Empty);
+    rpc SearchDeposits(SearchDepositsRequest) returns (stream DepositGrpcModel);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
