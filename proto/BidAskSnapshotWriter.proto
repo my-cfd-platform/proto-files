@@ -11,6 +11,6 @@ message PublishPriceGrpcRequest{
 }
 
 service BidAskSnapshotWriterGrpcService {
-    rpc PublishPrice(position_manager.PositionManagerUpdateToppingUpGrpcRequest) returns (google.protobuf.Empty);
+    rpc PublishPrice(bidask_snapshot_writer.PublishPriceGrpcRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
