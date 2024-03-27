@@ -1,0 +1,16 @@
+syntax = "proto3";
+package bidask_snapshot_writer;
+import "google/protobuf/empty.proto";
+
+message PublishPriceGrpcRequest{
+    string Id = 1;
+    double Ask = 2;
+    double Bid = 3;
+    string Base = 4;
+    string Quote = 5;
+}
+
+service BidAskSnapshotWriterGrpcService {
+    rpc PublishPrice(position_manager.PositionManagerUpdateToppingUpGrpcRequest) returns (google.protobuf.Empty);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+ }
