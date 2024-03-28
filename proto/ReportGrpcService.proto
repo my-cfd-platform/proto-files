@@ -107,6 +107,9 @@ message ReportsFlowsActivePositionGrpcModel{
     double CollateralBaseOpenPrice = 25;
     ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 27;
     repeated PositionSwapGrpcModel Swaps = 28;
+    optional double ToppingUpPercent = 29;
+    optional double MarginCallPercent = 30;
+    optional double ReservedFundsForToppingUp = 31;
 }
 
 message PositionSwapGrpcModel{
