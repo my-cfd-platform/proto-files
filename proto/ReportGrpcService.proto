@@ -154,6 +154,9 @@ message ReportsFlowsClosedPositionGrpcModel{
     ReportsFlowsBidAsk CollateralBaseOpenBidAsk = 33;
     ReportsFlowsBidAsk CollateralQuoteCloseBidAsk = 34;
     repeated PositionSwapGrpcModel Swaps = 35;
+    optional double ToppingUpPercent = 36;
+    optional double MarginCallPercent = 37;
+    optional double ReservedFundsForToppingUp = 38;
 }
 
 message ReportOperationHistoryItem{
