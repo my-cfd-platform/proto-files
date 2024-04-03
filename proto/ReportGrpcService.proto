@@ -17,6 +17,7 @@ enum ReportFlowsTransactionType{
     BalanceCorrection = 2;
     Trading = 3;
     WithdrawalCancel = 4;
+    ToppingUp = 5;
 }
 
 enum ReportsFlowsPositionSide{
