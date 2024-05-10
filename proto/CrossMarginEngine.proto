@@ -8,7 +8,7 @@ enum CrossMarginEngineResponseCode{
 }
 
 
-enum CrossMarginPositionOperation{
+enum CrossMarginPositionOperationGrpcModel{
     Buy = 0;
     Sell = 1;
 }
@@ -21,7 +21,7 @@ message PositionBidAsk{
     int64 Timestamp = 4;
 }
 
-message PriceInformation{
+message OrderPriceInformationGrpcModel{
     int64 TimeStamp = 7;
     double Price = 8;
     PositionBidAsk BidAsk = 10;
@@ -38,12 +38,12 @@ message CrossMarginOrderGrpcModel{
 
     optional double DesiredPrice = 6;
 
-    CrossMarginPositionOperation Operation = 7;
+    CrossMarginPositionOperationGrpcModel Operation = 7;
 
     double Lots = 8;
 
-    PriceInformation OpenPrice = 9;
-    PriceInformation ClosePrice = 10;
+    OrderPriceInformationGrpcModel OpenPrice = 9;
+    OrderPriceInformationGrpcModel ClosePrice = 10;
 
     optional double TpInInstrumentPrice = 11;
     optional double TpInCurrency = 12;
