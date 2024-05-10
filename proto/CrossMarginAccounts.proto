@@ -70,7 +70,7 @@ message CreateAccountGrpcRequest{
 service CrossMarginAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
-    rpc GetClientAccount(GetTraderAccountGrpcRequest) returns ();
+    rpc GetClientAccount(GetTraderAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
     rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
