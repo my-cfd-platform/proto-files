@@ -46,7 +46,7 @@ message CrossMarginAccountsGetTraderAccountGrpcRequest{
     string AccountId = 2;
 }
 
-message CrossMarginUpdateAccountGrpcRequest{
+message UpdateAccountGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
     optional bool TradingDisabled = 3;
@@ -72,7 +72,7 @@ service CrossMarginAccountsGrpcService{
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccount);
     rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccount);
     rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccount);
-    rpc UpdateAccount(CrossMarginUpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
+    rpc UpdateAccount(UpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
