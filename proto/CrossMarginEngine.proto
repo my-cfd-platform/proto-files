@@ -135,9 +135,29 @@ message CancelCrossMarginPendingOrderGrpcResponse{
     CrossMarginOrderGrpcModel Order = 2;
 }
 
+
+message UpdateSlTpGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    optional double TpInCurrency = 4;
+    optional double SlInCurrency = 5;
+    optional double TpInAssetPrice = 6;
+    optional double SlInAssetPrice = 7;
+}
+
+
+
+message UpdateTpSlResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Position = 2;
+}
+
+
 service CrossMarginEngineGrpcService{
     rpc OpenPendingOrder(OpenCrossMarginPendingOrderGrpcRequest) returns (OpenCrossMarginPendingOrderGrpcResponse);
     rpc CancelPendingOrder(CancelCrossMarginPendingOrderGrpcRequest) returns (CancelCrossMarginPendingOrderGrpcResponse);
+    rpc UpdateSlTp(UpdateSlTpGrpcRequest) returns (UpdateTpSlResponse);
 
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
