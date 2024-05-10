@@ -22,7 +22,7 @@ message PositionBidAsk{
 }
 
 
-message CrossMarginPositionGrpcModel{
+message CrossMarginOrderGrpcModel{
     string TraderId = 1;
     string AccountId = 2;
     string Id = 3;
@@ -41,12 +41,42 @@ message OpenCrossMarginPositionGrpcRequest{
     double Lots = 4;
 }
 
+
+message CloseCrossMarginPositionGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+
+}
+
 message OpenCrossMarginPositionGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginPositionGrpcModel Position = 2;
+    CrossMarginOrderGrpcModel Position = 2;
+}
+
+message CloseCrossMarginPositionGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Position = 2;
+}
+
+
+
+message GetPendingPositionsGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+
+message GetActivePositionsGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
 }
 
 service CrossMarginEngineGrpcService{
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
+    rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
+    rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
+    rpc GetActivePositions(GetActivePositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
+
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
