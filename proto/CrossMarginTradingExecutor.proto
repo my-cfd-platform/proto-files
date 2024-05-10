@@ -3,6 +3,51 @@ syntax = "proto3";
 package cross_margin_trading_executor;
 import "google/protobuf/empty.proto";
 
-service CrossMarginTradingExecutorGrpcService{
+enum CrossMarginEngineResponseCode{
+    Success = 0;
+}
+
+
+enum CrossMarginPositionOperation{
+    Buy = 0;
+    Sell = 1;
+}
+
+
+message PositionBidAsk{
+    string Symbol = 1;
+    double Bid = 2;
+    double Ask = 3;
+    int64 Timestamp = 4;
+}
+
+
+message CrossMarginPositionGrpcModel{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    string Instrument = 4;
+    int64 Created = 5;
+    double OpenPrice = 6;
+    CrossMarginPositionOperation Operation = 7;
+    PositionBidAsk OpenBidAsk = 8;
+    PositionBidAsk CrossedBidAsk = 9;
+}
+
+message OpenCrossMarginPositionGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Instrument = 3;
+    double Lots = 4;
+}
+
+message OpenCrossMarginPositionGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginPositionGrpcModel Position = 2;
+}
+
+service CrossMarginEngineGrpcService{
+
+    rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
