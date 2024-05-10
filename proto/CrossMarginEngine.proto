@@ -28,17 +28,20 @@ message CrossMarginOrderGrpcModel{
     string Id = 3;
     string Instrument = 4;
     int64 Created = 5;
-    optional int64 Executed = 6;
-    optional double OpenPrice = 7;
-    CrossMarginPositionOperation Operation = 8;
-    PositionBidAsk OpenBidAsk = 9;
-    PositionBidAsk OpenCrossQuoteBidAsk = 10;
-    double Lots = 11;
 
+    optional double DesiredPrice = 6;
 
-    optional double ClosePrice = 12;
-    optional PositionBidAsk CloseBidAsk = 13;
-    optional PositionBidAsk CloseCrossQuoteBidAsk = 14;
+    optional int64 OpenedTimeStamp = 7;
+    optional double OpenPrice = 8;
+    CrossMarginPositionOperation Operation = 9;
+    PositionBidAsk OpenBidAsk = 10;
+    PositionBidAsk OpenCrossQuoteBidAsk = 11;
+    double Lots = 12;
+
+    optional double ClosePrice = 13;
+    optional PositionBidAsk CloseBidAsk = 14;
+    optional PositionBidAsk CloseCrossQuoteBidAsk = 15;
+    optional int64 ClosedTimeStamp = 16;
     
 }
 
