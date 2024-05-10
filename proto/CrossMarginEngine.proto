@@ -28,10 +28,18 @@ message CrossMarginOrderGrpcModel{
     string Id = 3;
     string Instrument = 4;
     int64 Created = 5;
-    double OpenPrice = 6;
-    CrossMarginPositionOperation Operation = 7;
-    PositionBidAsk OpenBidAsk = 8;
-    PositionBidAsk CrossedBidAsk = 9;
+    optional int64 Executed = 6;
+    optional double OpenPrice = 7;
+    CrossMarginPositionOperation Operation = 8;
+    PositionBidAsk OpenBidAsk = 9;
+    PositionBidAsk OpenCrossQuoteBidAsk = 10;
+    double Lots = 11;
+
+
+    optional double ClosePrice = 12;
+    optional PositionBidAsk CloseBidAsk = 13;
+    optional PositionBidAsk CloseCrossQuoteBidAsk = 14;
+    
 }
 
 message OpenCrossMarginPositionGrpcRequest{
