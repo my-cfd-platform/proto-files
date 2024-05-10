@@ -42,6 +42,9 @@ message CrossMarginOrderGrpcModel{
     optional PositionBidAsk CloseBidAsk = 14;
     optional PositionBidAsk CloseCrossQuoteBidAsk = 15;
     optional int64 ClosedTimeStamp = 16;
+
+    double Commission = 17;
+    double Swap = 18;
     
 }
 
