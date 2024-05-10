@@ -10,7 +10,7 @@ enum CrossMarginOperationsCodes{
     MarginCallSettingsNotFound = 4;   
 }
 
-message CrossMarginAccountsAccount{
+message CrossMarginAccount{
     string Id = 1;
     string TraderId = 2;
     string Currency = 3;
@@ -59,8 +59,16 @@ message CrossMarginUpdateAccountGrpcResponse{
     optional CrossMarginAccount Position = 2;
 }
 
+message CreateAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    int32 Leverage = 3;
+    string Currency = 4;
+    string ProcessId = 5;
+}
+
 service CrossMarginAccountsGrpcService{
-    rpc CreateAccount(CrossMarginCreateAccountGrpcRequest) returns (CrossMarginAccount);
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccount);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccount);
     rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccount);
     rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccount);
