@@ -22,10 +22,10 @@ message CrossMarginAccountsAccount{
     double FreeMargin = 9;
     double MarginLvl = 10;
     string TradingGroup = 11;
-    long DateCreate = 12;
-    long DateUpdate = 13;
-    long CreateProcessId = 14;
-    long LastUpdateProcessId = 15;
+    uint64 DateCreate = 12;
+    uint64 DateUpdate = 13;
+    string CreateProcessId = 14;
+    string LastUpdateProcessId = 15;
 }
 
 message CrossMarginAccountsCreateAccountGrpcRequest{
