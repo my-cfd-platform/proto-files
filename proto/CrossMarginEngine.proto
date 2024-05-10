@@ -21,6 +21,13 @@ message PositionBidAsk{
     int64 Timestamp = 4;
 }
 
+message PriceInformation{
+    int64 TimeStamp = 7;
+    double Price = 8;
+    PositionBidAsk BidAsk = 10;
+    PositionBidAsk CrossQuoteBidAsk = 11;
+}
+
 
 message CrossMarginOrderGrpcModel{
     string TraderId = 1;
@@ -31,26 +38,21 @@ message CrossMarginOrderGrpcModel{
 
     optional double DesiredPrice = 6;
 
-    optional int64 OpenedTimeStamp = 7;
-    optional double OpenPrice = 8;
-    CrossMarginPositionOperation Operation = 9;
-    PositionBidAsk OpenBidAsk = 10;
-    PositionBidAsk OpenCrossQuoteBidAsk = 11;
-    double Lots = 12;
+    CrossMarginPositionOperation Operation = 7;
 
-    optional double ClosePrice = 13;
-    optional PositionBidAsk CloseBidAsk = 14;
-    optional PositionBidAsk CloseCrossQuoteBidAsk = 15;
-    optional int64 ClosedTimeStamp = 16;
+    double Lots = 8;
 
-    optional double TpInInstrumentPrice = 17;
-    optional double TpInCurrency = 18;
+    PriceInformation OpenPrice = 9;
+    PriceInformation ClosePrice = 10;
 
-    optional double SlInInstrumentPrice = 19;
-    optional double SlInCurrency = 20;
+    optional double TpInInstrumentPrice = 11;
+    optional double TpInCurrency = 12;
 
-    double Commission = 21;
-    double Swap = 22;
+    optional double SlInInstrumentPrice = 13;
+    optional double SlInCurrency = 14;
+
+    double Commission = 15;
+    double Swap = 16;
     
 }
 
