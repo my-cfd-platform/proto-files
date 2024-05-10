@@ -1,0 +1,8 @@
+
+syntax = "proto3";
+package cross_margin_trading_executor;
+import "google/protobuf/empty.proto";
+
+service CrossMarginTradingExecutorGrpcService{
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
