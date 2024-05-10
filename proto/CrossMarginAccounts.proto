@@ -10,7 +10,7 @@ enum CrossMarginOperationsCodes{
     MarginCallSettingsNotFound = 4;   
 }
 
-message CrossMarginAccount{
+message CrossMarginAccountGrpcModel{
     string Id = 1;
     string TraderId = 2;
     string Currency = 3;
@@ -56,7 +56,7 @@ message UpdateAccountGrpcRequest{
 
 message CrossMarginUpdateAccountGrpcResponse{
     CrossMarginOperationsCodes Status = 1;
-    optional CrossMarginAccount Position = 2;
+    optional CrossMarginAccountGrpcModel ACcount = 2;
 }
 
 message CreateAccountGrpcRequest{
@@ -68,10 +68,10 @@ message CreateAccountGrpcRequest{
 }
 
 service CrossMarginAccountsGrpcService{
-    rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccount);
-    rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccount);
-    rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccount);
-    rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccount);
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
+    rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
+    rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
+    rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
