@@ -37,11 +37,11 @@ message CrossMarginAccountsCreateAccountGrpcRequest{
 }
 
 
-message CrossMarginAccountsGetTraderAccountsGrpcRequest{
+message GetTraderAccountsGrpcRequest{
     string TraderId = 1;
 }
 
-message CrossMarginAccountsGetTraderAccountGrpcRequest{
+message GetTraderAccountGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
 }
@@ -70,8 +70,8 @@ message CreateAccountGrpcRequest{
 service CrossMarginAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
-    rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
-    rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
+    rpc GetClientAccount(GetTraderAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
+    rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
