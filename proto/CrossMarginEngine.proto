@@ -1,6 +1,6 @@
 
 syntax = "proto3";
-package cross_margin_trading_executor;
+package cross_margin_engine;
 import "google/protobuf/empty.proto";
 
 enum CrossMarginEngineResponseCode{
@@ -47,7 +47,6 @@ message OpenCrossMarginPositionGrpcResponse{
 }
 
 service CrossMarginEngineGrpcService{
-
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
