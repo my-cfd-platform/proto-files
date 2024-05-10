@@ -4,7 +4,30 @@ package cross_margin_engine;
 import "google/protobuf/empty.proto";
 
 enum CrossMarginEngineResponseCode{
-    Success = 0;
+    Ok = 0;
+    DayOff = 1;
+    OperationIsTooLow = 2;
+    OperationIsTooHigh = 3;
+    MinOperationsByInstrumentViolated = 4;
+    MaxOperationsByInstrumentViolated = 5;
+    NotEnoughBalance = 6;
+    NoLiquidity = 7;
+    PositionNotFound = 8;
+    TpIsTooClose = 9;
+    SlIsTooClose = 10;
+    AccountNotFound = 11;
+    InstrumentNotFound = 12;
+    InstrumentIsNotTradable = 13;
+    HitMaxAmountOfPendingOrders = 14;
+    TechError = 15;
+    MultiplierIsNotFound = 16;
+    TradingDisabled = 17;
+    MaxPositionsAmount = 18;
+    TradingGroupNotFound = 19;
+    TradingProfileNotFound =20;
+    TradingProfileInstrumentNotFound = 21;
+    ABookReject = 22;
+    ProcessIdDuplicate = 23;
 }
 
 
