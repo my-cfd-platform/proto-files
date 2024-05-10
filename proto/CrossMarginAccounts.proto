@@ -1,0 +1,71 @@
+syntax = "proto3";
+package cross_margin_accounts;
+import "google/protobuf/empty.proto";
+
+enum CrossMarginOperationsCodes{
+    Ok = 0;
+    NoLiquidity = 1;
+    PositionNotFound = 2;
+    ToppingUpDisabledForPosition = 3;
+    MarginCallSettingsNotFound = 4;   
+}
+
+message CrossMarginAccountsAccount{
+    string Id = 1;
+    string TraderId = 2;
+    string Currency = 3;
+    double Balance = 4;
+    double Equity = 5;
+    double Margin = 6;
+    bool TradingDisabled = 7;
+    double Leverage = 8;
+    double FreeMargin = 9;
+    double MarginLvl = 10;
+    string TradingGroup = 11;
+    long DateCreate = 12;
+    long DateUpdate = 13;
+    long CreateProcessId = 14;
+    long LastUpdateProcessId = 15;
+}
+
+message CrossMarginAccountsCreateAccountGrpcRequest{
+    string TraderId = 1;
+    string Currency = 2;
+    string ProcessId = 3;
+    string TradingGroup = 4;
+    map<string, string> Metadata = 5;
+}
+
+
+message CrossMarginAccountsGetTraderAccountsGrpcRequest{
+    string TraderId = 1;
+}
+
+message CrossMarginAccountsGetTraderAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+message CrossMarginUpdateAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    optional bool TradingDisabled = 3;
+    optional string TradingGroup = 4;
+    string ProcessId = 5;
+}
+
+message CrossMarginUpdateAccountGrpcResponse{
+    CrossMarginOperationsCodes Status = 1;
+    optional CrossMarginAccount Position = 2;
+}
+
+service CrossMarginAccountsGrpcService{
+    rpc CreateAccount(CrossMarginCreateAccountGrpcRequest) returns (CrossMarginAccount);
+    rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccount);
+    rpc GetClientAccount(CrossMarginAccountsGetTraderAccountGrpcRequest) returns (CrossMarginAccount);
+    rpc GetClientAccounts(CrossMarginAccountsGetTraderAccountsGrpcRequest) returns (stream CrossMarginAccount);
+    rpc UpdateAccount(CrossMarginUpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
+
+
