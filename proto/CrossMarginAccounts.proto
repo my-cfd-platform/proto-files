@@ -46,6 +46,10 @@ message GetTraderAccountGrpcRequest{
     string AccountId = 2;
 }
 
+message GetTraderAccountGrpcResponse{
+    CrossMarginAccountGrpcModel Account = 1;
+}
+
 message UpdateAccountGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
