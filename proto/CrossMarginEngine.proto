@@ -41,18 +41,19 @@ message CrossMarginOrderGrpcModel{
     CrossMarginPositionOperationGrpcModel Operation = 7;
 
     double Lots = 8;
+    int32 Leverage = 9;
 
-    OrderPriceInformationGrpcModel OpenPrice = 9;
-    OrderPriceInformationGrpcModel ClosePrice = 10;
+    OrderPriceInformationGrpcModel OpenPrice = 10;
+    OrderPriceInformationGrpcModel ClosePrice = 11;
 
-    optional double TpInInstrumentPrice = 11;
-    optional double TpInCurrency = 12;
+    optional double TpInInstrumentPrice = 12;
+    optional double TpInCurrency = 13;
 
-    optional double SlInInstrumentPrice = 13;
-    optional double SlInCurrency = 14;
+    optional double SlInInstrumentPrice = 14;
+    optional double SlInCurrency = 15;
 
-    double Commission = 15;
-    double Swap = 16;
+    double Commission = 16;
+    double Swap = 17;
     
 }
 
