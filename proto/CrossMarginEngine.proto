@@ -111,7 +111,34 @@ message GetActivePositionsGrpcRequest{
     string AccountId = 2;
 }
 
+message OpenCrossMarginPendingOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Instrument = 3;
+    double Lots = 4;
+}
+
+message OpenCrossMarginPendingOrderGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Order = 2;
+}
+
+
+message CancelCrossMarginPendingOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+}
+
+message CancelCrossMarginPendingOrderGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Order = 2;
+}
+
 service CrossMarginEngineGrpcService{
+    rpc OpenPendingOrder(OpenCrossMarginPendingOrderGrpcRequest) returns (OpenCrossMarginPendingOrderGrpcResponse);
+    rpc CancelPendingOrder(CancelCrossMarginPendingOrderGrpcRequest) returns (CancelCrossMarginPendingOrderGrpcResponse);
+
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
     rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
