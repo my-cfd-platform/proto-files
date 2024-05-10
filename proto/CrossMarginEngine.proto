@@ -30,12 +30,10 @@ enum CrossMarginEngineResponseCode{
     ProcessIdDuplicate = 23;
 }
 
-
 enum CrossMarginPositionOperationGrpcModel{
     Buy = 0;
     Sell = 1;
 }
-
 
 message PositionBidAsk{
     string Symbol = 1;
@@ -50,7 +48,6 @@ message OrderPriceInformationGrpcModel{
     PositionBidAsk BidAsk = 10;
     PositionBidAsk CrossQuoteBidAsk = 11;
 }
-
 
 message CrossMarginOrderGrpcModel{
     string TraderId = 1;
@@ -87,7 +84,6 @@ message OpenCrossMarginPositionGrpcRequest{
     double Lots = 4;
 }
 
-
 message CloseCrossMarginPositionGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
@@ -105,13 +101,10 @@ message CloseCrossMarginPositionGrpcResponse{
     CrossMarginOrderGrpcModel Position = 2;
 }
 
-
-
 message GetPendingPositionsGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
 }
-
 
 message GetActivePositionsGrpcRequest{
     string TraderId = 1;
