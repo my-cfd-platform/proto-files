@@ -144,15 +144,13 @@ message UpdateSlTpGrpcRequest{
     optional double SlInCurrency = 5;
     optional double TpInAssetPrice = 6;
     optional double SlInAssetPrice = 7;
+    string ProcessId = 8;
 }
-
-
 
 message UpdateTpSlResponse{
     CrossMarginEngineResponseCode Status = 1;
     CrossMarginOrderGrpcModel Position = 2;
 }
-
 
 service CrossMarginEngineGrpcService{
     rpc OpenPendingOrder(OpenCrossMarginPendingOrderGrpcRequest) returns (OpenCrossMarginPendingOrderGrpcResponse);
