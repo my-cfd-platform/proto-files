@@ -4,10 +4,11 @@ import "google/protobuf/empty.proto";
 
 enum CrossMarginOperationsCodes{
     Ok = 0;
-    NoLiquidity = 1;
-    PositionNotFound = 2;
-    ToppingUpDisabledForPosition = 3;
-    MarginCallSettingsNotFound = 4;   
+    AccountNotFound = 1;
+    TraderNotFound = 2;
+    NotEnoughBalance = 3;
+    ProcessIdDuplicate = 4;
+    CollateralCurrencyNotFound = 5;
 }
 
 message CrossMarginAccountGrpcModel{
