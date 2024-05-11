@@ -83,10 +83,11 @@ message OpenCrossMarginPositionGrpcRequest{
     string ProcessId = 3;
     string Instrument = 4;
     double Lots = 5;
-    optional double TpInCurrency = 6;
-    optional double SlInCurrency = 7;
-    optional double TpInAssetPrice = 8;
-    optional double SlInAssetPrice = 9;
+    CrossMarginPositionOperationGrpcModel Operation = 6;
+    optional double TpInCurrency = 7;
+    optional double SlInCurrency = 8;
+    optional double TpInAssetPrice = 9;
+    optional double SlInAssetPrice = 10;
     
 }
 
