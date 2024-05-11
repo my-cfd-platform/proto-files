@@ -122,8 +122,16 @@ message GetActivePositionsGrpcRequest{
 message OpenCrossMarginPendingOrderGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
-    string Instrument = 3;
-    double Lots = 4;
+    string ProcessId = 3;
+    string Instrument = 4;
+    double Lots = 5;
+    CrossMarginPositionOperationGrpcModel Operation = 6;
+    double DesiredPrice = 7;
+    optional double TpInCurrency = 8;
+    optional double SlInCurrency = 9;
+    optional double TpInAssetPrice = 10;
+    optional double SlInAssetPrice = 11;
+    
 }
 
 message OpenCrossMarginPendingOrderGrpcResponse{
