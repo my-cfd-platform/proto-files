@@ -4,15 +4,36 @@ package cross_margin_engine;
 import "google/protobuf/empty.proto";
 
 enum CrossMarginEngineResponseCode{
-    Success = 0;
+    Ok = 0;
+    DayOff = 1;
+    OperationIsTooLow = 2;
+    OperationIsTooHigh = 3;
+    MinOperationsByInstrumentViolated = 4;
+    MaxOperationsByInstrumentViolated = 5;
+    NotEnoughBalance = 6;
+    NoLiquidity = 7;
+    PositionNotFound = 8;
+    TpIsTooClose = 9;
+    SlIsTooClose = 10;
+    AccountNotFound = 11;
+    InstrumentNotFound = 12;
+    InstrumentIsNotTradable = 13;
+    HitMaxAmountOfPendingOrders = 14;
+    TechError = 15;
+    MultiplierIsNotFound = 16;
+    TradingDisabled = 17;
+    MaxPositionsAmount = 18;
+    TradingGroupNotFound = 19;
+    TradingProfileNotFound =20;
+    TradingProfileInstrumentNotFound = 21;
+    ABookReject = 22;
+    ProcessIdDuplicate = 23;
 }
-
 
 enum CrossMarginPositionOperationGrpcModel{
     Buy = 0;
     Sell = 1;
 }
-
 
 message PositionBidAsk{
     string Symbol = 1;
@@ -27,7 +48,6 @@ message OrderPriceInformationGrpcModel{
     PositionBidAsk BidAsk = 10;
     PositionBidAsk CrossQuoteBidAsk = 11;
 }
-
 
 message CrossMarginOrderGrpcModel{
     string TraderId = 1;
@@ -60,15 +80,22 @@ message CrossMarginOrderGrpcModel{
 message OpenCrossMarginPositionGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
-    string Instrument = 3;
-    double Lots = 4;
+    string ProcessId = 3;
+    string Instrument = 4;
+    double Lots = 5;
+    CrossMarginPositionOperationGrpcModel Operation = 6;
+    optional double TpInCurrency = 7;
+    optional double SlInCurrency = 8;
+    optional double TpInAssetPrice = 9;
+    optional double SlInAssetPrice = 10;
+    
 }
-
 
 message CloseCrossMarginPositionGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
     string Id = 3;
+    string ProcessId = 4;
 
 }
 
@@ -82,20 +109,70 @@ message CloseCrossMarginPositionGrpcResponse{
     CrossMarginOrderGrpcModel Position = 2;
 }
 
-
-
 message GetPendingPositionsGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
 }
-
 
 message GetActivePositionsGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
 }
 
+message OpenCrossMarginPendingOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string ProcessId = 3;
+    string Instrument = 4;
+    double Lots = 5;
+    CrossMarginPositionOperationGrpcModel Operation = 6;
+    double DesiredPrice = 7;
+    optional double TpInCurrency = 8;
+    optional double SlInCurrency = 9;
+    optional double TpInAssetPrice = 10;
+    optional double SlInAssetPrice = 11;
+    
+}
+
+message OpenCrossMarginPendingOrderGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Order = 2;
+}
+
+
+message CancelCrossMarginPendingOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+}
+
+message CancelCrossMarginPendingOrderGrpcResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Order = 2;
+}
+
+
+message UpdateSlTpGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    optional double TpInCurrency = 4;
+    optional double SlInCurrency = 5;
+    optional double TpInAssetPrice = 6;
+    optional double SlInAssetPrice = 7;
+    string ProcessId = 8;
+}
+
+message UpdateTpSlResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginOrderGrpcModel Position = 2;
+}
+
 service CrossMarginEngineGrpcService{
+    rpc OpenPendingOrder(OpenCrossMarginPendingOrderGrpcRequest) returns (OpenCrossMarginPendingOrderGrpcResponse);
+    rpc CancelPendingOrder(CancelCrossMarginPendingOrderGrpcRequest) returns (CancelCrossMarginPendingOrderGrpcResponse);
+    rpc UpdateSlTp(UpdateSlTpGrpcRequest) returns (UpdateTpSlResponse);
+
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
     rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
