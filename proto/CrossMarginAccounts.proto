@@ -55,7 +55,8 @@ message UpdateAccountGrpcRequest{
     string AccountId = 2;
     optional bool TradingDisabled = 3;
     optional string TradingGroup = 4;
-    string ProcessId = 5;
+    optional double Leverage = 5;
+    string ProcessId = 6;
 }
 
 message CrossMarginUpdateAccountGrpcResponse{
