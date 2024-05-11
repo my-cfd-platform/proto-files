@@ -80,14 +80,21 @@ message CrossMarginOrderGrpcModel{
 message OpenCrossMarginPositionGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
-    string Instrument = 3;
-    double Lots = 4;
+    string ProcessId = 3;
+    string Instrument = 4;
+    double Lots = 5;
+    optional double TpInCurrency = 6;
+    optional double SlInCurrency = 7;
+    optional double TpInAssetPrice = 8;
+    optional double SlInAssetPrice = 9;
+    
 }
 
 message CloseCrossMarginPositionGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
     string Id = 3;
+    string ProcessId = 4;
 
 }
 
