@@ -42,39 +42,64 @@ message PositionBidAsk{
     int64 Timestamp = 4;
 }
 
-message OrderPriceInformationGrpcModel{
-    int64 TimeStamp = 7;
-    double Price = 8;
-    PositionBidAsk BidAsk = 10;
-    PositionBidAsk CrossQuoteBidAsk = 11;
-}
-
-message CrossMarginOrderGrpcModel{
+message CrossMarginPositionGrpcModel{
     string TraderId = 1;
     string AccountId = 2;
     string Id = 3;
-    string Instrument = 4;
-    int64 Created = 5;
+    string AssetPair = 4;
+    CrossMarginPositionOperationGrpcModel Side = 5;
+    double ContractSize = 6;
+    double LotsAmount = 7;
+    uint64 Created = 8;
+    string ProcessIdCreate = 9;
+    uint64 LastUpdateDate = 10;
+    string LastUpdateProcessId = 11;
+    string Base = 12;
+    string Quote = 13;
+    string Collateral = 14;
 
-    optional double DesiredPrice = 6;
+    optional double TpInProfit = 15;
+    optional double SlInProfit = 16;
+    optional double TpInAssetPrice = 17;
+    optional double SlInAssetPrice = 18;
+    map<string, string> Metadata = 19;
 
-    CrossMarginPositionOperationGrpcModel Operation = 7;
+    string OpenProcessId = 20;
+    uint64 OpenDate = 21;
+    PositionBidAsk OpenBidAsk = 22;
+    double OpenPrice = 23;
+    PositionBidAsk ActiveBidAsk = 24;
+    double ActivePrice = 25;
+    PositionBidAsk MarginBidAsk = 26;
+    double MarginPrice = 27;
+    PositionBidAsk ProfitBidAsk = 28;
+    double ProfitPrice = 29;
+    double Profit = 30;
+}
 
-    double Lots = 8;
-    int32 Leverage = 9;
+message CrossMarginPendingOrderGrpcModel{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    string AssetPair = 4;
+    CrossMarginPositionOperationGrpcModel Side = 5;
+    double ContractSize = 6;
+    double LotsAmount = 7;
+    uint64 Created = 8;
+    string ProcessIdCreate = 9;
+    uint64 LastUpdateDate = 10;
+    string LastUpdateProcessId = 11;
+    string Base = 12;
+    string Quote = 13;
+    string Collateral = 14;
 
-    OrderPriceInformationGrpcModel OpenPrice = 10;
-    OrderPriceInformationGrpcModel ClosePrice = 11;
+    optional double TpInProfit = 15;
+    optional double SlInProfit = 16;
+    optional double TpInAssetPrice = 17;
+    optional double SlInAssetPrice = 18;
+    map<string, string> Metadata = 19;
 
-    optional double TpInInstrumentPrice = 12;
-    optional double TpInCurrency = 13;
-
-    optional double SlInInstrumentPrice = 14;
-    optional double SlInCurrency = 15;
-
-    double Commission = 16;
-    double Swap = 17;
-    
+    double DesirePrice = 20;
 }
 
 message OpenCrossMarginPositionGrpcRequest{
@@ -101,12 +126,12 @@ message CloseCrossMarginPositionGrpcRequest{
 
 message OpenCrossMarginPositionGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginOrderGrpcModel Position = 2;
+    CrossMarginPositionGrpcModel Position = 2;
 }
 
 message CloseCrossMarginPositionGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginOrderGrpcModel Position = 2;
+    CrossMarginPositionGrpcModel Position = 2;
 }
 
 message GetPendingPositionsGrpcRequest{
@@ -136,7 +161,7 @@ message OpenCrossMarginPendingOrderGrpcRequest{
 
 message OpenCrossMarginPendingOrderGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginOrderGrpcModel Order = 2;
+    CrossMarginPendingOrderGrpcModel Order = 2;
 }
 
 
@@ -165,7 +190,7 @@ message UpdateSlTpGrpcRequest{
 
 message UpdateTpSlResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginOrderGrpcModel Position = 2;
+    CrossMarginPositionGrpcModel Position = 2;
 }
 
 service CrossMarginEngineGrpcService{
