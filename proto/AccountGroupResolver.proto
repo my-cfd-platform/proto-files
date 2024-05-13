@@ -1,0 +1,19 @@
+
+syntax = "proto3";
+package account_group_resolver;
+import "google/protobuf/empty.proto";
+
+
+message ResolveAccountGroupRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+}
+
+message ResolveAccountGroupResponse{
+    optional string GroupId = 1;
+}
+
+service AccountGroupResolverGrpcService {
+    rpc ResolveGroup(ResolveAccountGroupRequest) returns (ResolveAccountGroupResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
