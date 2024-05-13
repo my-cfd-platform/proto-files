@@ -3,6 +3,14 @@ syntax = "proto3";
 package cross_margin_engine;
 import "google/protobuf/empty.proto";
 
+enum CrossMarginEngineClosePositionReason{
+    TakeProfit = 0;
+    StopLoss = 1;
+    StopOut = 2;
+    ClientCommand = 3;
+    AdminCommand = 4;
+}
+
 enum CrossMarginEngineResponseCode{
     Ok = 0;
     DayOff = 1;
@@ -77,6 +85,48 @@ message CrossMarginPositionGrpcModel{
     double Profit = 30;
 }
 
+message CrossMarginClosedPositionGrpcModel{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    string AssetPair = 4;
+    CrossMarginPositionOperationGrpcModel Side = 5;
+    double ContractSize = 6;
+    double LotsAmount = 7;
+    uint64 Created = 8;
+    string ProcessIdCreate = 9;
+    uint64 LastUpdateDate = 10;
+    string LastUpdateProcessId = 11;
+    string Base = 12;
+    string Quote = 13;
+    string Collateral = 14;
+
+    optional double TpInProfit = 15;
+    optional double SlInProfit = 16;
+    optional double TpInAssetPrice = 17;
+    optional double SlInAssetPrice = 18;
+    map<string, string> Metadata = 19;
+
+    string OpenProcessId = 20;
+    uint64 OpenDate = 21;
+    PositionBidAsk OpenBidAsk = 22;
+    double OpenPrice = 23;
+    PositionBidAsk ActiveBidAsk = 24;
+    double ActivePrice = 25;
+    PositionBidAsk MarginBidAsk = 26;
+    double MarginPrice = 27;
+    PositionBidAsk ProfitBidAsk = 28;
+    double ProfitPrice = 29;
+    double Profit = 30;
+
+    string CloseProcessId = 31;
+    uint64 CloseDate = 32;
+    PositionBidAsk CloseBidAsk = 33;
+    double ClosePrice = 34;
+    CrossMarginEngineClosePositionReason CloseReason = 35;
+}
+
+
 message CrossMarginPendingOrderGrpcModel{
     string TraderId = 1;
     string AccountId = 2;
@@ -131,7 +181,7 @@ message OpenCrossMarginPositionGrpcResponse{
 
 message CloseCrossMarginPositionGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginPositionGrpcModel Position = 2;
+    CrossMarginClosedPositionGrpcModel Position = 2;
 }
 
 message GetPendingPositionsGrpcRequest{
