@@ -33,6 +33,8 @@ enum CrossMarginBrokerOperationCodes{
     TradingProfileInstrumentNotFound = 21;
     ABookReject = 22;
     ProcessIdDuplicate = 23;
+    InvalidLeverage = 24;
+    InvalidCollateral = 25;
 }
 
 message CrossMarginBrokerBidAsk{
