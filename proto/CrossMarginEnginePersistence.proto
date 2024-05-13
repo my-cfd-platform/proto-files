@@ -1,0 +1,94 @@
+syntax = "proto3";
+package cross_margin_engine_persistence;
+import "google/protobuf/empty.proto";
+
+enum CrossMarginPersistencePositionSide{
+    Buy = 0;
+    Sell = 1;
+}
+
+message CrossMarginPersistenceBidAsk{
+    string AssetPair = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 DateTimeUnixTimestampMilis = 4;
+    string Base = 5;
+    string Quote = 6;
+}
+
+message CrossMarginPositionSwapGrpcModel{
+    double Amount = 1;
+    uint64 Date = 2;
+}
+
+message CrossMarginPersistenceActivePositionGrpcModel{
+    string Id = 1;
+    string AccountId = 2;
+    string TraderId = 3;
+    string AssetPair = 4;
+    CrossMarginPersistencePositionSide Side = 5;
+    double InvestAmount = 6;
+    double Leverage = 7;
+    double StopOutPercent = 8;
+    string CreateProcessId = 9;
+    uint64 CreateDateUnixTimestampMilis = 10;
+    string LastUpdateProcessId = 11;
+    uint64 LastUpdateDate = 12;
+    optional double TpInProfit = 13;
+    optional double SlInProfit = 14;
+    optional double TpInAssetPrice = 15;
+    optional double SlInAssetPrice = 16;
+    string Collateral = 17;
+    string Base = 18;
+    string Quote = 19;
+
+    double AssetOpenPrice = 20;
+    CrossMarginPersistenceBidAsk AssetOpenBidAsk = 21;
+
+    double CollateralBaseOpenPrice = 22;
+    CrossMarginPersistenceBidAsk CollateralBaseOpenBidAsk = 23;
+
+    string OpenProcessId = 24;
+    uint64 OpenDateUnixTimestampMilis = 25;
+
+    repeated CrossMarginPositionSwapGrpcModel Swaps = 26;
+
+    optional double ToppingUpPercent = 27;
+    map<string, string> Metadata = 28;
+    optional double MarginCallPercent = 29;
+    optional double ReservedFundForToppingUp = 30;
+}
+
+message CrossMarginPersistencePendingPositionGrpcModel{
+    string Id = 1;
+    string AccountId = 2;
+    string TraderId = 3;
+    string AssetPair = 4;
+    CrossMarginPersistencePositionSide Side = 5;
+    double InvestAmount = 6;
+    double Leverage = 7;
+    double StopOutPercent = 8;
+    string CreateProcessId = 9;
+    uint64 CreateDateUnixTimestampMilis = 10;
+    string LastUpdateProcessId = 11;
+    uint64 LastUpdateDate = 12;
+    optional double TpInProfit = 13;
+    optional double SlInProfit = 14;
+    optional double TpInAssetPrice = 15;
+    optional double SlInAssetPrice = 16;
+    string Collateral = 17;
+    string Base = 18;
+    string Quote = 19;
+    double DesirePrice = 20;
+
+    optional double ToppingUpPercent = 21;
+    map<string, string> Metadata = 22;
+    optional double MarginCallPercent = 23;
+}
+
+service PositionManagerPersistenceGrpcService {
+    rpc GetActivePositions(google.protobuf.Empty) returns (stream CrossMarginPersistenceActivePositionGrpcModel);
+    rpc GetPendingPositions(google.protobuf.Empty) returns (stream CrossMarginPersistencePendingPositionGrpcModel);
+    rpc GetPricesSnapshot(google.protobuf.Empty) returns (stream CrossMarginPersistenceBidAsk);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
