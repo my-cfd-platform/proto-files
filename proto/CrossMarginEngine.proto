@@ -39,7 +39,7 @@ message PositionBidAsk{
     string Symbol = 1;
     double Bid = 2;
     double Ask = 3;
-    int64 Timestamp = 4;
+    uint64 Timestamp = 4;
 }
 
 message CrossMarginPositionGrpcModel{
@@ -173,7 +173,7 @@ message CancelCrossMarginPendingOrderGrpcRequest{
 
 message CancelCrossMarginPendingOrderGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginOrderGrpcModel Order = 2;
+    CrossMarginPositionGrpcModel Order = 2;
 }
 
 
@@ -200,8 +200,8 @@ service CrossMarginEngineGrpcService{
 
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
-    rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
-    rpc GetActivePositions(GetActivePositionsGrpcRequest) returns (stream CrossMarginOrderGrpcModel);
+    rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginPendingOrderGrpcModel);
+    rpc GetActivePositions(GetActivePositionsGrpcRequest) returns (stream CrossMarginPositionGrpcModel);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }

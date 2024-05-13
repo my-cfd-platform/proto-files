@@ -2,7 +2,7 @@ syntax = "proto3";
 package cross_margin_accounts;
 import "google/protobuf/empty.proto";
 
-enum CrossMarginOperationsCodes{
+enum CrossMarginAccountsOperationsCodes{
     Ok = 0;
     AccountNotFound = 1;
     TraderNotFound = 2;
@@ -61,7 +61,7 @@ message UpdateAccountGrpcRequest{
 }
 
 message CrossMarginUpdateAccountGrpcResponse{
-    CrossMarginOperationsCodes Status = 1;
+    CrossMarginAccountsOperationsCodes Status = 1;
     optional CrossMarginAccountGrpcModel Account = 2;
 }
 
