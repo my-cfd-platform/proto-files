@@ -1,0 +1,115 @@
+
+syntax = "proto3";
+package cross_margin_broker;
+import "google/protobuf/empty.proto";
+
+enum CrossMarginBrokerPositionSide{
+    Buy = 0;
+    Sell = 1;
+}
+
+enum CrossMarginBrokerOperationCodes{
+    Ok = 0;
+    DayOff = 1;
+    OperationIsTooLow = 2;
+    OperationIsTooHigh = 3;
+    MinOperationsByInstrumentViolated = 4;
+    MaxOperationsByInstrumentViolated = 5;
+    NotEnoughBalance = 6;
+    NoLiquidity = 7;
+    PositionNotFound = 8;
+    TpIsTooClose = 9;
+    SlIsTooClose = 10;
+    AccountNotFound = 11;
+    InstrumentNotFound = 12;
+    InstrumentIsNotTradable = 13;
+    HitMaxAmountOfPendingOrders = 14;
+    TechError = 15;
+    MultiplierIsNotFound = 16;
+    TradingDisabled = 17;
+    MaxPositionsAmount = 18;
+    TradingGroupNotFound = 19;
+    TradingProfileNotFound =20;
+    TradingProfileInstrumentNotFound = 21;
+    ABookReject = 22;
+    ProcessIdDuplicate = 23;
+    InvalidLeverage = 24;
+    InvalidCollateral = 25;
+}
+
+message CrossMarginBrokerBidAsk{
+    string Symbol = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 Timestamp = 4;
+}
+
+message CrossMarginBrokerAccountGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string Currency = 3;
+    double Balance = 4;
+    double Equity = 5;
+    double Margin = 6;
+    bool TradingDisabled = 7;
+    double Leverage = 8;
+    double FreeMargin = 9;
+    double MarginLvl = 10;
+    string TradingGroup = 11;
+    uint64 DateCreate = 12;
+    uint64 DateUpdate = 13;
+    string CreateProcessId = 14;
+    string LastUpdateProcessId = 15; 
+}
+
+message CrossMarginBrokerCreateAccountGrpcRequest{
+    string TraderId = 1;
+    string Currency = 2;
+    double Leverage = 3;
+    string ProcessId = 4;
+}
+
+message CrossMarginBrokerCreateAccountGrpcResponse{
+    CrossMarginBrokerOperationCodes Result = 1;
+    CrossMarginBrokerAccountGrpcModel Account = 2;
+}
+
+// message CrossMarginBrokerPositionGrpcModel{
+//     string TraderId = 1;
+//     string AccountId = 2;
+//     string Id = 3;
+//     string AssetPair = 4;
+//     CrossMarginBrokerPositionSide Side = 5;
+//     double ContractSize = 6;
+//     double LotsAmount = 7;
+//     uint64 Created = 8;
+//     string ProcessIdCreate = 9;
+//     uint64 LastUpdateDate = 10;
+//     string LastUpdateProcessId = 11;
+//     string Base = 12;
+//     string Quote = 13;
+//     string Collateral = 14;
+
+//     optional double TpInProfit = 15;
+//     optional double SlInProfit = 16;
+//     optional double TpInAssetPrice = 17;
+//     optional double SlInAssetPrice = 18;
+//     map<string, string> Metadata = 19;
+
+//     string OpenProcessId = 20;
+//     uint64 OpenDate = 21;
+//     PositionBidAsk OpenBidAsk = 22;
+//     double OpenPrice = 23;
+//     PositionBidAsk ActiveBidAsk = 24;
+//     double ActivePrice = 25;
+//     PositionBidAsk MarginBidAsk = 26;
+//     double MarginPrice = 27;
+//     PositionBidAsk ProfitBidAsk = 28;
+//     double ProfitPrice = 29;
+//     double Profit = 30;
+// }
+
+service CrossMarginBrokerGrpcService{
+    rpc CreateAccount(CrossMarginBrokerCreateAccountGrpcRequest) returns (CrossMarginBrokerCreateAccountGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}

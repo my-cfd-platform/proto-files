@@ -2,12 +2,13 @@ syntax = "proto3";
 package cross_margin_accounts;
 import "google/protobuf/empty.proto";
 
-enum CrossMarginOperationsCodes{
+enum CrossMarginAccountsOperationsCodes{
     Ok = 0;
-    NoLiquidity = 1;
-    PositionNotFound = 2;
-    ToppingUpDisabledForPosition = 3;
-    MarginCallSettingsNotFound = 4;   
+    AccountNotFound = 1;
+    TraderNotFound = 2;
+    NotEnoughBalance = 3;
+    ProcessIdDuplicate = 4;
+    CollateralCurrencyNotFound = 5;
 }
 
 message CrossMarginAccountGrpcModel{
@@ -55,11 +56,12 @@ message UpdateAccountGrpcRequest{
     string AccountId = 2;
     optional bool TradingDisabled = 3;
     optional string TradingGroup = 4;
-    string ProcessId = 5;
+    optional double Leverage = 5;
+    string ProcessId = 6;
 }
 
 message CrossMarginUpdateAccountGrpcResponse{
-    CrossMarginOperationsCodes Status = 1;
+    CrossMarginAccountsOperationsCodes Status = 1;
     optional CrossMarginAccountGrpcModel Account = 2;
 }
 
@@ -69,6 +71,7 @@ message CreateAccountGrpcRequest{
     int32 Leverage = 3;
     string Currency = 4;
     string ProcessId = 5;
+    string TradingGroup = 6;
 }
 
 service CrossMarginAccountsGrpcService{
