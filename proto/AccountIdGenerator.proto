@@ -1,0 +1,13 @@
+
+syntax = "proto3";
+package account_group_resolver;
+import "google/protobuf/empty.proto";
+
+message GenerateIdResponse {
+   string id = 1;
+}
+
+service AccountIdGenerateId {
+   rpc GenerateId(google.protobuf.Empty) returns (GenerateIdResponse);
+   rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
