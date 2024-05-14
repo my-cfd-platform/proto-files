@@ -1,6 +1,6 @@
 
 syntax = "proto3";
-package account_group_resolver;
+package account_id_generator;
 import "google/protobuf/empty.proto";
 
 message GenerateIdResponse {
