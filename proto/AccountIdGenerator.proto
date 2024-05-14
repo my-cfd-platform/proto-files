@@ -7,7 +7,7 @@ message GenerateIdResponse {
    string id = 1;
 }
 
-service AccountIdGenerateIdGrpcService {
+service AccountIdGeneratorGrpcService {
    rpc GenerateId(google.protobuf.Empty) returns (GenerateIdResponse);
    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
