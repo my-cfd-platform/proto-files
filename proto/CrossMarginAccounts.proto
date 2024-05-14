@@ -74,12 +74,46 @@ message CreateAccountGrpcRequest{
     string TradingGroup = 6;
 }
 
+message UpdateAccountBalanceGrpcRequest{
+    string TraderId = 1;
+     string AccountId = 2;
+     double Delta = 3;
+     string Comment = 4;
+     string ProcessId = 5;
+     bool AllowNegativeBalance = 6;
+     UpdateBalanceReason Reason = 7;
+     optional string ReferenceTransactionId = 8;
+     bool SameResponseProcessId = 9;
+
+}
+
+enum UpdateBalanceReason {
+    TradingResult = 0;
+    BalanceCorrection = 1;
+    Deposit = 2;
+    Withdrawal = 3;
+    WithdrawalCanceled = 4;
+    ToppingUp = 5;
+    Dividends = 6;
+    Bonus = 7;
+    Credit = 8;
+    Voucher = 9;
+}
+
+
+message UpdateAccountBalanceGrpcResponse{
+    CrossMarginAccountsOperationsCodes Result = 1;
+    optional string OperationId = 2;
+    CrossMarginAccountGrpcModel Account = 3;
+}
+
 service CrossMarginAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
     rpc GetClientAccount(GetTraderAccountGrpcRequest) returns (GetTraderAccountGrpcResponse);
     rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (CrossMarginUpdateAccountGrpcResponse);
+    rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
