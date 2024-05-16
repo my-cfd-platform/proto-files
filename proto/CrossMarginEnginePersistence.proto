@@ -23,40 +23,29 @@ message CrossMarginPositionSwapGrpcModel{
 
 message CrossMarginPersistenceActivePositionGrpcModel{
     string Id = 1;
-    string AccountId = 2;
-    string TraderId = 3;
+    string TraderId = 2;
+    string AccountId = 3;
     string AssetPair = 4;
     CrossMarginPersistencePositionSide Side = 5;
-    double InvestAmount = 6;
-    double Leverage = 7;
-    double StopOutPercent = 8;
-    string CreateProcessId = 9;
-    uint64 CreateDateUnixTimestampMilis = 10;
-    string LastUpdateProcessId = 11;
-    uint64 LastUpdateDate = 12;
-    optional double TpInProfit = 13;
-    optional double SlInProfit = 14;
-    optional double TpInAssetPrice = 15;
-    optional double SlInAssetPrice = 16;
-    string Collateral = 17;
-    string Base = 18;
-    string Quote = 19;
+    double ContractSize = 6;
+    double LostAmount = 7;
+    string CreateProcessId = 8;
+    uint64 CreateDateUnixTimestampMilis = 9;
+    string LastUpdateProcessId = 10;
+    uint64 LastUpdateDate = 11;
+    double Leverage = 12;
+    string Base = 13;
+    string Quote = 14;
+    string Collateral = 15;
 
-    double AssetOpenPrice = 20;
-    CrossMarginPersistenceBidAsk AssetOpenBidAsk = 21;
+    map<string, string> Metadata = 16;
 
-    double CollateralBaseOpenPrice = 22;
-    CrossMarginPersistenceBidAsk CollateralBaseOpenBidAsk = 23;
-
-    string OpenProcessId = 24;
-    uint64 OpenDateUnixTimestampMilis = 25;
-
-    repeated CrossMarginPositionSwapGrpcModel Swaps = 26;
-
-    optional double ToppingUpPercent = 27;
-    map<string, string> Metadata = 28;
-    optional double MarginCallPercent = 29;
-    optional double ReservedFundForToppingUp = 30;
+    string OpenProcessId = 17;
+    uint64 OpenDate = 18;
+    CrossMarginPersistenceBidAsk OpenBidAsk = 19;
+    double OpenPrice = 20;
+    CrossMarginPersistenceBidAsk MarginBidAsk = 21;
+    double MarginPrice = 22;
 }
 
 message CrossMarginPersistencePendingPositionGrpcModel{
