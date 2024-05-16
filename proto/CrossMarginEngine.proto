@@ -262,7 +262,7 @@ service CrossMarginEngineGrpcService{
 
     rpc OpenPosition(OpenCrossMarginPositionGrpcRequest) returns (OpenCrossMarginPositionGrpcResponse);
     rpc ClosePosition(CloseCrossMarginPositionGrpcRequest) returns (CloseCrossMarginPositionGrpcResponse);
-    rpc ForcePositionClose(CloseCrossMarginPositionGrpcRequest) returns (CrossMarginForcePositionCloseGrpcResponse);
+    rpc ForcePositionClose(CrossMarginForcePositionCloseGrpcRequest) returns (CrossMarginForcePositionCloseGrpcResponse);
     rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginPendingOrderGrpcModel);
     rpc GetActivePositions(GetActivePositionsGrpcRequest) returns (stream CrossMarginPositionGrpcModel);
 
