@@ -1,0 +1,208 @@
+
+syntax = "proto3";
+package cross_margin_report_grpc;
+import "google/protobuf/empty.proto";
+
+enum CrossMarginReportsFlowsClosePositionReason{
+    ClientCommand = 0;
+    StopOut = 1;
+    TakeProfit = 2;
+    StopLoss = 3;
+    ForceClose = 4;
+}
+
+enum CrossMarginReportFlowsTransactionType{
+    Deposit = 0;
+    Withdrawal = 1;
+    BalanceCorrection = 2;
+    Trading = 3;
+    WithdrawalCancel = 4;
+    ToppingUp = 5;
+    Dividends = 6;
+    Bonus = 7;
+    Credit = 8;
+    Voucher = 9;
+}
+
+enum CrossMarginReportsFlowsPositionSide{
+    Buy = 0;
+    Sell = 1;
+}
+
+message CrossMarginReportsFlowsBidAsk{
+    string AssetPair = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 DateTimeUnixTimestampMilis = 4;
+}
+
+////////////////////////////////////////////////////////////
+
+message CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest{
+    string AccountId = 1;
+    string TraderId  = 2;
+    int32 Page = 3;
+    int32 Size = 4;
+}
+
+message CrossMarginGetPaginatedInDateRangeRequest{
+    string AccountId = 1;
+    string TraderId  = 2;
+    uint64 DateFrom = 3;
+    uint64 DateTo = 4;
+    int32 Page = 5;
+    int32 Size = 6;
+}
+
+message CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest{
+    optional string AccountId = 1;
+    optional string TraderId  = 2;
+    optional uint64 DateFrom = 3;
+    optional uint64 DateTo = 4;
+}
+
+////////////////////////////////////////////////////////////
+
+message CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse{
+    int32 Page = 1;
+    int32 Size = 2;
+    uint64 TotalItems = 3;
+    repeated CrossMarginReportFlowsOperationHistoryUiItem History = 4;
+}
+
+message CrossMarginReportFlowsGetHistoryPositionsPaginatedGrpcResponse{
+    int32 Page = 1;
+    int32 Size = 2;
+    uint64 Count = 3;
+    repeated CrossMarginReportsFlowsClosedPositionGrpcModel History = 4;
+}
+
+message CrossMarginReportFlowsOperationHistoryUiItem{
+    double Amount = 1;
+    double BalanceAfterOperation = 2;
+    string Description = 3;
+    uint64 CreatedAt = 4;
+}
+
+message CrossMarginReportsFlowsActivePositionGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LostAmount = 5;
+    double LotsSize = 6;
+    CrossMarginReportsFlowsPositionSide Side = 7;
+    uint64 CreateDateUnixTimestampMilis = 8;
+    optional double TpInProfit = 9;
+    optional double SlInProfit = 10;
+    optional double TpInAssetPrice = 11;
+    optional double SlInAssetPrice = 12;
+    string CreateProcessId = 13;
+    string LastUpdateProcessId = 14;
+    uint64 LastUpdateDate = 15;
+    double OpenPrice = 16;
+    uint64 OpenDate = 17;
+    string OpenProcessId = 18;
+    CrossMarginReportsFlowsBidAsk OpenBidAsk = 19;
+    map<string, string> Metadata = 20;
+    string Base = 21;
+    string Quote = 22;
+    string Collateral = 23;
+    double MarginPrice = 24;
+    CrossMarginReportsFlowsBidAsk MarginBidAsk = 25;
+    repeated CrossMarginPositionSwapGrpcModel Swaps = 26;
+}
+
+message CrossMarginPositionSwapGrpcModel{
+    double Amount = 1;
+    uint64 Date = 2;
+}
+
+message CrossMarginReportsFlowsClosedPositionGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LostAmount = 5;
+    double LotsSize = 6;
+    CrossMarginReportsFlowsPositionSide Side = 7;
+    uint64 CreateDateUnixTimestampMilis = 8;
+    optional double TpInProfit = 9;
+    optional double SlInProfit = 10;
+    optional double TpInAssetPrice = 11;
+    optional double SlInAssetPrice = 12;
+    string CreateProcessId = 13;
+    string LastUpdateProcessId = 14;
+    uint64 LastUpdateDate = 15;
+    double OpenPrice = 16;
+    uint64 OpenDate = 17;
+    string OpenProcessId = 18;
+    CrossMarginReportsFlowsBidAsk OpenBidAsk = 19;
+    map<string, string> Metadata = 20;
+    string Base = 21;
+    string Quote = 22;
+    string Collateral = 23;
+    double MarginPrice = 24;
+    CrossMarginReportsFlowsBidAsk MarginBidAsk = 25;
+    repeated CrossMarginPositionSwapGrpcModel Swaps = 26;
+    double ClosePrice = 27;
+    CrossMarginReportsFlowsBidAsk CloseBidAsk = 28;
+    uint64 CloseDate = 29;
+    string CloseProcessId = 30;
+    double Profit = 31;
+    CrossMarginReportsFlowsBidAsk ProfitBidAsk = 32;
+    double ProfitPrice = 33;
+}
+
+message CrossMarginReportOperationHistoryItem{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    CrossMarginReportFlowsTransactionType TransactionType = 4;
+    optional string ProcessId = 5;
+    double Delta = 6;
+    uint64 Date = 7;
+    optional string ReferenceTransactionId = 8;
+    double BalanceAfterOperation = 9;
+    optional string Comment = 10;
+}
+
+message CrossMarginGetHistoryPositionsPaginatedRequest{
+    string AccountId = 1;
+    string TraderId = 2;
+    int32 Page = 3;
+    int32 Size = 4;
+}
+
+message SearchHistory{
+    repeated string TraderIds = 1;
+    repeated string AccountIds = 2;
+    repeated CrossMarginReportFlowsTransactionType TransactionTypes = 3;
+    optional CrossMarginFromToUint64Model DateRange = 4;
+}
+
+message CrossMarginFromToUint64Model{
+    optional uint64 From = 1;
+    optional uint64 To = 2;
+}
+
+message CrossMarginGetOperationRequest{
+    string OperationId = 1;
+}
+
+message CrossMarginGetOperationResponse{
+    optional CrossMarginReportOperationHistoryItem Item = 1;
+}
+
+service ReportGrpcService {
+    rpc GetHistoryPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
+    rpc GetOperationsHistoryPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
+    rpc GetHistoryPositionsPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
+    rpc GetHistoryPositionsPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsGetHistoryPositionsPaginatedGrpcResponse);
+    rpc GetOperationsHistoryInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportOperationHistoryItem);
+    rpc GetActivePositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsActivePositionGrpcModel);
+    rpc GetHistoryPositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsClosedPositionGrpcModel);
+    rpc SearchHistoryPositions(SearchHistory) returns (stream CrossMarginReportOperationHistoryItem);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+    rpc GetOperation(CrossMarginGetOperationRequest) returns (CrossMarginGetOperationResponse);
+}
