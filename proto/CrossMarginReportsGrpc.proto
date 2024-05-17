@@ -149,9 +149,10 @@ message CrossMarginReportsFlowsClosedPositionGrpcModel{
     CrossMarginReportsFlowsBidAsk CloseBidAsk = 28;
     uint64 CloseDate = 29;
     string CloseProcessId = 30;
-    double Profit = 31;
-    CrossMarginReportsFlowsBidAsk ProfitBidAsk = 32;
-    double ProfitPrice = 33;
+    CrossMarginReportsFlowsClosePositionReason CloseReason = 31;
+    double Profit = 32;
+    CrossMarginReportsFlowsBidAsk ProfitBidAsk = 33;
+    double ProfitPrice = 34;
 }
 
 message CrossMarginReportOperationHistoryItem{
