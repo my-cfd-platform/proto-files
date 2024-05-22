@@ -48,8 +48,23 @@ message CrossMarginPersistenceActivePositionGrpcModel{
     double MarginPrice = 22;
 }
 
+message CrossMarginPersistenceAccountGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string Currency = 3;
+    double Balance = 4;
+    bool TradingDisabled = 5;
+    double Leverage = 6;
+    string TradingGroup = 7;
+    uint64 CreateDate = 8;
+    uint64 LastUpdateDate = 9;
+    string CreateProcessId = 10;
+    string LastUpdateProcessId = 11;
+}
+
 
 service PositionManagerPersistenceGrpcService {
     rpc GetActivePositions(google.protobuf.Empty) returns (stream CrossMarginPersistenceActivePositionGrpcModel);
+    rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginPersistenceAccountGrpcModel);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
