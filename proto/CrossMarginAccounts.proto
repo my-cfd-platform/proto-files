@@ -9,6 +9,7 @@ enum CrossMarginAccountsOperationsCodes{
     NotEnoughBalance = 3;
     ProcessIdDuplicate = 4;
     CollateralCurrencyNotFound = 5;
+    InvalidLeverage = 6;
 }
 
 message CrossMarginAccountGrpcModel{
