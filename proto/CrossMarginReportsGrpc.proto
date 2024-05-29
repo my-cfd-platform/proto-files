@@ -89,7 +89,7 @@ message CrossMarginReportsFlowsActivePositionGrpcModel{
     string TraderId = 2;
     string AccountId = 3;
     string AssetPair = 4;
-    double LostAmount = 5;
+    double LotsAmount = 5;
     double LotsSize = 6;
     CrossMarginReportsFlowsPositionSide Side = 7;
     uint64 CreateDateUnixTimestampMilis = 8;
@@ -123,7 +123,7 @@ message CrossMarginReportsFlowsClosedPositionGrpcModel{
     string TraderId = 2;
     string AccountId = 3;
     string AssetPair = 4;
-    double LostAmount = 5;
+    double LotsAmount = 5;
     double LotsSize = 6;
     CrossMarginReportsFlowsPositionSide Side = 7;
     uint64 CreateDateUnixTimestampMilis = 8;
