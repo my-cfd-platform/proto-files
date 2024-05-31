@@ -4,6 +4,7 @@ import "google/protobuf/empty.proto";
 
 message GenerateAutoLoginTokenRequest{
     string TraderId = 1;
+    optional string AccountId = 2;
 }
 
 message GenerateAutoLoginTokenResponse{
