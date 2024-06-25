@@ -28,6 +28,7 @@ message CrossMarginAccountGrpcModel{
     uint64 DateUpdate = 13;
     string CreateProcessId = 14;
     string LastUpdateProcessId = 15;
+    map<string, string> Metadata = 16;
 }
 
 message CrossMarginAccountsCreateAccountGrpcRequest{
@@ -73,6 +74,7 @@ message CreateAccountGrpcRequest{
     string Currency = 4;
     string ProcessId = 5;
     string TradingGroup = 6;
+    map<string, string> Metadata = 7;
 }
 
 message UpdateAccountBalanceGrpcRequest{
