@@ -235,7 +235,7 @@ message CancelCrossMarginPendingOrderGrpcRequest{
 
 message CancelCrossMarginPendingOrderGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
-    CrossMarginPositionGrpcModel Order = 2;
+    CrossMarginPendingOrderGrpcModel Order = 2;
 }
 
 
