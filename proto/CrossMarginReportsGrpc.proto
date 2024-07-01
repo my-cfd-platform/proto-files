@@ -17,11 +17,6 @@ enum CrossMarginReportFlowsTransactionType{
     BalanceCorrection = 2;
     Trading = 3;
     WithdrawalCancel = 4;
-    ToppingUp = 5;
-    Dividends = 6;
-    Bonus = 7;
-    Credit = 8;
-    Voucher = 9;
 }
 
 enum CrossMarginReportsFlowsPositionSide{
