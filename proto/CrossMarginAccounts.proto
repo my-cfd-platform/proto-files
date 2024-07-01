@@ -10,6 +10,8 @@ enum CrossMarginAccountsOperationsCodes{
     ProcessIdDuplicate = 4;
     CollateralCurrencyNotFound = 5;
     InvalidLeverage = 6;
+    TradingGroupNotFound = 7;
+    TradingProfileNotFound = 8;
 }
 
 message CrossMarginAccountGrpcModel{
