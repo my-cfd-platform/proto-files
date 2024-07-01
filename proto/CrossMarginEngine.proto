@@ -163,6 +163,7 @@ message OpenCrossMarginPositionGrpcRequest{
     optional double SlInCurrency = 8;
     optional double TpInAssetPrice = 9;
     optional double SlInAssetPrice = 10;
+    map<string, string> Metadata = 11;
     
 }
 
@@ -218,7 +219,7 @@ message OpenCrossMarginPendingOrderGrpcRequest{
     optional double SlInCurrency = 9;
     optional double TpInAssetPrice = 10;
     optional double SlInAssetPrice = 11;
-    
+    map<string, string> Metadata = 12;
 }
 
 message OpenCrossMarginPendingOrderGrpcResponse{
