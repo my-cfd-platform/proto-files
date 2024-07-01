@@ -77,6 +77,11 @@ message CreateAccountGrpcRequest{
     map<string, string> Metadata = 7;
 }
 
+message CreateAccountGrpcResponse{
+    CrossMarginAccountsOperationsCodes Status = 1;
+    optional CrossMarginAccountGrpcModel Account = 2;
+}
+
 message UpdateAccountBalanceGrpcRequest{
     string TraderId = 1;
      string AccountId = 2;
@@ -111,7 +116,7 @@ message UpdateAccountBalanceGrpcResponse{
 }
 
 service CrossMarginAccountsGrpcService{
-    rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
     rpc GetClientAccount(GetTraderAccountGrpcRequest) returns (GetTraderAccountGrpcResponse);
     rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
