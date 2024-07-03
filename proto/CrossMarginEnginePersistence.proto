@@ -48,6 +48,34 @@ message CrossMarginPersistenceActivePositionGrpcModel{
     double MarginPrice = 22;
 }
 
+enum CrossMarginPersistencePendingOrderType{
+    Limit = 0;
+    Stop = 1;
+}
+
+message CrossMarginPersistencePendingOrderGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    CrossMarginPersistencePositionSide Side = 5;
+    double ContractSize = 6;
+    double LostAmount = 7;
+    string CreateProcessId = 8;
+    uint64 CreateDateUnixTimestampMilis = 9;
+    string LastUpdateProcessId = 10;
+    uint64 LastUpdateDate = 11;
+    double Leverage = 12;
+    string Base = 13;
+    string Quote = 14;
+    string Collateral = 15;
+
+    map<string, string> Metadata = 16;
+
+    double DesirePrice = 17;
+    CrossMarginPersistencePendingOrderType OrderType = 18 ;
+}
+
 message CrossMarginPersistenceAccountGrpcModel{
     string Id = 1;
     string TraderId = 2;
@@ -65,6 +93,7 @@ message CrossMarginPersistenceAccountGrpcModel{
 
 service PositionManagerPersistenceGrpcService {
     rpc GetActivePositions(google.protobuf.Empty) returns (stream CrossMarginPersistenceActivePositionGrpcModel);
+    rpc GetPendingOrders(google.protobuf.Empty) returns (stream CrossMarginPersistencePendingOrderGrpcModel);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginPersistenceAccountGrpcModel);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
