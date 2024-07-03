@@ -33,7 +33,6 @@ message CrossMarginPersistenceActivePositionGrpcModel{
     uint64 CreateDateUnixTimestampMilis = 9;
     string LastUpdateProcessId = 10;
     uint64 LastUpdateDate = 11;
-    double Leverage = 12;
     string Base = 13;
     string Quote = 14;
     string Collateral = 15;
@@ -65,7 +64,6 @@ message CrossMarginPersistencePendingOrderGrpcModel{
     uint64 CreateDateUnixTimestampMilis = 9;
     string LastUpdateProcessId = 10;
     uint64 LastUpdateDate = 11;
-    double Leverage = 12;
     string Base = 13;
     string Quote = 14;
     string Collateral = 15;
