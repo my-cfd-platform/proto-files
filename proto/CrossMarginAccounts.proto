@@ -103,11 +103,6 @@ enum UpdateBalanceReason {
     Deposit = 2;
     Withdrawal = 3;
     WithdrawalCanceled = 4;
-    ToppingUp = 5;
-    Dividends = 6;
-    Bonus = 7;
-    Credit = 8;
-    Voucher = 9;
 }
 
 
