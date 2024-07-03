@@ -190,6 +190,13 @@ message CrossMarginGetOperationResponse{
     optional CrossMarginReportOperationHistoryItem Item = 1;
 }
 
+message CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse{
+    int32 Page = 1;
+    int32 Size = 2;
+    uint64 Count = 3;
+    repeated CrossMarginReportsFlowsClosedPositionGrpcModel History = 4;
+}
+
 service ReportGrpcService {
     rpc GetHistoryPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetOperationsHistoryPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
@@ -199,6 +206,10 @@ service ReportGrpcService {
     rpc GetActivePositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsActivePositionGrpcModel);
     rpc GetHistoryPositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsClosedPositionGrpcModel);
     rpc SearchHistoryPositions(SearchHistory) returns (stream CrossMarginReportOperationHistoryItem);
+
+    rpc GetOrdersPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
+    rpc GetOrdersPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
+
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc GetOperation(CrossMarginGetOperationRequest) returns (CrossMarginGetOperationResponse);
 }
