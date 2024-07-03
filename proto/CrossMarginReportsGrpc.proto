@@ -219,7 +219,6 @@ message CrossMarginReportsFlowsOrderGrpcModel{
     string Base = 21;
     string Quote = 22;
     string Collateral = 23;
-    optional double ExecutePrice = 24;
     CrossMarginReportsFlowsOrderStatus Status = 25;
     
 }
