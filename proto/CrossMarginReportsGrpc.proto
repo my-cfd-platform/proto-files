@@ -194,7 +194,34 @@ message CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse{
     int32 Page = 1;
     int32 Size = 2;
     uint64 Count = 3;
-    repeated CrossMarginReportsFlowsClosedPositionGrpcModel History = 4;
+    repeated CrossMarginReportsFlowsOrderGrpcModel History = 4;
+}
+enum CrossMarginReportsFlowsOrderStatus{
+    Active = 0;
+    Canceled = 1;
+    Executed = 2;
+    FailedToExecute = 3;
+}
+
+message CrossMarginReportsFlowsOrderGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LotsAmount = 5;
+    double LotsSize = 6;
+    CrossMarginReportsFlowsPositionSide Side = 7;
+    uint64 CreateDateUnixTimestampMilis = 8;
+    string CreateProcessId = 13;
+    string LastUpdateProcessId = 14;
+    uint64 LastUpdateDate = 15;
+    map<string, string> Metadata = 20;
+    string Base = 21;
+    string Quote = 22;
+    string Collateral = 23;
+    optional double ExecutePrice = 24;
+    CrossMarginReportsFlowsOrderStatus Status = 25;
+    
 }
 
 service ReportGrpcService {
