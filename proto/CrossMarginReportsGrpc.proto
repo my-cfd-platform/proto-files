@@ -203,6 +203,11 @@ enum CrossMarginReportsFlowsOrderStatus{
     FailedToExecute = 3;
 }
 
+enum CrossMarginReportsFlowsOrderType{
+    Stop = 0;
+    Limit = 1;
+}
+
 message CrossMarginReportsFlowsOrderGrpcModel{
     string Id = 1;
     string TraderId = 2;
@@ -220,6 +225,9 @@ message CrossMarginReportsFlowsOrderGrpcModel{
     string Quote = 22;
     string Collateral = 23;
     CrossMarginReportsFlowsOrderStatus Status = 25;
+    double DesirePrice = 26;
+    CrossMarginReportsFlowsOrderType Type = 27;
+
     
 }
 
