@@ -227,8 +227,13 @@ message CrossMarginReportsFlowsOrderGrpcModel{
     CrossMarginReportsFlowsOrderStatus Status = 25;
     double DesirePrice = 26;
     CrossMarginReportsFlowsOrderType Type = 27;
+}
 
-    
+message CrossMarginReportFlowsOrdersGetInDateRangeGrpcRequest{
+    optional string AccountId = 1;
+    optional string TraderId  = 2;
+    optional uint64 DateFrom = 3;
+    optional uint64 DateTo = 4;
 }
 
 service ReportGrpcService {
@@ -243,6 +248,7 @@ service ReportGrpcService {
 
     rpc GetOrdersPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
     rpc GetOrdersPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
+    rpc GetOrdersInDateRange(CrossMarginReportFlowsOrdersGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsOrderGrpcModel);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc GetOperation(CrossMarginGetOperationRequest) returns (CrossMarginGetOperationResponse);
