@@ -17,11 +17,6 @@ enum CrossMarginReportFlowsTransactionType{
     BalanceCorrection = 2;
     Trading = 3;
     WithdrawalCancel = 4;
-    ToppingUp = 5;
-    Dividends = 6;
-    Bonus = 7;
-    Credit = 8;
-    Voucher = 9;
 }
 
 enum CrossMarginReportsFlowsPositionSide{
@@ -195,6 +190,52 @@ message CrossMarginGetOperationResponse{
     optional CrossMarginReportOperationHistoryItem Item = 1;
 }
 
+message CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse{
+    int32 Page = 1;
+    int32 Size = 2;
+    uint64 Count = 3;
+    repeated CrossMarginReportsFlowsOrderGrpcModel History = 4;
+}
+enum CrossMarginReportsFlowsOrderStatus{
+    Active = 0;
+    Canceled = 1;
+    Executed = 2;
+    FailedToExecute = 3;
+}
+
+enum CrossMarginReportsFlowsOrderType{
+    Stop = 0;
+    Limit = 1;
+}
+
+message CrossMarginReportsFlowsOrderGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LotsAmount = 5;
+    double LotsSize = 6;
+    CrossMarginReportsFlowsPositionSide Side = 7;
+    uint64 CreateDateUnixTimestampMilis = 8;
+    string CreateProcessId = 13;
+    string LastUpdateProcessId = 14;
+    uint64 LastUpdateDate = 15;
+    map<string, string> Metadata = 20;
+    string Base = 21;
+    string Quote = 22;
+    string Collateral = 23;
+    CrossMarginReportsFlowsOrderStatus Status = 25;
+    double DesirePrice = 26;
+    CrossMarginReportsFlowsOrderType Type = 27;
+}
+
+message CrossMarginReportFlowsOrdersGetInDateRangeGrpcRequest{
+    optional string AccountId = 1;
+    optional string TraderId  = 2;
+    optional uint64 DateFrom = 3;
+    optional uint64 DateTo = 4;
+}
+
 service ReportGrpcService {
     rpc GetHistoryPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
     rpc GetOperationsHistoryPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsOperationsGetHistoryPaginatedGrpcResponse);
@@ -204,6 +245,11 @@ service ReportGrpcService {
     rpc GetActivePositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsActivePositionGrpcModel);
     rpc GetHistoryPositionsInDateRange(CrossMarginReportFlowsOperationsGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsClosedPositionGrpcModel);
     rpc SearchHistoryPositions(SearchHistory) returns (stream CrossMarginReportOperationHistoryItem);
+
+    rpc GetOrdersPaginated(CrossMarginReportFlowsOperationsGetPaginatedGrpcRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
+    rpc GetOrdersPaginatedInDateRange(CrossMarginGetPaginatedInDateRangeRequest) returns (CrossMarginReportFlowsGetHistoryOrdersPaginatedGrpcResponse);
+    rpc GetOrdersInDateRange(CrossMarginReportFlowsOrdersGetInDateRangeGrpcRequest) returns (stream CrossMarginReportsFlowsOrderGrpcModel);
+
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
     rpc GetOperation(CrossMarginGetOperationRequest) returns (CrossMarginGetOperationResponse);
 }

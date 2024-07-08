@@ -10,6 +10,8 @@ enum CrossMarginAccountsOperationsCodes{
     ProcessIdDuplicate = 4;
     CollateralCurrencyNotFound = 5;
     InvalidLeverage = 6;
+    TradingGroupNotFound = 7;
+    TradingProfileNotFound = 8;
 }
 
 message CrossMarginAccountGrpcModel{
@@ -77,6 +79,11 @@ message CreateAccountGrpcRequest{
     map<string, string> Metadata = 7;
 }
 
+message CreateAccountGrpcResponse{
+    CrossMarginAccountsOperationsCodes Status = 1;
+    optional CrossMarginAccountGrpcModel Account = 2;
+}
+
 message UpdateAccountBalanceGrpcRequest{
     string TraderId = 1;
      string AccountId = 2;
@@ -96,11 +103,6 @@ enum UpdateBalanceReason {
     Deposit = 2;
     Withdrawal = 3;
     WithdrawalCanceled = 4;
-    ToppingUp = 5;
-    Dividends = 6;
-    Bonus = 7;
-    Credit = 8;
-    Voucher = 9;
 }
 
 
@@ -111,7 +113,7 @@ message UpdateAccountBalanceGrpcResponse{
 }
 
 service CrossMarginAccountsGrpcService{
-    rpc CreateAccount(CreateAccountGrpcRequest) returns (CrossMarginAccountGrpcModel);
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream CrossMarginAccountGrpcModel);
     rpc GetClientAccount(GetTraderAccountGrpcRequest) returns (GetTraderAccountGrpcResponse);
     rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream CrossMarginAccountGrpcModel);
