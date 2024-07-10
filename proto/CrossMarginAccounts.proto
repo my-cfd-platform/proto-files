@@ -31,7 +31,6 @@ message CrossMarginAccountGrpcModel{
     string CreateProcessId = 14;
     string LastUpdateProcessId = 15;
     map<string, string> Metadata = 16;
-    optional double MarginCoefficient = 17;
 }
 
 message CrossMarginAccountsCreateAccountGrpcRequest{
