@@ -227,6 +227,10 @@ message CrossMarginReportsFlowsOrderGrpcModel{
     CrossMarginReportsFlowsOrderStatus Status = 25;
     double DesirePrice = 26;
     CrossMarginReportsFlowsOrderType Type = 27;
+    optional double TpInProfit = 28;
+    optional double SlInProfit = 29;
+    optional double TpInAssetPrice = 30;
+    optional double SlInAssetPrice = 31;
 }
 
 message CrossMarginReportFlowsOrdersGetInDateRangeGrpcRequest{
