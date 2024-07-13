@@ -150,6 +150,8 @@ message CrossMarginPendingOrderGrpcModel{
     map<string, string> Metadata = 19;
 
     double DesirePrice = 20;
+
+    CrossMarginPendingOrderType OrderType = 21;
 }
 
 message OpenCrossMarginPositionGrpcRequest{
