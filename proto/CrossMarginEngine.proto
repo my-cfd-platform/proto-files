@@ -84,6 +84,7 @@ message CrossMarginPositionGrpcModel{
     double ProfitPrice = 29;
     double Profit = 30;
     double Commissions = 31;
+    double Swaps = 32;
 }
 
 message CrossMarginClosedPositionGrpcModel{
