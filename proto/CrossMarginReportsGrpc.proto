@@ -106,6 +106,7 @@ message CrossMarginReportsFlowsActivePositionGrpcModel{
     double MarginPrice = 24;
     CrossMarginReportsFlowsBidAsk MarginBidAsk = 25;
     repeated CrossMarginPositionSwapGrpcModel Swaps = 26;
+    double Commissions = 27;
 }
 
 message CrossMarginPositionSwapGrpcModel{
@@ -148,6 +149,7 @@ message CrossMarginReportsFlowsClosedPositionGrpcModel{
     double Profit = 32;
     CrossMarginReportsFlowsBidAsk ProfitBidAsk = 33;
     double ProfitPrice = 34;
+    double Commissions = 35;
 }
 
 message CrossMarginReportOperationHistoryItem{
