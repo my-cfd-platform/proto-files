@@ -83,6 +83,7 @@ message CrossMarginPositionGrpcModel{
     PositionBidAsk ProfitBidAsk = 28;
     double ProfitPrice = 29;
     double Profit = 30;
+    double Commissions = 31;
 }
 
 message CrossMarginClosedPositionGrpcModel{

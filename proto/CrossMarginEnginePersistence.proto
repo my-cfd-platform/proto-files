@@ -46,6 +46,7 @@ message CrossMarginPersistenceActivePositionGrpcModel{
     CrossMarginPersistenceBidAsk MarginBidAsk = 21;
     double MarginPrice = 22;
     repeated CrossMarginPositionSwapGrpcModel Swaps = 23;
+    double Commissions = 24;
 }
 
 enum CrossMarginPersistencePendingOrderType{
