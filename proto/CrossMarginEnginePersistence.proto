@@ -74,6 +74,7 @@ message CrossMarginPersistencePendingOrderGrpcModel{
 
     double DesirePrice = 17;
     CrossMarginPersistencePendingOrderType OrderType = 18 ;
+    double InitPrice = 19;
 }
 
 message CrossMarginPersistenceAccountGrpcModel{
