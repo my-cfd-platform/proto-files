@@ -58,7 +58,7 @@ message UploadCandleRequest{
 
 message UploadCandlesResponse{
     bool Success = 1;
-    string ErrorMessage = 2;
+    string Message = 2;
 }
 
 message GetCandlesHistoryFromCacheGrpcRequest {
