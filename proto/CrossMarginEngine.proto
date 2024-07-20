@@ -83,6 +83,8 @@ message CrossMarginPositionGrpcModel{
     PositionBidAsk ProfitBidAsk = 28;
     double ProfitPrice = 29;
     double Profit = 30;
+    double Commissions = 31;
+    double Swaps = 32;
 }
 
 message CrossMarginClosedPositionGrpcModel{
@@ -150,6 +152,8 @@ message CrossMarginPendingOrderGrpcModel{
     map<string, string> Metadata = 19;
 
     double DesirePrice = 20;
+
+    CrossMarginPendingOrderType OrderType = 21;
 }
 
 message OpenCrossMarginPositionGrpcRequest{
@@ -207,6 +211,11 @@ message GetActivePositionsGrpcRequest{
     string AccountId = 2;
 }
 
+enum CrossMarginPendingOrderType{
+    Limit = 0;
+    Stop = 1;
+}
+
 message OpenCrossMarginPendingOrderGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
@@ -220,6 +229,7 @@ message OpenCrossMarginPendingOrderGrpcRequest{
     optional double TpInAssetPrice = 10;
     optional double SlInAssetPrice = 11;
     map<string, string> Metadata = 12;
+    CrossMarginPendingOrderType OrderType = 13;
 }
 
 message OpenCrossMarginPendingOrderGrpcResponse{
