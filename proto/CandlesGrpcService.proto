@@ -56,6 +56,11 @@ message UploadCandleRequest{
     repeated CandleGrpcModel Candles = 4;
 }
 
+message UploadCandlesResponse{
+    bool Success = 1;
+    string ErrorMessage = 2;
+}
+
 message GetCandlesHistoryFromCacheGrpcRequest {
     string InstrumentId = 1;
     uint64 FromDateTime = 2;
@@ -69,6 +74,6 @@ service CandlesGrpcService {
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
     rpc GetAllByInstrumentFromCache(GetAllByInstrumentGrpcRequest) returns (stream CandleCacheList);
     rpc GetByInstrumentFromCache(GetCandlesHistoryFromCacheGrpcRequest) returns (stream CandleCacheList);
-    rpc UploadCandles(UploadCandleRequest) returns (google.protobuf.Empty);
+    rpc UploadCandles(UploadCandleRequest) returns (UploadCandlesResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
