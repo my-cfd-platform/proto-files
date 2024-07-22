@@ -33,14 +33,6 @@ message CrossMarginAccountGrpcModel{
     map<string, string> Metadata = 16;
 }
 
-message CrossMarginAccountsCreateAccountGrpcRequest{
-    string TraderId = 1;
-    string Currency = 2;
-    string ProcessId = 3;
-    string TradingGroup = 4;
-    map<string, string> Metadata = 5;
-}
-
 
 message GetTraderAccountsGrpcRequest{
     string TraderId = 1;
