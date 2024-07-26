@@ -91,7 +91,6 @@ message CrossMarginPersistenceAccountGrpcModel{
     string LastUpdateProcessId = 11;
 }
 
-
 service PositionManagerPersistenceGrpcService {
     rpc GetActivePositions(google.protobuf.Empty) returns (stream CrossMarginPersistenceActivePositionGrpcModel);
     rpc GetPendingOrders(google.protobuf.Empty) returns (stream CrossMarginPersistencePendingOrderGrpcModel);
