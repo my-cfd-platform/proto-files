@@ -16,8 +16,8 @@ enum CrossMarginEngineResponseCode{
     DayOff = 1;
     OperationIsTooLow = 2;
     OperationIsTooHigh = 3;
-    MinOperationsByInstrumentViolated = 4;
-    MaxOperationsByInstrumentViolated = 5;
+    MinLotsSizeReached = 4;
+    MaxLotsSizeReached = 5;
     NotEnoughBalance = 6;
     NoLiquidity = 7;
     PositionNotFound = 8;
@@ -237,7 +237,6 @@ message OpenCrossMarginPendingOrderGrpcResponse{
     CrossMarginPendingOrderGrpcModel Order = 2;
 }
 
-
 message CancelCrossMarginPendingOrderGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
@@ -248,7 +247,6 @@ message CancelCrossMarginPendingOrderGrpcResponse{
     CrossMarginEngineResponseCode Status = 1;
     CrossMarginPendingOrderGrpcModel Order = 2;
 }
-
 
 message UpdateSlTpGrpcRequest{
     string TraderId = 1;
@@ -276,6 +274,9 @@ service CrossMarginEngineGrpcService{
     rpc ForcePositionClose(CrossMarginForcePositionCloseGrpcRequest) returns (CrossMarginForcePositionCloseGrpcResponse);
     rpc GetPendingPositions(GetPendingPositionsGrpcRequest) returns (stream CrossMarginPendingOrderGrpcModel);
     rpc GetActivePositions(GetActivePositionsGrpcRequest) returns (stream CrossMarginPositionGrpcModel);
+
+    rpc GetAllActivePosition(google.protobuf.Empty) returns (stream CrossMarginPositionGrpcModel);
+    rpc GetAllPendingPosition(google.protobuf.Empty) returns (stream CrossMarginPendingOrderGrpcModel);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
