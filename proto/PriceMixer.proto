@@ -9,7 +9,7 @@ message InstrumentDayOffStatusGrpcModel{
     bool DayOff = 2;
 }
 
-service PriceSourceService {
+service PriceMixer {
     rpc GetInstrumentsDayOffs(google.protobuf.Empty) returns (stream InstrumentDayOffStatusGrpcModel);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
  }
