@@ -1,0 +1,15 @@
+
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package price_mixer;
+
+
+message InstrumentDayOffStatusGrpcModel{
+    string Id = 1;
+    bool DayOff = 2;
+}
+
+service PriceMixer {
+    rpc GetInstrumentsDayOffs(google.protobuf.Empty) returns (stream InstrumentDayOffStatusGrpcModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+ }
