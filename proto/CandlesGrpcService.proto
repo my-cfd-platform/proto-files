@@ -79,6 +79,12 @@ message GetCandlesHistoryFromCacheGrpcRequest {
     bool IsBid = 5;
 }
 
+message InstrumentMinDateKey{
+    string InstrumentId = 1;
+    CandleGrpcType CandleType = 2;
+    uint64 DateKey = 3;
+}
+
 service CandlesGrpcService {
     rpc GetCandlesByInstrumentFromDb(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);    
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
@@ -86,5 +92,6 @@ service CandlesGrpcService {
     rpc GetByInstrumentFromCache(GetCandlesHistoryFromCacheGrpcRequest) returns (stream CandleCacheList);
     rpc UploadCandles(UploadCandleRequest) returns (UploadCandlesResponse);
     rpc CleanCandles(CleanCandlesRequest) returns (google.protobuf.Empty);
+    rpc GetInstrumentMinDateKeys(CleanCandlesRequest) returns (stream InstrumentMinDateKey);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
