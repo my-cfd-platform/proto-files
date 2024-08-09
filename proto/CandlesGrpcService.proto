@@ -94,7 +94,7 @@ message InstrumentGrpcModel{
 service CandlesGrpcService {
     rpc GetCandlesByInstrumentFromDb(GetCandlesHistoryGrpcRequest) returns (stream CandleGrpcModel);    
     rpc GetAllFromCache(GetAllCandlesGrpcRequest) returns (stream CandleCacheList);
-    rpc GetAllFromCacheV2(GetAllCandlesGrpcRequest) returns (stream CandleGrpcModel);
+    rpc GetAllFromCacheV2(GetAllCandlesV2GrpcRequest) returns (stream CandleGrpcModel);
     rpc GetAllInstruments(google.protobuf.Empty) returns (stream InstrumentGrpcModel);
     rpc GetAllByInstrumentFromCache(GetAllByInstrumentGrpcRequest) returns (stream CandleCacheList);
     rpc GetByInstrumentFromCache(GetCandlesHistoryFromCacheGrpcRequest) returns (stream CandleCacheList);
