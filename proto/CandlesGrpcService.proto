@@ -87,7 +87,7 @@ message GetCandlesHistoryFromCacheGrpcRequest {
     bool IsBid = 5;
 }
 
-message GetByAmountFromHighAndBelowGrpcRequest {
+message GetFromDbByAmountFromHighAndBelowGrpcRequest {
     string InstrumentId = 1;
     uint64 MaxDateTimeKey = 2;
     uint64 Amount = 3;
@@ -107,7 +107,7 @@ service CandlesGrpcService {
     rpc GetAllInstruments(google.protobuf.Empty) returns (stream InstrumentGrpcModel);
     rpc GetAllByInstrumentFromCache(GetAllByInstrumentGrpcRequest) returns (stream CandleCacheList);
     rpc GetByInstrumentFromCache(GetCandlesHistoryFromCacheGrpcRequest) returns (stream CandleCacheList);
-    rpc GetByAmountFromHighAndBelow(GetByAmountFromHighAndBelowGrpcRequest) returns (stream CandleGrpcModel);
+    rpc GetFromDbByAmountFromHighAndBelow(GetFromDbByAmountFromHighAndBelowGrpcRequest) returns (stream CandleGrpcModel);
     rpc UploadCandles(UploadCandleRequest) returns (UploadCandlesResponse);
     rpc CleanCandles(CleanCandlesRequest) returns (google.protobuf.Empty);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
