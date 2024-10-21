@@ -47,6 +47,11 @@ message CrossMarginPersistenceActivePositionGrpcModel{
     double MarginPrice = 22;
     repeated CrossMarginPositionSwapGrpcModel Swaps = 23;
     double Commissions = 24;
+
+    optional double TpInCurrency = 25;
+    optional double SlInCurrency = 26;
+    optional double TpInAssetPrice = 27;
+    optional double SlInAssetPrice = 28;
 }
 
 enum CrossMarginPersistencePendingOrderType{
@@ -75,6 +80,11 @@ message CrossMarginPersistencePendingOrderGrpcModel{
     double DesirePrice = 17;
     CrossMarginPersistencePendingOrderType OrderType = 18 ;
     double InitPrice = 19;
+
+    optional double TpInCurrency = 20;
+    optional double SlInCurrency = 21;
+    optional double TpInAssetPrice = 22;
+    optional double SlInAssetPrice = 23;
 }
 
 message CrossMarginPersistenceAccountGrpcModel{
