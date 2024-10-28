@@ -1,0 +1,190 @@
+
+syntax = "proto3";
+package a_book_bridge;
+
+
+enum OperationCodes{
+    Success = 0;
+    AuthFailed = 1;
+    Unauthorized = 2;
+}
+
+//Auth
+message AuthMessage{
+    string SecretKey = 1;
+}
+
+message AuthResultMessage{
+    OperationCodes Result = 1;
+    optional string SessionId = 2;
+}
+
+message BidAsk{
+    string Id = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 Timestamp = 4;
+}
+
+//Accounts
+enum AccountBalanceOperationType {
+    Trading = 0;
+    BalanceCorrection = 1;
+    Withdrawal = 2;
+    Deposit = 3;
+    ToppingUp = 4;
+    Commission = 5;
+}
+
+message Account {
+    string Id = 1;
+    string TraderId = 2;
+    string Currency = 3;
+    double Balance = 4;
+    bool TradingDisabled = 5;
+    double Leverage = 6;
+    string TradingGroup = 7;
+    double StopOut = 8;
+    uint64 CreateDate = 9;
+    uint64 LastUpdateDate = 10;
+    string LastUpdateProcessId = 11;
+    string CreateProcessId = 12;
+    map<string, string> Metadata = 13;
+}
+
+message BalanceOperation {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    AccountBalanceOperationType OperationType = 4;
+    optional string ProcessId = 5;
+    double Delta = 6;
+    uint64 DateTimeUnixMs = 7;
+    optional string Comment = 8;
+    optional string ReferenceOperationId = 9;
+}
+
+message AccountBalanceUpdateOperation {
+    Account AccountAfterUpdate = 1;
+    BalanceOperation Operation = 2;
+}
+
+message CrossMarginAccountEvent {
+    oneof event {
+        Account AddAccountEvent = 1;
+        AccountBalanceUpdateOperation UpdateAccountEvent = 2;
+    }
+}
+
+
+//Trading Data
+enum PositionSide {
+    Buy = 0;
+    Sell = 1;
+}
+
+enum PositionCloseReason {
+    ClientCommand = 0;
+    So = 1;
+    Sl = 2;
+    Tp = 3;
+    Canceled = 4;
+    AdminAction = 5;
+}
+
+message Swap {
+    double Amount = 1;
+    uint64 Date = 2;
+}
+
+message Position {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LostAmount = 5;
+    PositionSide Side = 6;
+    double Leverage = 7;
+    uint64 CreateDate = 9;
+    optional double TpInInstrumentPrice = 10;
+    optional double TpInCurrency = 11;
+    optional double SlInInstrumentPrice = 12;
+    optional double SlInCurrency = 13;
+    string CreateProcessId = 14;
+    optional double Profit = 15;
+    map<string, string> Metadata = 16;
+    uint64 LastUpdateDate = 17;
+    string LastUpdateProcessId = 18;
+    double AssetOpenPrice = 19;
+    optional BidAsk AssetOpenBidAsk = 22;
+    uint64 OpenDate = 20;
+    string OpenProcessId = 21;
+    optional uint64 CloseDate = 23;
+    optional BidAsk CloseReason = 24;
+    optional double AssetClosePrice = 25;
+    optional BidAsk AssetCloseBidAsk = 26;
+    optional string CloseProcessId = 27;
+    string Base = 28;
+    string Quote = 29;
+    string CollateralCurrency = 30;
+    double MarginPrice = 31;
+    BidAsk MarginBidAsk = 32;
+    optional double ProfitPrice = 33;
+    BidAsk ProfitBidAsk = 34;
+    repeated Swap Swaps = 35;
+    double LotsAmount = 36;
+    double LotsSize = 37;
+    optional double Commission = 38;
+}
+
+message PositionEvent {
+    string ProcessId = 1;
+    oneof position_event{
+        Position Created = 2;
+        Position Updated = 3;
+        Position Closed = 4;
+    }
+}
+
+enum PendingPositionType{
+    Stop = 0;
+    Limit = 1;
+}
+
+message PendingPosition {
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double LotsAmount = 5;
+    PositionSide Side = 6;
+    uint64 CreateDate = 7;
+    optional double TpInInstrumentPrice = 8;
+    optional double TpInCurrency = 9;
+    optional double SlInInstrumentPrice = 10;
+    optional double SlInCurrency = 11;
+    string CreateProcessId = 12;
+    map<string, string> Metadata = 13;
+    uint64 LastUpdateDate = 14;
+    string LastUpdateProcessId = 15;
+    string Base = 16;
+    string Quote = 17;
+    string CollateralCurrency = 18;
+    double DesirePrice = 19;
+    double LotsSize = 20;
+    optional double ExecutePrice = 21;
+    PendingPositionType PendingPositionType = 22;
+    double InitPrice = 23;
+}
+
+
+message PendingPositionEvent {
+    string ProcessId = 1;
+    oneof pending_position_event{
+        PendingPosition Created = 2;
+        PendingPosition Canceled = 3;
+        PendingPosition Failed = 4;
+        PendingPosition Executed = 5;
+        PendingPosition Updated = 6;
+    }
+}
