@@ -119,9 +119,9 @@ service TradingSettingsIntegrationGrpcService{
     rpc InsertOrReplaceTradingMarkupProfile(MarkupProfileGrpcModel) returns (MarkupProfileGrpcModel);
 
     rpc GetInstruments(google.protobuf.Empty) returns (stream TradingInstrumentGrpcModel);
-    rpc GetTradingProfiles(google.protobuf.Empty) returns (TradingProfileGrpcModel);
-    rpc GetTradingGroups(google.protobuf.Empty) returns (TradingGroupGrpcModel);
-    rpc GetTradingSwapProfiles(google.protobuf.Empty) returns (SwapProfileGrpcModel);
-    rpc GetTradingSwapProfileSchedules(google.protobuf.Empty) returns (SwapScheduleGrpcModel);
-    rpc GetTradingMarkupProfiles(google.protobuf.Empty) returns (MarkupProfileGrpcModel);
+    rpc GetTradingProfiles(google.protobuf.Empty) returns (stream TradingProfileGrpcModel);
+    rpc GetTradingGroups(google.protobuf.Empty) returns (stream TradingGroupGrpcModel);
+    rpc GetTradingSwapProfiles(google.protobuf.Empty) returns (stream SwapProfileGrpcModel);
+    rpc GetTradingSwapProfileSchedules(google.protobuf.Empty) returns (stream SwapScheduleGrpcModel);
+    rpc GetTradingMarkupProfiles(google.protobuf.Empty) returns (stream MarkupProfileGrpcModel);
 }
