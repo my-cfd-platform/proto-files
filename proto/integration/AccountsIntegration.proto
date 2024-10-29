@@ -1,6 +1,5 @@
 syntax = "proto3";
 package cfd_integration_accounts;
-import "google/protobuf/empty.proto";
 
 
 //Models
@@ -101,5 +100,4 @@ service AccountsIntegrationGrpcService{
     rpc GetAccounts(GetAccountsGrpcRequest) returns (stream AccountGrpcModel);
     rpc UpdateAccountBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
-    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
