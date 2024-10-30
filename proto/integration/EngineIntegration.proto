@@ -182,7 +182,7 @@ message OpenPendingOrderGrpcRequest{
 
 message OpenPendingGrpcResponse{
     EngineOperationCode Status = 1;
-    EnginePendingOrderGrpcModel Order = 2;
+    optional EnginePendingOrderGrpcModel Order = 2;
 }
 
 message CancelPendingOrderGrpcRequest{
@@ -193,7 +193,7 @@ message CancelPendingOrderGrpcRequest{
 
 message CancelPendingGrpcResponse{
     EngineOperationCode Status = 1;
-    EnginePendingOrderGrpcModel Order = 2;
+    optional EnginePendingOrderGrpcModel Order = 2;
 }
 
 message UpdatePendingOrderSlTpGrpcRequest{
@@ -209,7 +209,7 @@ message UpdatePendingOrderSlTpGrpcRequest{
 
 message UpdatePendingOrderTpSlResponse{
     EngineOperationCode Status = 1;
-    EnginePendingOrderGrpcModel Position = 2;
+    optional EnginePendingOrderGrpcModel Position = 2;
 }
 
 message GetPendingOrdersGrpcRequest{
@@ -233,7 +233,7 @@ message OpenPositionGrpcRequest{
 
 message OpenPositionGrpcResponse{
     EngineOperationCode Status = 1;
-    EngineActivePositionGrpcModel Position = 2;
+    optional EngineActivePositionGrpcModel Position = 2;
 }
 
 message ClosePositionGrpcRequest{
@@ -246,7 +246,7 @@ message ClosePositionGrpcRequest{
 
 message ClosePositionGrpcResponse{
     EngineOperationCode Status = 1;
-    EngineClosedPositionGrpcModel Position = 2;
+    optional EngineClosedPositionGrpcModel Position = 2;
 }
 
 message UpdateActiveSlTpGrpcRequest{
@@ -262,15 +262,13 @@ message UpdateActiveSlTpGrpcRequest{
 
 message UpdateActiveSlTpGrpcResponse{
     EngineOperationCode Status = 1;
-    EngineClosedPositionGrpcModel Position = 2;
+    optional EngineClosedPositionGrpcModel Position = 2;
 }
 
 message GetActivePositionsGrpcRequest{
     optional string TraderId = 1;
     optional string AccountId = 2;
 }
-
-
 
 service EngineIntegrationGrpcService{
     rpc OpenPending(OpenPendingOrderGrpcRequest) returns (OpenPendingGrpcResponse);
