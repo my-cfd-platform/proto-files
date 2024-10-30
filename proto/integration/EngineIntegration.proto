@@ -262,7 +262,7 @@ message UpdateActiveSlTpGrpcRequest{
 
 message UpdateActiveSlTpGrpcResponse{
     EngineOperationCode Status = 1;
-    optional EngineClosedPositionGrpcModel Position = 2;
+    optional EngineActivePositionGrpcModel Position = 2;
 }
 
 message GetActivePositionsGrpcRequest{
