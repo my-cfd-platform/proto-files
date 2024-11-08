@@ -1,7 +1,18 @@
 
 syntax = "proto3";
-package a_book_bridge;
+package yft_tcp_integration;
 
+message YftIntegrationMessage{
+    string MessageId = 1;
+    oneof message {
+        AuthResultMessage AuthResult = 2;
+        BidAsk BidAskResult = 3;
+        AccountEvent AccountEvent = 4;
+        BalanceOperation BalanceOperation = 5;
+        PositionEvent PositionEvent = 6;
+        PendingPositionEvent PendingPositionEvent = 7;
+    }
+}
 
 enum OperationCodes{
     Success = 0;
@@ -69,7 +80,7 @@ message AccountBalanceUpdateOperation {
     BalanceOperation Operation = 2;
 }
 
-message CrossMarginAccountEvent {
+message AccountEvent {
     oneof event {
         Account AddAccountEvent = 1;
         AccountBalanceUpdateOperation UpdateAccountEvent = 2;
