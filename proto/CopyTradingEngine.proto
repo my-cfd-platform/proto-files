@@ -1,0 +1,73 @@
+syntax = "proto3";
+package copy_trading_engine;
+
+message CopyTradingSubscribeGrpcRequest{
+    string ProviderId = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string Enabled = 4;
+    string PendingCopy = 5;
+    string SlTpCopy = 6;
+    optional double Commission = 7;
+}
+
+message GetSubscriptionsGrpcRequest{
+    optional string ProviderId = 1;
+    optional string TraderId = 2;
+    optional string AccountId = 3;
+}
+
+message CopyTradingSubscriptionGrpcModel{
+    string Id = 1;
+    string ProviderId = 2;
+    string TraderId = 3;
+    string AccountId = 4;
+    string Enabled = 5;
+    string PendingCopy = 6;
+    string SlTpCopy = 7;
+    optional double Commission = 8;
+}
+
+message CopyTradingUnsubscribeGrpcRequest{
+    string Id = 1;
+    string ProviderId = 2;
+}
+
+message CopyTradingCreateProviderGrpcRequest{
+    string ProviderId = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    optional double Commission = 4;
+}
+
+message CopyTradingProviderGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string Enabled = 4;
+    uint64 EnabledAt = 5;
+    optional double Commission = 8;
+}
+
+message CopyTradingUpdateProviderGrpcRequest{
+    string Id = 1;
+    optional string Enabled = 2;
+    optional double Commission = 3;
+}
+
+message CopyTradingGetProviderGrpcRequest{
+    optional string Id = 1;
+    optional string TraderId = 2;
+    optional string AccountId = 3;
+}
+
+service CopyTradingEngine{
+    rpc Subscribe(CopyTradingSubscribeGrpcRequest) returns (stream CopyTradingSubscriptionGrpcModel);
+    rpc GetSubscriptions(GetSubscriptionsGrpcRequest) returns (stream CopyTradingSubscriptionGrpcModel);
+    rpc Unsubscribe(CopyTradingUnsubscribeGrpcRequest) returns (CopyTradingSubscriptionGrpcModel);
+
+    rpc CreateProvider(CopyTradingCreateProviderGrpcRequest) returns (CopyTradingProviderGrpcModel);
+    rpc UpdateProvider(CopyTradingUpdateProviderGrpcRequest) returns (CopyTradingProviderGrpcModel);
+    rpc GetProvider(CopyTradingGetProviderGrpcRequest) returns (stream CopyTradingProviderGrpcModel);
+}
+

@@ -6,21 +6,16 @@ package yft_tcp_integration;
 message YftIntegrationClientMessage{
     oneof message {
         AuthMessage AuthRequest = 1;
-        Ping Ping = 2;
-        Pong Pong = 3;
     }
 }
 
 message YftIntegrationServerMessage{
     oneof message {
-        AuthResultMessage AuthResult = 1;
-        BidAsk BidAskResult = 2;
+        AuthResultMessage AuthResultMessage = 1;
+        BidAsk BidAskEvent = 2;
         AccountEvent AccountEvent = 3;
-        BalanceOperation BalanceOperation = 4;
-        PositionEvent PositionEvent = 5;
-        PendingPositionEvent PendingPositionEvent = 6;
-        Ping Ping = 7;
-        Pong Pong = 8;
+        PositionEvent PositionEvent = 4;
+        PendingPositionEvent PendingPositionEvent = 5;
     }
 }
 
@@ -29,6 +24,8 @@ message YftIntegrationMessage{
     oneof message {
         YftIntegrationServerMessage ServerMessage = 2;
         YftIntegrationClientMessage ClientMessage = 3;
+        Ping Ping = 4;
+        Pong Pong = 5;
     }
 }
 
@@ -92,15 +89,15 @@ message BalanceOperation {
     optional string ReferenceOperationId = 9;
 }
 
-message AccountBalanceUpdateOperation {
+message AccountUpdateOperation {
     Account AccountAfterUpdate = 1;
-    BalanceOperation Operation = 2;
+    optional BalanceOperation Operation = 2;
 }
 
 message AccountEvent {
     oneof event {
         Account AddAccountEvent = 1;
-        AccountBalanceUpdateOperation UpdateAccountEvent = 2;
+        AccountUpdateOperation UpdateAccountEvent = 2;
     }
 }
 
