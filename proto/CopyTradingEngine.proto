@@ -9,6 +9,7 @@ message CopyTradingSubscribeGrpcRequest{
     string PendingCopy = 5;
     string SlTpCopy = 6;
     optional double Commission = 7;
+    double CopyMultiplier = 8;
 }
 
 message GetSubscriptionsGrpcRequest{
