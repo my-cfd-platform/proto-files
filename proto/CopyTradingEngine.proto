@@ -5,7 +5,7 @@ message CopyTradingSubscribeGrpcRequest{
     string ProviderId = 1;
     string TraderId = 2;
     string AccountId = 3;
-    string Enabled = 4;
+    bool Enabled = 4;
     bool PendingCopy = 5;
     bool SlTpCopy = 6;
     optional double Commission = 7;
@@ -52,7 +52,7 @@ message CopyTradingProviderGrpcModel{
 
 message CopyTradingUpdateProviderGrpcRequest{
     string Id = 1;
-    optional string Enabled = 2;
+    optional bool Enabled = 2;
     optional double Commission = 3;
 }
 
