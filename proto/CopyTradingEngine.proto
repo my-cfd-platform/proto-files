@@ -6,8 +6,8 @@ message CopyTradingSubscribeGrpcRequest{
     string TraderId = 2;
     string AccountId = 3;
     string Enabled = 4;
-    string PendingCopy = 5;
-    string SlTpCopy = 6;
+    bool PendingCopy = 5;
+    bool SlTpCopy = 6;
     optional double Commission = 7;
     double CopyMultiplier = 8;
 }
