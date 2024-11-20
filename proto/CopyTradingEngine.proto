@@ -27,6 +27,7 @@ message CopyTradingSubscriptionGrpcModel{
     string PendingCopy = 6;
     string SlTpCopy = 7;
     optional double Commission = 8;
+    double CopyMultiplier = 9;
 }
 
 message CopyTradingUnsubscribeGrpcRequest{
