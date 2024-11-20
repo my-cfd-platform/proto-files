@@ -45,7 +45,7 @@ message CopyTradingProviderGrpcModel{
     string Id = 1;
     string TraderId = 2;
     string AccountId = 3;
-    string Enabled = 4;
+    bool Enabled = 4;
     uint64 EnabledAt = 5;
     optional double Commission = 8;
 }
