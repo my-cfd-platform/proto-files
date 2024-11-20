@@ -26,8 +26,7 @@ message CopyTradingSubscriptionGrpcModel{
     bool Enabled = 5;
     bool PendingCopy = 6;
     bool SlTpCopy = 7;
-    optional double Commission = 8;
-    double CopyMultiplier = 9;
+    double CopyMultiplier = 8;
 }
 
 message CopyTradingUnsubscribeGrpcRequest{
