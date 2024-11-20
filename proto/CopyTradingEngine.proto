@@ -23,9 +23,9 @@ message CopyTradingSubscriptionGrpcModel{
     string ProviderId = 2;
     string TraderId = 3;
     string AccountId = 4;
-    string Enabled = 5;
-    string PendingCopy = 6;
-    string SlTpCopy = 7;
+    bool Enabled = 5;
+    bool PendingCopy = 6;
+    bool SlTpCopy = 7;
     optional double Commission = 8;
     double CopyMultiplier = 9;
 }
