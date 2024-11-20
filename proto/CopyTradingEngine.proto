@@ -63,7 +63,7 @@ message CopyTradingGetProviderGrpcRequest{
 }
 
 service CopyTradingEngine{
-    rpc Subscribe(CopyTradingSubscribeGrpcRequest) returns (stream CopyTradingSubscriptionGrpcModel);
+    rpc Subscribe(CopyTradingSubscribeGrpcRequest) returns ( CopyTradingSubscriptionGrpcModel);
     rpc GetSubscriptions(GetSubscriptionsGrpcRequest) returns (stream CopyTradingSubscriptionGrpcModel);
     rpc Unsubscribe(CopyTradingUnsubscribeGrpcRequest) returns (CopyTradingSubscriptionGrpcModel);
 
