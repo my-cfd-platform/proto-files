@@ -98,9 +98,10 @@ message SwapDayScheduleGrpcModel {
 }
 
 message MarkupProfileGrpcModel {
-    string Name = 1;
-    bool Disabled = 2;
-    map<string, MarkupInstrumentGrpcModel> Instruments = 3;
+    string Id = 1;
+    string Name = 2;
+    bool Disabled = 3;
+    map<string, MarkupInstrumentGrpcModel> Instruments = 4;
 }
 
 message MarkupInstrumentGrpcModel {

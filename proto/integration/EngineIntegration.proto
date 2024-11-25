@@ -209,7 +209,7 @@ message UpdatePendingOrderSlTpGrpcRequest{
 
 message UpdatePendingOrderTpSlResponse{
     EngineOperationCode Status = 1;
-    optional EnginePendingOrderGrpcModel Position = 2;
+    optional EnginePendingOrderGrpcModel Order = 2;
 }
 
 message GetPendingOrdersGrpcRequest{

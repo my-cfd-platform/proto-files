@@ -55,7 +55,7 @@ message CreateAccountGrpcRequest{
 }
 
 message CreateAccountGrpcResponse{
-    AccountsIntegrationOperationCode Code = 1;
+    AccountsIntegrationOperationCode Status = 1;
     optional AccountGrpcModel Account = 2;
 }
 
