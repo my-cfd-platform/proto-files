@@ -275,6 +275,24 @@ message UpdatePendingOrderSlTpGrpcRequest{
     string ProcessId = 8;
 }
 
+message UpdatePendingOrderGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    string Id = 3;
+    optional double TpInCurrency = 4;
+    optional double SlInCurrency = 5;
+    optional double TpInAssetPrice = 6;
+    optional double SlInAssetPrice = 7;
+    optional double DesirePrice = 8;
+    string ProcessId = 9;
+}
+
+message UpdatePendingOrderResponse{
+    CrossMarginEngineResponseCode Status = 1;
+    CrossMarginPendingOrderGrpcModel Position = 2;
+}
+
+
 message UpdatePendingOrderTpSlResponse{
     CrossMarginEngineResponseCode Status = 1;
     CrossMarginPendingOrderGrpcModel Position = 2;
@@ -294,6 +312,8 @@ service CrossMarginEngineGrpcService{
 
     rpc GetAllActivePositions(google.protobuf.Empty) returns (stream CrossMarginPositionGrpcModel);
     rpc GetAllPendingPositions(google.protobuf.Empty) returns (stream CrossMarginPendingOrderGrpcModel);
+
+    rpc UpdatePendingOrder(UpdatePendingOrderGrpcRequest) returns (UpdatePendingOrderResponse);
 
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
