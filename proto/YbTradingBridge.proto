@@ -1,0 +1,36 @@
+
+syntax = "proto3";
+package yb_trading_bridge;
+import "google/protobuf/empty.proto";
+
+enum YbTradingBridgeStatusCode{
+    Success = 0;
+    LiquidityProviderNotFound = 1;
+    InstrumentNotFoundInLpMapping = 2;
+    TradingInstrumentNotFound = 3;
+    LpReject = 4;
+    Timeout = 5;
+}
+
+message YbTradingBridgePlaceOrderRequest{
+    string InstrumentId = 1;
+    string PositionId = 2;
+    double Quantity = 3;
+    bool IsBuy = 4;
+}
+
+message YbTradingBridgePosition{
+    string Id = 1;
+    string ExternalId = 2;
+    double ExecutionPrice = 3;
+}
+
+message YbTradingBridgeExecutionResponse{
+    YbTradingBridgeStatusCode StatusCode = 1;
+    YbTradingBridgePosition Position = 2;
+}
+
+service ABookBridgeGrpcService {
+    rpc PlaceOrder(YbTradingBridgePlaceOrderRequest) returns (YbTradingBridgeExecutionResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
