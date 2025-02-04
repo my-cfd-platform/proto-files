@@ -30,7 +30,7 @@ message YbTradingBridgeExecutionResponse{
     YbTradingBridgePosition Position = 2;
 }
 
-service ABookBridgeGrpcService {
+service YbTradingBridgeGrpcService {
     rpc PlaceOrder(YbTradingBridgePlaceOrderRequest) returns (YbTradingBridgeExecutionResponse);
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
