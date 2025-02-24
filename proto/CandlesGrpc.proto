@@ -29,4 +29,5 @@ message GetCandlesFromDateRequest {
 service CandlesGrpcService {
     rpc GetCandlesFromDate(GetCandlesFromDateRequest) returns (stream CandleGrpcModel);
     rpc GetInitCandles(google.protobuf.Empty) returns (stream CandleGrpcModel);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
