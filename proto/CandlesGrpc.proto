@@ -1,6 +1,7 @@
 
 syntax = "proto3";
 package candles_grpc;
+import "google/protobuf/empty.proto";
 
 enum CandleGrpcType{
     Minute = 0;
@@ -27,4 +28,5 @@ message GetCandlesFromDateRequest {
 
 service CandlesGrpcService {
     rpc GetCandlesFromDate(GetCandlesFromDateRequest) returns (stream CandleGrpcModel);
+    rpc GetInitCandles(google.protobuf.Empty) returns (stream CandleGrpcModel);
 }
