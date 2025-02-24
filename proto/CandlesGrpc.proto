@@ -1,0 +1,32 @@
+
+syntax = "proto3";
+package candles_grpc;
+
+enum CandleGrpcType{
+    Minute = 0;
+    Hour = 1;
+    Day = 2;
+    Month = 3;
+}
+
+message CandleGrpcModel{
+    uint64 DateKey = 1;
+    double Open = 2;
+    double Close = 3;
+    double High = 4;
+    double Low = 5;
+    double Volume = 6;
+}
+
+message GetCandlesFromDateRequest {
+    string InstrumentId = 1;
+    uint64 FromDateTime = 2;
+    uint64 Count = 3;
+    CandleGrpcType CandleType = 4;
+}
+
+
+
+service CandlesGrpcService {
+    rpc GetCandlesFromDate(GetCandlesFromDateRequest) returns (stream CandleGrpcModel);
+}
