@@ -123,7 +123,7 @@ message TradingEngineAccountMetadataGrpcModel{
 
 message UpdateAccountGrpcRequest{
     string AccountId = 1;
-    optional bool TradingDisabled = 2;
+    optional TradingEngineAccountGrpcStatus Status = 2;
     optional string TradingGroup = 3;
     optional double Leverage = 4;
     string ProcessId = 5;
@@ -140,6 +140,30 @@ message UpdateAccountGrpcResponse{
     }
 }
 
+message TransferGrpcRequest{
+    string AccountId = 1;
+    string ReceiverAccountId = 2;
+    double Amount = 3;
+    string ProcessId = 4;
+    optional string Comment = 5;
+}
+
+message SuccessTransferGrpcData{
+    TradingEngineAccountGrpcModel Account = 1;
+    TradingEngineAccountBalanceOperationGrpcModel Operation = 2;
+    TradingEngineAccountGrpcModel ReceiverAccount = 3;
+    TradingEngineAccountBalanceOperationGrpcModel ReceiverOperation = 4;
+}
+
+message TransferGrpcResponse{
+    oneof TransferResult{
+        SuccessTransferGrpcData Result = 1;
+        TradingEngineAccountsGrpcErrors Error = 2;
+    }
+}
+
+
+
 service CrossMarginAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
@@ -148,6 +172,7 @@ service CrossMarginAccountsGrpcService{
 
     rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
+    rpc Transfer(TransferGrpcRequest) returns (TransferGrpcResponse);
     
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
