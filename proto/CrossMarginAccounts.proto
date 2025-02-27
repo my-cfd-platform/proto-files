@@ -86,7 +86,6 @@ message UpdateAccountBalanceGrpcRequest{
      UpdateBalanceReason Reason = 7;
      optional string ReferenceTransactionId = 8;
      bool SameResponseProcessId = 9;
-
 }
 
 enum UpdateBalanceReason {

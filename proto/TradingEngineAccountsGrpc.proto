@@ -1,0 +1,153 @@
+syntax = "proto3";
+package trading_engine_accounts;
+import "google/protobuf/empty.proto";
+
+enum TradingEngineAccountBalanceOperationType{
+    Trading = 0;
+    BalanceCorrection = 1;
+    Withdrawal = 2;
+    Deposit = 3;
+    WithdrawalCancel = 4;
+    Commission = 5;
+    Transfer = 6;
+}
+
+enum TradingEngineAccountsGrpcErrors{
+    AccountNotFound = 0;
+    TraderNotFound = 1;
+    NotEnoughBalance = 2;
+    ProcessIdDuplicate = 3;
+    CollateralCurrencyNotFound = 4;
+    InvalidLeverage = 5;
+    TradingGroupNotFound = 6;
+    TradingProfileNotFound = 7;
+}
+
+enum TradingEngineAccountGrpcStatus{
+    Active = 0;
+    Disabled = 1;
+}
+
+enum TradingEngineAccountGrpcType{
+    Hedging = 0;
+    Netting = 1;
+}
+
+
+message TradingEngineAccountGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string Collateral = 3;
+    TradingEngineAccountGrpcType AccountType = 4;
+    double Balance = 5;
+    double Leverage = 6;
+    string TradingGroup = 7;
+    int64 CreateDate = 8;
+    int64 UpdateDate = 9;
+    string LastUpdateProcessId = 10;
+    TradingEngineAccountGrpcStatus Status = 11;
+    map<string, string> Metadata = 12;
+    TradingEngineAccountTradingInfoGrpcModel TradingInfo = 13;
+}
+
+message TradingEngineAccountTradingInfoGrpcModel{
+    double Equity = 1;
+    double Margin = 2;
+    double FreeMargin = 3;
+    double MarginLvl = 4;
+}
+
+message TradingEngineAccountBalanceOperationGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    double Delta = 4;
+    optional string Comment = 5;
+    optional string ReferenceOperationId = 6;
+    int64 Date = 7;
+    double BalanceAfter = 8;
+    TradingEngineAccountBalanceOperationType Type = 9;
+    string ProcessId = 10;
+}
+
+message CreateAccountGrpcRequest{
+    string TraderId = 1;
+    string AccountId = 2;
+    double Leverage = 3;
+    string Collateral = 4;
+    string ProcessId = 5;
+    string TradingGroup = 6;
+    map<string, string> Metadata = 7;
+}
+
+message CreateAccountGrpcResponse{
+    oneof create_account_result{
+        TradingEngineAccountGrpcModel Account = 1;
+        TradingEngineAccountsGrpcErrors Error = 2;
+    }
+}
+
+message GetTraderAccountGrpcRequest{
+    string Id = 1;
+}
+
+message GetTraderAccountsGrpcRequest{
+    string TraderId = 1;
+}
+
+message UpdateAccountBalanceGrpcRequest{
+    string AccountId = 1;
+    double Delta = 2;
+    string ProcessId = 3;
+    bool AllowNegativeBalance = 4;
+    TradingEngineAccountBalanceOperationType OperationType = 5;
+    optional string ReferenceId = 6;
+    optional string Comment = 7;
+}
+
+message UpdateAccountBalanceSuccessGrpcResult{
+    TradingEngineAccountGrpcModel Account = 1;
+    TradingEngineAccountBalanceOperationGrpcModel Operation = 2;
+}
+
+message UpdateAccountBalanceGrpcResponse{
+    oneof UpdateAccountBalanceResult{
+        UpdateAccountBalanceSuccessGrpcResult Result = 1;
+        TradingEngineAccountsGrpcErrors Error = 2;
+    }
+}
+
+message TradingEngineAccountMetadataGrpcModel{
+    map<string, string> Metadata = 2;
+}
+
+message UpdateAccountGrpcRequest{
+    string AccountId = 1;
+    optional bool TradingDisabled = 2;
+    optional string TradingGroup = 3;
+    optional double Leverage = 4;
+    string ProcessId = 5;
+    oneof UpdateAccountRequestMetadataMode{
+        TradingEngineAccountMetadataGrpcModel Replace = 6;
+        TradingEngineAccountMetadataGrpcModel Merge = 7;
+    }
+}
+
+message UpdateAccountGrpcResponse{
+    oneof UpdateAccountBalanceResult{
+        TradingEngineAccountGrpcModel Account = 1;
+        TradingEngineAccountsGrpcErrors Error = 2;
+    }
+}
+
+service CrossMarginAccountsGrpcService{
+    rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
+    rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
+    rpc GetTraderAccount(GetTraderAccountGrpcRequest) returns (TradingEngineAccountGrpcModel);
+    rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
+
+    rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
+    rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
+    
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
