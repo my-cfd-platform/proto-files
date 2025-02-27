@@ -164,7 +164,7 @@ message TransferGrpcResponse{
 
 
 
-service CrossMarginAccountsGrpcService{
+service TradingEngineAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
     rpc GetTraderAccount(GetTraderAccountGrpcRequest) returns (TradingEngineAccountGrpcModel);
