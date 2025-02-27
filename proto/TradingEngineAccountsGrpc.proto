@@ -168,7 +168,7 @@ service TradingEngineAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
     rpc GetTraderAccount(GetTraderAccountGrpcRequest) returns (TradingEngineAccountGrpcModel);
-    rpc GetClientAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
+    rpc GetTraderAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
 
     rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
     rpc UpdateAccount(UpdateAccountGrpcRequest) returns (UpdateAccountGrpcResponse);
