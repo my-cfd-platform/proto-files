@@ -21,6 +21,8 @@ enum TradingEngineAccountsGrpcErrors{
     InvalidLeverage = 5;
     TradingGroupNotFound = 6;
     TradingProfileNotFound = 7;
+    ReceiverAccountNotFound = 8;
+    InvalidBalanceTransferAmount = 9;
 }
 
 enum TradingEngineAccountGrpcStatus{
