@@ -72,6 +72,10 @@ message TradingEngineAccountBalanceOperationGrpcModel{
     string ProcessId = 10;
 }
 
+message GetTraderAccountGrpcResponse{
+    optional TradingEngineAccountGrpcModel Account = 1;
+}
+
 message CreateAccountGrpcRequest{
     string TraderId = 1;
     string AccountId = 2;
@@ -136,7 +140,7 @@ message UpdateAccountGrpcRequest{
 }
 
 message UpdateAccountGrpcResponse{
-    oneof UpdateAccountBalanceResult{
+    oneof UpdateAccountResult{
         TradingEngineAccountGrpcModel Account = 1;
         TradingEngineAccountsGrpcErrors Error = 2;
     }
@@ -169,7 +173,7 @@ message TransferGrpcResponse{
 service TradingEngineAccountsGrpcService{
     rpc CreateAccount(CreateAccountGrpcRequest) returns (CreateAccountGrpcResponse);
     rpc GetAllAccounts(google.protobuf.Empty) returns (stream TradingEngineAccountGrpcModel);
-    rpc GetTraderAccount(GetTraderAccountGrpcRequest) returns (TradingEngineAccountGrpcModel);
+    rpc GetTraderAccount(GetTraderAccountGrpcRequest) returns (GetTraderAccountGrpcResponse);
     rpc GetTraderAccounts(GetTraderAccountsGrpcRequest) returns (stream TradingEngineAccountGrpcModel);
 
     rpc UpdateBalance(UpdateAccountBalanceGrpcRequest) returns (UpdateAccountBalanceGrpcResponse);
