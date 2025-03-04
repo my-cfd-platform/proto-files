@@ -1,0 +1,63 @@
+
+syntax = "proto3";
+package trading_engine;
+import "google/protobuf/empty.proto";
+
+enum TradingEngineGrpcOrderType{
+    Market = 0;
+    Stop = 1;
+    Limit = 2;
+}
+
+enum TradingEngineGrpcError{
+    NoLiquidity = 0;
+}
+
+message TradingEngineGrpcOrder{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    string Collateral = 5;
+    double LotsAmount = 6;
+    bool IsBuy = 7;
+    bool IsAbook = 8;
+
+    optional double SlPrice = 9;
+    optional double TpPrice = 10;
+
+    map<string, string> Metadata = 11;
+
+    int64 CreateDate = 12;
+    string CreateProcessId = 13;
+
+    int64 UpdateDate = 14;
+    string UpdateProcessId = 15;
+}
+
+message PlaceOrderGrpcRequest{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    double Lots = 5;
+    bool IsBuy = 6;
+    optional double DesirePrice = 7;
+    optional double TpPrice = 8;
+    optional double SlPrice = 9;
+    map<string, string> Metadata = 10;
+    TradingEngineGrpcOrderType OrderType = 11;
+    string ProcessId = 12;
+}
+
+message PlaceOrderGrpcResponse{
+    oneof PlaceOrderResult{
+        TradingEngineGrpcOrder order = 1;
+        TradingEngineGrpcError error = 2;
+    }
+}
+
+service TradingEngineGrpcService{
+    rpc PlaceOrder(PlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}

@@ -19,6 +19,16 @@ message CandleGrpcModel{
     double Volume = 6;
 }
 
+message InitCandleGrpcModel{
+    uint64 DateKey = 1;
+    double Open = 2;
+    double Close = 3;
+    double High = 4;
+    double Low = 5;
+    double Volume = 6;
+    string Instrument = 7;
+}
+
 message GetCandlesFromDateRequest {
     string InstrumentId = 1;
     uint64 FromDateTime = 2;
