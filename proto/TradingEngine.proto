@@ -13,6 +13,14 @@ enum TradingEngineGrpcError{
     NoLiquidity = 0;
 }
 
+enum PositionCloseReason{
+    TakeProfit = 0;
+    StopLoss = 1;
+    StopOut = 2;
+    ClientCommand = 3;
+    AdminCommand = 4;
+}
+
 message TradingEngineGrpcOrder{
     string Id = 1;
     string TraderId = 2;
@@ -33,6 +41,82 @@ message TradingEngineGrpcOrder{
 
     int64 UpdateDate = 14;
     string UpdateProcessId = 15;
+}
+
+message TradingEnginePositionGrpcSwap{
+    double Amount = 1;
+    int64 Date = 2;
+}
+
+message TradingEngineGrpcBidAsk{
+    string AssetPair = 1;
+    double Bid = 2;
+    double Ask = 3;
+    uint64 Date = 4;
+}
+
+message TradingEnginePositionGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    bool IsBuy = 5;
+    int64 OpenDate = 6;
+    string OpenProcessId = 7;
+    double Lots = 8;
+    double ContractSize = 9;
+
+    optional double TpPrice = 10;
+    optional double SlPrice = 11;
+
+    int64 LastUpdateDate = 12;
+    string LastUpdateProcessId = 13;
+
+    map<string, string> Metadata = 14;
+
+    TradingEngineGrpcBidAsk OpenBidAsk = 15;
+    TradingEngineGrpcBidAsk ActiveBidAsk = 16;
+    TradingEngineGrpcBidAsk MarginBidAsk = 17;
+    TradingEngineGrpcBidAsk ProfitBidAsk = 18;
+
+    double Commission = 19;
+    repeated TradingEnginePositionGrpcSwap Swaps = 20;
+    double Pl = 21;
+}
+
+message TradingEngineClosedPositionGrpcModel{
+    string Id = 1;
+    string TraderId = 2;
+    string AccountId = 3;
+    string AssetPair = 4;
+    bool IsBuy = 5;
+    int64 OpenDate = 6;
+    string OpenProcessId = 7;
+    double Lots = 8;
+    double ContractSize = 9;
+
+    optional double TpPrice = 10;
+    optional double SlPrice = 11;
+
+    int64 LastUpdateDate = 12;
+    string LastUpdateProcessId = 13;
+
+    map<string, string> Metadata = 14;
+
+    TradingEngineGrpcBidAsk OpenBidAsk = 15;
+    TradingEngineGrpcBidAsk ActiveBidAsk = 16;
+    TradingEngineGrpcBidAsk MarginBidAsk = 17;
+    TradingEngineGrpcBidAsk ProfitBidAsk = 18;
+
+    double Commission = 19;
+    repeated TradingEnginePositionGrpcSwap Swaps = 20;
+    double Pl = 21;
+
+    string CloseProcessId = 22;
+    int64 CloseDate = 23;
+    TradingEngineGrpcBidAsk CloseBidAsk = 24;
+    double ClosePrice = 25;
+    PositionCloseReason CloseReason = 26;
 }
 
 message PlaceOrderGrpcRequest{
@@ -57,7 +141,66 @@ message PlaceOrderGrpcResponse{
     }
 }
 
+message ClosePositionGrpcRequest{
+    string Id = 1;
+    string AccountId = 2;
+    string ProcessId = 3;
+}
+
+message GetClientOrdersGrpcRequest{
+    string AccountId = 1;
+}
+
+message CancelOrderGrpcRequest{
+    string Id = 1;
+    string AccountId = 2;
+    string ProcessId = 3;
+}
+
+message CancelOrderGrpcResponse{
+    oneof CancelOrderResult{
+        TradingEngineGrpcOrder order = 1;
+        TradingEngineGrpcError error = 2;
+    }
+}
+
+message ClosePositionGrpcResponse{
+    oneof ClosePositionResult{
+        TradingEngineClosedPositionGrpcModel position = 1;
+        TradingEngineGrpcError error = 2;
+    }
+}
+
+
+message GetClientPositionsGrpcRequest{
+    string AccountId = 1;
+}
+
+message PartialPositionCloseGrpcRequest{
+    string Id = 1;
+    string AccountId = 2;
+    string ProcessId = 3;
+    double QuantityToClose = 4;
+}
+
+message PartialPositionCloseGrpcResponse{
+    oneof CancelOrderResult{
+        TradingEnginePositionGrpcModel position = 1;
+        TradingEngineGrpcError error = 2;
+    }
+}
+
 service TradingEngineGrpcService{
     rpc PlaceOrder(PlaceOrderGrpcRequest) returns (PlaceOrderGrpcResponse);
+    rpc GetClientOrders(GetClientOrdersGrpcRequest) returns (stream TradingEngineGrpcOrder);
+    rpc CancelOrder(CancelOrderGrpcRequest) returns (CancelOrderGrpcResponse);
+
+    rpc GetClientPositions(GetClientPositionsGrpcRequest) returns (stream TradingEnginePositionGrpcModel);
+    rpc ClosePosition(ClosePositionGrpcRequest) returns (ClosePositionGrpcResponse); 
+    rpc PartialPositionClose(PartialPositionCloseGrpcRequest) returns (PartialPositionCloseGrpcResponse); 
+    
+    rpc GetAllOrders(google.protobuf.Empty) returns (stream TradingEngineGrpcOrder);
+    rpc GetAllPositions(google.protobuf.Empty) returns (stream TradingEnginePositionGrpcModel);
+
     rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
 }
