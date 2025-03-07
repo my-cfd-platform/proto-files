@@ -52,7 +52,7 @@ message TradingEngineGrpcBidAsk{
     string AssetPair = 1;
     double Bid = 2;
     double Ask = 3;
-    uint64 Date = 4;
+    int64 Date = 4;
 }
 
 message TradingEnginePositionGrpcModel{
@@ -64,24 +64,23 @@ message TradingEnginePositionGrpcModel{
     int64 OpenDate = 6;
     string OpenProcessId = 7;
     double Lots = 8;
-    double ContractSize = 9;
 
-    optional double TpPrice = 10;
-    optional double SlPrice = 11;
+    optional double TpPrice = 9;
+    optional double SlPrice = 10;
 
-    int64 LastUpdateDate = 12;
-    string LastUpdateProcessId = 13;
+    int64 LastUpdateDate = 11;
+    string LastUpdateProcessId = 12;
 
-    map<string, string> Metadata = 14;
+    map<string, string> Metadata = 13;
 
-    TradingEngineGrpcBidAsk OpenBidAsk = 15;
-    TradingEngineGrpcBidAsk ActiveBidAsk = 16;
-    TradingEngineGrpcBidAsk MarginBidAsk = 17;
-    TradingEngineGrpcBidAsk ProfitBidAsk = 18;
+    TradingEngineGrpcBidAsk OpenBidAsk = 14;
+    TradingEngineGrpcBidAsk ActiveBidAsk = 15;
+    TradingEngineGrpcBidAsk MarginBidAsk = 16;
+    TradingEngineGrpcBidAsk ProfitBidAsk = 17;
 
-    double Commission = 19;
-    repeated TradingEnginePositionGrpcSwap Swaps = 20;
-    double Pl = 21;
+    double Commission = 18;
+    repeated TradingEnginePositionGrpcSwap Swaps = 19;
+    double Pl = 20;
 }
 
 message TradingEngineClosedPositionGrpcModel{
