@@ -184,8 +184,8 @@ message PartialPositionCloseGrpcRequest{
 }
 
 message PartialPositionCloseGrpcResponse{
-    oneof CancelOrderResult{
-        TradingEnginePositionGrpcModel position = 1;
+    oneof PartialCloseResult{
+        TradingEngineClosedPositionGrpcModel position = 1;
         TradingEngineGrpcError error = 2;
     }
 }
