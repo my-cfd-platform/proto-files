@@ -11,6 +11,7 @@ enum TradingEngineGrpcOrderType{
 
 enum TradingEngineGrpcError{
     NoLiquidity = 0;
+    OrderNotFound = 1;
 }
 
 enum PositionCloseReason{
