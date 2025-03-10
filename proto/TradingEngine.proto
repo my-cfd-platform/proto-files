@@ -84,39 +84,38 @@ message TradingEnginePositionGrpcModel{
     double Pl = 20;
 }
 
-message TradingEngineClosedPositionGrpcModel{
+message TradingEngineClosedPositionGrpcModel {
     string Id = 1;
     string TraderId = 2;
     string AccountId = 3;
     string AssetPair = 4;
     bool IsBuy = 5;
+
     int64 OpenDate = 6;
     string OpenProcessId = 7;
     double Lots = 8;
-    double ContractSize = 9;
 
-    optional double TpPrice = 10;
-    optional double SlPrice = 11;
+    optional double TpPrice = 9;
+    optional double SlPrice = 10;
 
-    int64 LastUpdateDate = 12;
-    string LastUpdateProcessId = 13;
+    int64 LastUpdateDate = 11;
+    string LastUpdateProcessId = 12;
+    map<string, string> Metadata = 13;
 
-    map<string, string> Metadata = 14;
-
-    TradingEngineGrpcBidAsk OpenBidAsk = 15;
-    TradingEngineGrpcBidAsk ActiveBidAsk = 16;
-    TradingEngineGrpcBidAsk MarginBidAsk = 17;
-    TradingEngineGrpcBidAsk ProfitBidAsk = 18;
+    TradingEngineGrpcBidAsk OpenBidAsk = 14;
+    TradingEngineGrpcBidAsk ActiveBidAsk = 15;
+    TradingEngineGrpcBidAsk MarginBidAsk = 16;
+    TradingEngineGrpcBidAsk ProfitBidAsk = 17;
+    TradingEngineGrpcBidAsk CloseBidAsk = 18;
 
     double Commission = 19;
     repeated TradingEnginePositionGrpcSwap Swaps = 20;
     double Pl = 21;
 
-    string CloseProcessId = 22;
-    int64 CloseDate = 23;
-    TradingEngineGrpcBidAsk CloseBidAsk = 24;
-    double ClosePrice = 25;
-    PositionCloseReason CloseReason = 26;
+    int64 CloseDate = 22;
+    string CloseProcessId = 23;
+    double ClosePrice = 24;
+    PositionCloseReason CloseReason = 25;
 }
 
 message PlaceOrderGrpcRequest{
