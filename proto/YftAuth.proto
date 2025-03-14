@@ -1,0 +1,35 @@
+
+syntax = "proto3";
+package yft_auth;
+import "google/protobuf/empty.proto";
+
+enum YbAuthError{
+    LoginAlreadyInUse = 0;
+    AuthCreadsNotFound = 1;
+    InvalidLogin = 2;
+    InvalidPassword = 3;
+}
+
+message RegisterClientGrpcRequest{
+    string Login = 1;
+    string Password = 2;
+}
+
+message RegisterClientGrpcResponse{
+    optional YbAuthError Error = 1;
+}
+
+message UpdatePasswordGrpcRequest{
+    string ClientId = 1;
+    string NewPassword = 2;
+}
+
+message UpdatePasswordGrpcResponse{
+    optional YbAuthError Error = 1;
+}
+
+service YbTradingBridgeGrpcService {
+    rpc Register(RegisterClientGrpcRequest) returns (RegisterClientGrpcResponse);
+    rpc UpdatePassword(UpdatePasswordGrpcRequest) returns (UpdatePasswordGrpcResponse);
+    rpc Ping(google.protobuf.Empty) returns (google.protobuf.Empty);
+}
