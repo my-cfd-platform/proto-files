@@ -13,6 +13,7 @@ enum YbAuthError{
 message RegisterClientGrpcRequest{
     string Login = 1;
     string Password = 2;
+    optional string Creads = 3;
 }
 
 message RegisterClientGrpcResponse{
