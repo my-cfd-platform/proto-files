@@ -99,6 +99,7 @@ message CrossMarginPersistenceAccountGrpcModel{
     uint64 LastUpdateDate = 9;
     string CreateProcessId = 10;
     string LastUpdateProcessId = 11;
+    map<string, string> Metadata = 12;
 }
 
 service PositionManagerPersistenceGrpcService {
