@@ -24,6 +24,7 @@ message TradingInstrumentGrpcModel {
     bool TradingDisabled = 11;
     double LotSize = 12;
     repeated TradingInstrumentDayOffGrpcModel DaysOff = 13;
+    string Id = 14;
 }
 
 message TradingGroupGrpcModel {
