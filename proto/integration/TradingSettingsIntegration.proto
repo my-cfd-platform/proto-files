@@ -112,6 +112,11 @@ message MarkupInstrumentGrpcModel {
     optional int32 MinSpread = 4;
 }
 
+message GetInstrumentsFilterRequest {
+    optional string GroupId = 1;
+    optional string Symbol = 2;
+}
+
 service TradingSettingsIntegrationGrpcService{
     rpc InsertOrReplaceInstrument(TradingInstrumentGrpcModel) returns (TradingInstrumentGrpcModel);
     rpc InsertOrReplaceTradingProfile(TradingProfileGrpcModel) returns (TradingProfileGrpcModel);
