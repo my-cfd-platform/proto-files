@@ -29,7 +29,7 @@ message SettingsManagerCollateralGrpcModel{
 
 message SettingsManagerInsertOrReplaceCollateralGrpcResponse{
     optional SettingsManagerCollateralGrpcModel Collateral = 1;
-    repeated SettingsManagerCollateralGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 message SettingsManagerDayOffProfileDayOffGrpcModel {
@@ -48,7 +48,7 @@ message SettingsManagerDayOffProfileGrpcModel {
 
 message SettingsManagerInsertOrReplaceDayOffProfileGrpcResponse {
     optional SettingsManagerDayOffProfileGrpcModel DayOffProfile = 1;
-    repeated SettingsManagerDayOffProfileGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 message SettingsManagerInstrumentsGroupGrpcModel {
@@ -60,7 +60,7 @@ message SettingsManagerInstrumentsGroupGrpcModel {
 
 message SettingsManagerInsertOrReplaceInstrumentsGroupGrpcResponse {
     optional SettingsManagerInstrumentsGroupGrpcModel InstrumentsGroup = 1;
-    repeated SettingsManagerInstrumentsGroupGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 message SettingsManagerMarkupProfileInstrumentGrpcModel {
@@ -79,7 +79,7 @@ message SettingsManagerMarkupProfileGrpcModel {
 
 message SettingsManagerInsertOrReplaceMarkupProfileGrpcResponse {
     optional SettingsManagerMarkupProfileGrpcModel MarkupProfile = 1;
-    repeated SettingsManagerMarkupProfileGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 
@@ -109,7 +109,7 @@ message SettingsManagerSwapProfileGrpcModel {
 
 message SettingsManagerInsertOrReplaceSwapProfileGrpcResponse {
     optional SettingsManagerSwapProfileGrpcModel SwapProfile = 1;
-    repeated SettingsManagerSwapProfileGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 
@@ -126,7 +126,7 @@ message SettingsManagerSwapScheduleGrpcModel {
 
 message SettingsManagerInsertOrReplaceSwapScheduleGrpcResponse {
     optional SettingsManagerSwapScheduleGrpcModel SwapSchedule = 1;
-    repeated SettingsManagerSwapScheduleGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 
@@ -142,7 +142,7 @@ message SettingsManagerTradingGroupGrpcModel {
 
 message SettingsManagerInsertOrReplaceTradingGroupGrpcResponse {
     optional SettingsManagerTradingGroupGrpcModel TradingGroup = 1;
-    repeated SettingsManagerTradingGroupGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 
@@ -165,7 +165,7 @@ message SettingsManagerInstrumentGrpcModel {
 
 message SettingsManagerInsertOrReplaceInstrumentGrpcResponse {
     optional SettingsManagerInstrumentGrpcModel Instrument = 1;
-    repeated SettingsManagerInstrumentGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 message SettingsManagerTradingProfileInstrumentGrpcModel {
@@ -196,7 +196,7 @@ message SettingsManagerTradingProfileGrpcModel {
 
 message SettingsManagerInsertOrReplaceTradingProfileGrpcResponse {
     optional SettingsManagerTradingProfileGrpcModel TradingProfile = 1;
-    repeated SettingsManagerTradingProfileGrpcModel Errors = 2;
+    repeated SettingsManagerGrpcError Errors = 2;
 }
 
 
