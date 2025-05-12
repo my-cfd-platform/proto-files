@@ -1,0 +1,214 @@
+syntax = "proto3";
+package settings_manager;
+
+enum SettingsManagerGrpcErrorCode {
+    InstrumentGroupNotFound = 0;
+    SwapScheduleNotFound = 1;
+    TradingInstrumentGroupNotFound = 2;
+    TradingProfileNotFound = 3;
+    MarkupProfileNotFound = 4;
+    SwapProfileNotFound = 5;
+    MdeProfileNotFound = 6;
+    TradingInstrumentNotFound = 7;
+    InstrumentDayOffProfileNotFound = 8;
+    CollateralsErrors = 9;
+    FieldsValidationError = 10;
+}
+
+
+message SettingsManagerGrpcError{
+    SettingsManagerGrpcErrorCode ErrorCode = 1;
+    optional string Message = 2;
+}
+
+message SettingsManagerCollateralGrpcModel{
+    string Id = 1;
+    string Name = 2;
+    uint32 Digits = 3;
+}
+
+message SettingsManagerInsertOrReplaceCollateralGrpcResponse{
+    optional SettingsManagerCollateralGrpcModel Collateral = 1;
+    repeated SettingsManagerCollateralGrpcModel Errors = 2;
+}
+
+message SettingsManagerDayOffProfileDayOffGrpcModel {
+    uint32 DowFrom = 1;
+    string TimeFrom = 2;
+    uint32 DowTo = 3;
+    string TimeTo = 4;
+}
+
+message SettingsManagerDayOffProfileGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    bool IsDisabled = 3;
+    repeated SettingsManagerDayOffProfileDayOffGrpcModel DaysOff = 4;
+}
+
+message SettingsManagerInsertOrReplaceDayOffProfileGrpcResponse {
+    optional SettingsManagerDayOffProfileGrpcModel DayOffProfile = 1;
+    repeated SettingsManagerDayOffProfileGrpcModel Errors = 2;
+}
+
+message SettingsManagerInstrumentsGroupGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    int32 Weight = 3;
+    bool Hidden = 4;
+}
+
+message SettingsManagerInsertOrReplaceInstrumentsGroupGrpcResponse {
+    optional SettingsManagerInstrumentsGroupGrpcModel InstrumentsGroup = 1;
+    repeated SettingsManagerInstrumentsGroupGrpcModel Errors = 2;
+}
+
+message SettingsManagerMarkupProfileInstrumentGrpcModel {
+    int32 MarkupBid = 1;
+    int32 MarkupAsk = 2;
+    optional int32 MaxSpread = 3;
+    optional int32 MinSpread = 4;
+}
+
+message SettingsManagerMarkupProfileGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    bool Disabled = 3;
+    map<string, SettingsManagerMarkupProfileInstrumentGrpcModel> Instruments = 4;
+}
+
+message SettingsManagerInsertOrReplaceMarkupProfileGrpcResponse {
+    optional SettingsManagerMarkupProfileGrpcModel MarkupProfile = 1;
+    repeated SettingsManagerMarkupProfileGrpcModel Errors = 2;
+}
+
+
+
+
+message SettingsManagerSwapProfileInstrumentGrpcModel {
+    double Long = 1;
+    double Short = 2;
+    repeated string Schedules = 3;
+}
+
+enum SettingsManagerSwapProfileMarkupKind {
+    Percent = 0;
+    Points = 1;
+}
+
+message SettingsManagerSwapProfileMarkupTypeGrpcModel {
+    SettingsManagerSwapProfileMarkupKind Type = 1;
+    SettingsManagerSwapProfileInstrumentGrpcModel Instrument = 2;
+}
+
+message SettingsManagerSwapProfileGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    map<string, SettingsManagerSwapProfileMarkupTypeGrpcModel> InstrumentsSwaps = 3;
+}
+
+message SettingsManagerInsertOrReplaceSwapProfileGrpcResponse {
+    optional SettingsManagerSwapProfileGrpcModel SwapProfile = 1;
+    repeated SettingsManagerSwapProfileGrpcModel Errors = 2;
+}
+
+
+message SettingsManageSwapScheduleDayGrpcModel {
+    string Time = 1;
+    double SwapMultiplier = 2;
+}
+
+message SettingsManagerSwapScheduleGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    map<uint32, SettingsManageSwapScheduleDayGrpcModel> WeekSchedules = 3;
+}
+
+message SettingsManagerInsertOrReplaceSwapScheduleGrpcResponse {
+    optional SettingsManagerSwapScheduleGrpcModel SwapSchedule = 1;
+    repeated SettingsManagerSwapScheduleGrpcModel Errors = 2;
+}
+
+
+message SettingsManagerTradingGroupGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    string TradingProfileId = 3;
+    optional string MarkupProfileId = 4;
+    string SwapProfileId = 5;
+    bool TradingDisabled = 6;
+    optional string MdeProfileId = 7;
+}
+
+message SettingsManagerInsertOrReplaceTradingGroupGrpcResponse {
+    optional SettingsManagerTradingGroupGrpcModel TradingGroup = 1;
+    repeated SettingsManagerTradingGroupGrpcModel Errors = 2;
+}
+
+
+message SettingsManagerInstrumentGrpcModel {
+    string Id = 1;
+    string Name = 2;
+    uint32 Digits = 3;
+    string Base = 4;
+    string Quote = 5;
+    double TickSize = 6;
+    optional string SwapScheduleId = 7;
+    optional string GroupId = 8;
+    int32 Weight = 9;
+    optional uint32 DayTimeout = 10;
+    optional uint32 NightTimeout = 11;
+    bool TradingDisabled = 12;
+    double LotSize = 13;
+    repeated string DayOffProfilesId = 14;
+}
+
+message SettingsManagerInsertOrReplaceInstrumentGrpcResponse {
+    optional SettingsManagerInstrumentGrpcModel Instrument = 1;
+    repeated SettingsManagerInstrumentGrpcModel Errors = 2;
+}
+
+message SettingsManagerTradingProfileInstrumentGrpcModel {
+    string Id = 1;
+    double MinOperationVolume = 2;
+    double MaxOperationVolume = 3;
+    double MaxPositionVolume = 4;
+    uint32 OpenPositionMinDelayMs = 5;
+    uint32 OpenPositionMaxDelayMs = 6;
+    optional double StopOutPercent = 7;
+    optional double InstrumentMaxLeverage = 8;
+    optional double CommissionPerLot = 9;
+}
+
+message SettingsManagerTradingProfileGrpcModel {
+    string Id = 1;
+    double StopOutPercent = 2;
+    bool IsABook = 3;
+    optional double MarginCallPercent = 4;
+    repeated SettingsManagerTradingProfileInstrumentGrpcModel Instruments = 5;
+    repeated double Leverages = 6;
+    optional double DefaultLeverage = 7;
+    repeated string CollateralCurrencies = 8;
+    double InitialDeposit = 9;
+    double HedgeMarginCoefficient = 10;
+    optional double CommissionPerLot = 11;
+}
+
+message SettingsManagerInsertOrReplaceTradingProfileGrpcResponse {
+    optional SettingsManagerTradingProfileGrpcModel TradingProfile = 1;
+    repeated SettingsManagerTradingProfileGrpcModel Errors = 2;
+}
+
+
+
+service SettingsManagerGrpcService{
+    rpc InsertOrReplaceCollateral(SettingsManagerCollateralGrpcModel) returns (SettingsManagerInsertOrReplaceCollateralGrpcResponse);
+    rpc InsertOrReplaceDayOffProfile(SettingsManagerDayOffProfileGrpcModel) returns (SettingsManagerInsertOrReplaceDayOffProfileGrpcResponse);
+    rpc InsertOrReplaceInstrumentGroup(SettingsManagerInstrumentsGroupGrpcModel) returns (SettingsManagerInsertOrReplaceInstrumentsGroupGrpcResponse);
+    rpc InsertOrReplaceMarkupProfile(SettingsManagerMarkupProfileGrpcModel) returns (SettingsManagerInsertOrReplaceMarkupProfileGrpcResponse);
+    rpc InsertOrReplaceSwapProfile(SettingsManagerSwapProfileGrpcModel) returns (SettingsManagerInsertOrReplaceSwapProfileGrpcResponse);
+    rpc InsertOrReplaceSwapSchedule(SettingsManagerSwapScheduleGrpcModel) returns (SettingsManagerInsertOrReplaceSwapScheduleGrpcResponse);
+    rpc InsertOrReplaceTradingGroup(SettingsManagerTradingGroupGrpcModel) returns (SettingsManagerInsertOrReplaceTradingGroupGrpcResponse);
+    rpc InsertOrReplaceInstrument(SettingsManagerInstrumentGrpcModel) returns (SettingsManagerInsertOrReplaceInstrumentGrpcResponse);
+    rpc InsertOrReplaceTradingProfile(SettingsManagerTradingProfileGrpcModel) returns (SettingsManagerInsertOrReplaceTradingProfileGrpcResponse);
+}
